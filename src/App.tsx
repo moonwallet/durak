@@ -8,7 +8,7 @@ function App() {
 
   return (
     <>
-      <h1 className="text-main">Durak</h1>
+      <h1 className="text-main font-semibold">Durak</h1>
       {/*
       <div>
         <a href="https://vitejs.dev" target="_blank">
