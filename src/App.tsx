@@ -8,6 +8,7 @@ import { ReactComponent as Ah } from './assets/ah.svg'
 import { ReactComponent as As } from './assets/as.svg'
 
 import chair from './assets/chair.png'
+import { Button } from './kit'
 
 import './index.css'
 
@@ -84,7 +85,13 @@ function App() {
           <Card className="-mx-[90px] h-[150px] rotate-6" card="as" />
         </div>
         <div className="absolute h-[90px] bottom-0 left-0 w-full p-5 bg-[#292834] rounded-t-[24px]">
-
+          <Button
+            theme="big"
+            wrapperClassName="w-[142px]"
+            onClick={() => {}}
+          >
+            Bet
+          </Button>
         </div>
       </div>
     </>
