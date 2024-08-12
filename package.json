@@ -13,7 +13,9 @@
   },
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "vite-plugin-checker": "^0.7.2",
+    "vite-plugin-svgr": "^3.3.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
