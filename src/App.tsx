@@ -14,8 +14,8 @@ import { ReactComponent as qs } from './assets/qs.svg'
 import chair from './assets/chair.png'
 import { Button } from './kit'
 
-import {  } from './hooks/useApi'
-import { TState } from './types'
+// import {  } from './hooks/useApi'
+// import { TState } from './types'
 
 import './index.css'
 
