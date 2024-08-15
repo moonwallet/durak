@@ -14,9 +14,13 @@ import { ReactComponent as qs } from './assets/qs.svg'
 import chair from './assets/chair.png'
 import { Button } from './kit'
 
+import {  } from './hooks/useApi'
+import { TState } from './types'
+
 import './index.css'
 
 type TCard = 'ac' | 'ad' | 'ah' | 'as' | 'qs'
+
 
 const cards: { [Key in TCard]: typeof ac } = {
   'ac': ac,
