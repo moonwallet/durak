@@ -1,0 +1,44 @@
+{
+  "play": "Play",
+  "find": "Find game",
+  "airdrop": "Airdrop",
+  "rules": "Rules",
+
+  "loading": "Loading…",
+  "yourPoints": "Your $DRK points",
+  "playEarn": "Play with frens, earn points, get $DRK airdrop",
+
+  "roomIsEmpty": "Room is empty",
+  "sendRoomLink": "Send the room link to your fren to start the game",
+  "forEveryFren": "For every new fren - you  will receive 500 $DRK points.",
+  "forEveryWin": "For every win - 2000 $DRK points",
+  "shareRoomLink": "Share room link",
+  "tapReadyToStart": "Tap Ready to start the game",
+  "leaveSure": "If you leave now - game will be lost. Are you sure?",
+  "stayAndPlay": "Stay and play",
+  "leaveAndLoose": "Leave and loose",
+  "roomBusy": "Room is already busy. Create your own to start playing",
+  "createRoom": "Create room",
+  "gameOver": "Game Over!",
+  "win": "Win!",
+  "pointsForInviting": "+1,000 points for inviting",
+  "tapReadyToPlayAgain": "Tap ready to play again",
+  "tapReadyForRevanche": "Tap ready for a revanche",
+
+  "ready": "I’m ready",
+  "waiting": "Waiting for the opponent…",
+  "bat": "Bat",
+  "yourTurn": "Your turn",
+  "pass": "Pass",
+  "take": "Take",
+  "opponentsTurn": "Opponent’s turn",
+
+  "exploreGroup": "Explore other players who are looking for a game in our Telegram group",
+  "joinGroup": "Join Telegram group",
+
+  "watchRules": "Watch 5 min video explaining durak rules",
+  "watchVideo": "Watch the video",
+
+  "airdropComing": "Airdrop is coming. Your points will be converted into the $DRK token.",
+  "abilities": "You will be able to use them to sell, boost your card collection or to play & increase your wealth",
+}

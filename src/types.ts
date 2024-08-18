@@ -1,3 +1,5 @@
+export type TLanguageCode = 'en' | 'ru'
+
 export type TMessageInType = 'room.data'
 export type TMessageOutType = 'player.ready'
 export type TMessageType = TMessageInType | TMessageOutType
