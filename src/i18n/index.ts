@@ -4,8 +4,8 @@ import { initReactI18next } from 'react-i18next'
 
 import { TLanguageCode } from '../types'
 
-import translationEn from './translation-en.json'
-import translationRu from './translation-ru.json'
+import en from './en.json'
+import ru from './ru.json'
 
 const langs: TLanguageCode[] = ['en', 'ru']
 
@@ -17,8 +17,8 @@ i18next.use(initReactI18next).init({
   supportedLngs: langs,
   debug: false,
   resources: {
-    en: { translation: translationEn },
-    ru: { translation: translationRu },
+    en: { translation: en },
+    ru: { translation: ru },
   },
 })
 
