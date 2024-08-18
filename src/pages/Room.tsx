@@ -2,52 +2,15 @@
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
 
-import card from './assets/card.png'
-
-import { ReactComponent as ac } from './assets/ac.svg'
-import { ReactComponent as ad } from './assets/ad.svg'
-import { ReactComponent as ah } from './assets/ah.svg'
-import { ReactComponent as as } from './assets/as.svg'
-
-import { ReactComponent as qs } from './assets/qs.svg'
-
-import chair from './assets/chair.png'
-import { Button } from '../kit'
+import chair from '../assets/chair.png'
+import { Button, Card } from '../kit'
 
 // import {  } from './hooks/useApi'
 // import { TState } from './types'
 
-type TCard = 'ac' | 'ad' | 'ah' | 'as' | 'qs'
-
-
-const cards: { [Key in TCard]: typeof ac } = {
-  'ac': ac,
-  'ad': ad,
-  'ah': ah,
-  'as': as,
-  'qs': qs,
-}
-
-const Card = ({ className, card }: {
-  className?: string
-  card: TCard
-}) => {
-  const Comp = cards[card]
-  return (
-  <Comp
-    className={className}
-    title={card}
-  />
-  )
-}
 
 export const Room = () => {
   // const [count, setCount] = useState(0)
-
-  /*
-  10D, 10C, 10H, 10S ?
-  6* 7* 8* 9* 10* J* Q* K* A*
-  */
 
   return (
     <>
@@ -76,17 +39,17 @@ export const Room = () => {
       <div className="Top mt-1 flex flex-col items-center justify-center h-[158px]">
         <img src={chair} className="w-[90px] h-[90px]" />
         <div className="flex items-center justify-center h-[110px] max-w-[100%] mx-auto">
-          <img src={card} className="-mx-[10px] h-[60px] rotate-6" />
-          <img src={card} className="-mx-[10px] h-[60px] rotate-3" />
-          <img src={card} className="-mx-[10px] h-[60px] -rotate-3" />
-          <img src={card} className="-mx-[10px] h-[60px] -rotate-6" />
+          <Card className="-mx-[10px] h-[60px] rotate-6" />
+          <Card className="-mx-[10px] h-[60px] rotate-3" />
+          <Card className="-mx-[10px] h-[60px] -rotate-3" />
+          <Card className="-mx-[10px] h-[60px] -rotate-6" />
         </div>
       </div>
 
       <div className="Side absolute left-0 top-[50%] -translate-y-[50%]">
         <div className="relative -top-[20px]">
           <Card className="absolute -left-[90px] top-[50%] -translate-y-[50%] h-[150px] rotate-90" card="qs" />
-          <img src={card} className="relative -left-[50px] w-[100px]" />
+          <Card className="relative -left-[50px] w-[100px]" />
         </div>
       </div>
 

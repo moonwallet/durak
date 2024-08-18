@@ -1,5 +1,7 @@
 export type TLanguageCode = 'en' | 'ru'
 
+export type TCard = 'ac' | 'ad' | 'ah' | 'as' | 'qs'
+
 export type TMessageInType = 'room.data'
 export type TMessageOutType = 'player.ready'
 export type TMessageType = TMessageInType | TMessageOutType
