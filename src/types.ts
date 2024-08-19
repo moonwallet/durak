@@ -1,6 +1,15 @@
 export type TLanguageCode = 'en' | 'ru'
 
-export type TCard = 'ac' | 'ad' | 'ah' | 'as' | 'qs'
+export type TCard =
+  '6c' | '6d' | '6h' | '6s' |
+  '7c' | '7d' | '7h' | '7s' |
+  '8c' | '8d' | '8h' | '8s' |
+  '9c' | '9d' | '9h' | '9s' |
+  '10c' | '10d' | '10h' | '10s' |
+  'jc' | 'jd' | 'jh' | 'js' |
+  'qc' | 'qd' | 'qh' | 'qs' |
+  'kc' | 'kd' | 'kh' | 'ks' |
+  'ac' | 'ad' | 'ah' | 'as'
 
 export type TMessageInType = 'room.data'
 export type TMessageOutType = 'player.ready'
