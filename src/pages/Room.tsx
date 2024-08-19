@@ -7,8 +7,11 @@ export const Room = () => {
 
   return (
     <>
-      <div className="Top mt-1 flex flex-col items-center justify-center h-[158px]">
-        <img src={chair} className="w-[90px] h-[90px]" />
+      <div className="Top z-0 mt-1 flex flex-col items-center justify-center h-[158px]">
+        <div className="z-[1] relative w-[90px] h-[90px] shadow-[0px_0px_30px_30px_#11101D]">
+          <img src={chair} className="w-[90px] h-[90px]" />
+          <div className="absolute top-[85%] left-[50%] -translate-x-[50%] text-[14px] leading-[14px]">@username</div>
+        </div>
         <div className="flex items-center justify-center h-[110px] max-w-[100%] mx-auto">
           <Card className="-mx-[10px] h-[60px] rotate-6" />
           <Card className="-mx-[10px] h-[60px] rotate-3" />
