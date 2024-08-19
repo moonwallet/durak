@@ -1,41 +1,12 @@
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
 
-import chair from '../assets/chair.png'
 import { Button, Card } from '../kit'
 
-// import {  } from './hooks/useApi'
-// import { TState } from './types'
-
+import chair from '../assets/chair.png'
 
 export const Room = () => {
-  // const [count, setCount] = useState(0)
 
   return (
     <>
-      {/*
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1 className="text-red-400">Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-      */}
       <div className="Top mt-1 flex flex-col items-center justify-center h-[158px]">
         <img src={chair} className="w-[90px] h-[90px]" />
         <div className="flex items-center justify-center h-[110px] max-w-[100%] mx-auto">
@@ -47,9 +18,10 @@ export const Room = () => {
       </div>
 
       <div className="Side absolute left-0 top-[50%] -translate-y-[50%]">
+        <div className="absolute -top-[48px] right-[48px] text-white/50 text-[16px] leading-[16px] font-semibold">24</div>
         <div className="relative -top-[20px]">
-          <Card className="absolute -left-[90px] top-[50%] -translate-y-[50%] h-[150px] rotate-90" card="qs" />
-          <Card className="relative -left-[50px] w-[100px]" />
+          <Card card="qs" className="absolute -left-[110px] top-[50%] -translate-y-[50%] h-[110px] rotate-90" />
+          <Card className="relative -left-[50px] h-[110px]" />
         </div>
       </div>
 
@@ -60,7 +32,7 @@ export const Room = () => {
         </div>
       </div>
       
-      <div className="relative Bottom h-[200px]">
+      <div className="Bottom relative h-[200px]">
         <div className="flex items-center justify-center h-[110px] max-w-[100%] mx-auto">
           <Card className="-mx-[90px] h-[150px] -rotate-6" card="ac" />
           <Card className="-mx-[90px] h-[150px] -rotate-3" card="ad" />
