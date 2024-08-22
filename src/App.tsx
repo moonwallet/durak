@@ -1,4 +1,3 @@
-import { useState } from 'react'
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
 
@@ -7,15 +6,12 @@ import { useState } from 'react'
 // import { TState } from './types'
 
 import { Play, Room } from './pages'
+import { useStore } from './hooks'
 
 import './i18n'
 
 export const App = () => {
-  const [room, setRoom] = useState(false)
-
-  if (Math.random() < 0) {
-    setRoom(true)
-  }
+  const { room } = useStore()
 
   if (room) {
     return <Room />

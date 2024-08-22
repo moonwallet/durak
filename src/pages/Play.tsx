@@ -1,23 +1,26 @@
 import { useTranslation } from 'react-i18next'
 
-import { Button } from '../kit'
+import { Button, Menu } from '../kit'
 
 import deck from '../assets/deck.jpg'
 import { ReactComponent as LangRu } from '../assets/langRu.svg'
 import { ReactComponent as LangEn } from '../assets/langEn.svg'
 
 import i18n from '../i18n'
+import { useStore } from '../hooks'
 
 export const Play = () => {
   const { t } = useTranslation()
+  const { setRoom } = useStore()
 
   return (
     <>
-      <div className="mt-5 flex flex-col items-center gap-1">
+      <div className="Top mt-5 flex flex-col items-center gap-1">
         <div className="text-[60px] leading-[60px] font-semibold">0</div>
         <div className="text-[16px] leading-[16px] text-text/50">{t('yourPoints')}</div>
       </div>
-      <div>
+
+      <div className="Center px-4">
         <img src={deck} className="w-[239px] h-[173px] mx-auto" />
         <div className="text-[24px] leading-[29px] font-bold">
           <div>{t('playEarn')}</div>
@@ -26,12 +29,15 @@ export const Play = () => {
         <Button
           theme="big"
           className="mt-10 h-[55px]"
-          onClick={() => {}}
+          onClick={() => {
+            setRoom(1)
+          }}
         >
           {t('createRoom')}
         </Button>
       </div>
-      <div>
+
+      <div className="Bottom">
         <div className="mb-[18px]">
           <Button
             className="w-[64px] p-3 bg-[#D9D9D91A] rounded-full"
@@ -46,6 +52,7 @@ export const Play = () => {
             </div>
           </Button>
         </div>
+        <Menu />
       </div>
     </>
   )
