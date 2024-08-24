@@ -16,21 +16,25 @@ export const Menu = () => {
       icon: menuPlay,
       text: t('play'),
       isActive: true,
+      slug: '/play',
     },
     {
       icon: menuFind,
       text: t('find'),
       isActive: false,
+      slug: '/find',
     },
     {
       icon: menuAirdrop,
       text: t('airdrop'),
       isActive: false,
+      slug: '/airdrop',
     },
     {
       icon: menuRules,
       text: t('rules'),
       isActive: false,
+      slug: '/rules',
     },
   ]
 

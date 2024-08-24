@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
 
 import { Button, Menu } from '../kit'
 
@@ -7,11 +8,10 @@ import { ReactComponent as LangRu } from '../assets/langRu.svg'
 import { ReactComponent as LangEn } from '../assets/langEn.svg'
 
 import i18n from '../i18n'
-import { useStore } from '../hooks'
 
 export const Play = () => {
   const { t } = useTranslation()
-  const { setRoom } = useStore()
+  const navigate = useNavigate()
 
   return (
     <>
@@ -30,7 +30,7 @@ export const Play = () => {
           theme="big"
           className="mt-10 h-[55px]"
           onClick={() => {
-            setRoom(1)
+            navigate('/room')
           }}
         >
           {t('createRoom')}

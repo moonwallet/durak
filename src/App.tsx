@@ -5,17 +5,13 @@
 // import {  } from './hooks/useApi'
 // import { TState } from './types'
 
-import { Play, Room } from './pages'
-import { useStore } from './hooks'
-
 import './i18n'
 
+import { RouterProvider } from 'react-router-dom'
+import { router } from './router'
+
 export const App = () => {
-  const { room } = useStore()
-
-  if (room) {
-    return <Room />
-  }
-
-  return <Play />
+  return (
+    <RouterProvider router={router} />
+  )
 }

@@ -16,5 +16,6 @@ module.exports = {
     ],
     'semi': ['warn', 'never'],
     'quotes': ['warn', 'single'],
+    'comma-dangle': ['error', 'always-multiline'],
   },
 }
