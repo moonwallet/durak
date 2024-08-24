@@ -38,8 +38,9 @@ export const Play = () => {
       </div>
 
       <div className="Bottom">
-        <div className="mb-[18px]">
+        <div className="my-[18px]">
           <Button
+            wrapperClassName="inline-block"
             className="w-[64px] p-3 bg-[#D9D9D91A] rounded-full"
             onClick={() => { i18n.changeLanguage(i18n.language === 'en' ? 'ru' : 'en') }}
           >
