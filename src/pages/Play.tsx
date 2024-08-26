@@ -1,17 +1,41 @@
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 
+import i18n from '../i18n'
 import { Button, Menu } from '../kit'
+import { usePostRoom, useStore } from '../hooks'
 
 import deck from '../assets/deck.jpg'
 import { ReactComponent as LangRu } from '../assets/langRu.svg'
 import { ReactComponent as LangEn } from '../assets/langEn.svg'
 
-import i18n from '../i18n'
 
 export const Play = () => {
   const { t } = useTranslation()
   const navigate = useNavigate()
+
+  const { setRoom } = useStore()
+
+  const [isBusy, setIsBusy] = useState(false)
+  const postRoom = usePostRoom()
+
+  const createRoom = async () => {
+    setIsBusy(true)
+    try {
+      const {
+        room_id,
+        // invite_link,
+      } = await postRoom()
+      setRoom(room_id)
+      // setInviteLink(invite_link)
+    } catch (e) {
+      console.error(e)
+    } finally {
+      setIsBusy(false)
+    }
+    navigate('/room')
+  }
 
   return (
     <>
@@ -29,9 +53,8 @@ export const Play = () => {
         <Button
           theme="big"
           className="mt-10 h-[55px]"
-          onClick={() => {
-            navigate('/room')
-          }}
+          onClick={createRoom}
+          isBusy={isBusy}
         >
           {t('createRoom')}
         </Button>

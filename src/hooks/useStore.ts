@@ -8,8 +8,8 @@ type TStore = {
   setDebug: (_: boolean) => void
   state: null | TState,
   setState: (state: TState) => void
-  // room: null | number
-  // setRoom: (_: null | number) => void
+  room: null | string
+  setRoom: (_: null | string) => void
 }
 
 export const useStore = create<TStore>((set) => ({
@@ -17,8 +17,8 @@ export const useStore = create<TStore>((set) => ({
   setDebug: (isDebug) => set({ isDebug }),
   state: null,
   setState: (state: TState) => set({ state }),
-  // room: null,
-  // setRoom: (room: null | number) => set({ room }),
+  room: null,
+  setRoom: (room: null | string) => set({ room }),
 }))
 
 type TPersistStore = {

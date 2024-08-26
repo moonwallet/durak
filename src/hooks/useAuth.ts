@@ -4,6 +4,7 @@ const AUTH: undefined | string = import.meta.env.VITE_AUTH
 const USER_ID: undefined | string = import.meta.env.VITE_USER_ID
 console.log('AUTH', AUTH)
 console.log('USER_ID', USER_ID)
+console.log(import.meta.env)
 
 export const useAuth = () => {
   const [initDataUnsafe, initData] = useInitData()
