@@ -12,7 +12,7 @@ export type TCard =
   'ac' | 'ad' | 'ah' | 'as'
 
 export type TMessageInType = 'room.data'
-export type TMessageOutType = 'player.ready'
+export type TMessageOutType = 'player.ready' | 'player.unready' | 'player.move'
 export type TMessageType = TMessageInType | TMessageOutType
 
 export type TUserId = string
