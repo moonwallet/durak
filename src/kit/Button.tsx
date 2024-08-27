@@ -24,7 +24,7 @@ export const Button = ({ theme = 'default', className, wrapperClassName, childre
 
   const themeStyle = {
     'default': '',
-    'big': 'min-h-[50px] min-w-[142px] rounded-[16px] bg-main text-[#000] font-semibold text-[18px] leading-[20px]',
+    'big': 'min-h-[50px] min-w-[142px] px-8 rounded-[16px] bg-main text-[#000] font-semibold text-[18px] leading-[20px]',
   }[theme]
 
   return (

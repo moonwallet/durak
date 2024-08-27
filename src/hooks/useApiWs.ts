@@ -32,9 +32,12 @@ export const useApiWs = () => {
   useEffect(() => {
     const onMessage = (event: MessageEvent) => {
       try {
-        const data: TState = JSON.parse(event.data)
-        console.log('WS:', data)
-        setState(data)
+        const parsedMessage: {
+          type: string
+          data: TState
+        } = JSON.parse(event.data)
+        console.log('WS:', parsedMessage)
+        setState(parsedMessage.data)
       } catch (e) {
         console.error('WS: cannot decode message', e)
       }
