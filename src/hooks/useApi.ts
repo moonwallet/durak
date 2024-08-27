@@ -13,7 +13,7 @@ export const usePostRoom = () => {
   }> => {
 
     const url = `${apiUrl}/rooms?${new URLSearchParams({
-      telegram_id: String(userId || ''),
+      player_id: String(userId || ''),
     })}`
 
     return fetch(url, {

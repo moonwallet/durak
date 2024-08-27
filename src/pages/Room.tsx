@@ -1,9 +1,20 @@
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { Button, Card } from '../kit'
 
 import chair from '../assets/chair.png'
+import { useStore } from '../hooks'
 
 export const Room = () => {
+  const { room } = useStore()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (!room) {
+      navigate('/')
+    }
+  }, [room, navigate])
 
   return (
     <>

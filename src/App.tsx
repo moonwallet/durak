@@ -1,16 +1,12 @@
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
-
-
-// import {  } from './hooks/useApi'
-// import { TState } from './types'
-
 import './i18n'
 
 import { RouterProvider } from 'react-router-dom'
 import { router } from './router'
+import { useApiWs } from './hooks'
 
 export const App = () => {
+  useApiWs()
+
   return (
     <RouterProvider router={router} />
   )
