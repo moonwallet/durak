@@ -5,10 +5,10 @@ import { useEffect, useMemo } from 'react'
 import { TState } from '../types'
 import { useStore, useAuth } from './'
 
-const wsUrl: undefined | string = import.meta.env.VITE_WS_API_URL
+const wsUrl: undefined | string = import.meta.env.VITE_API_WS_URL
 
 if (!wsUrl) {
-  console.error('No VITE_WS_API_URL')
+  console.error('No VITE_API_WS_URL')
 }
 
 export const useApiWs = () => {
