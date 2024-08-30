@@ -3,21 +3,21 @@ import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 
-import { Button, Card } from '../kit'
+import { Page, Button, Card } from '../kit'
 
 import chair from '../assets/chair.png'
-import { useStore, useAuth } from '../hooks'
+import { useShareLink, useStore, useAuth } from '../hooks'
 
 export const Room = () => {
   const { t } = useTranslation()
-  const { room, state } = useStore()
+  const { roomId, state } = useStore()
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (!room) {
+    if (!roomId) {
       navigate('/')
     }
-  }, [room, navigate])
+  }, [roomId, navigate])
 
   const { userId } = useAuth()
 
@@ -26,8 +26,14 @@ export const Room = () => {
 
   const status = state?.status || false
 
+  const { shareLink } = useShareLink({ roomId: roomId || '' })
+
+  const share = () => {
+    console.log(shareLink)
+  }
+
   return (
-    <>
+    <Page>
       <div className="Top z-0 mt-1 flex flex-col items-center justify-center h-[158px]">
         <div className="z-[1] relative w-[150px] h-[90px] shadow-[0px_0px_30px_30px_#11101D]">
           <img src={chair} className={cx('mx-auto w-[90px] h-[90px]', !opponent && 'grayscale')} />
@@ -79,7 +85,7 @@ export const Room = () => {
         <div className="absolute h-[90px] bottom-0 left-0 w-full flex items-center justify-between p-5 bg-[#292834] rounded-t-[24px]">
           <Button
             theme="big"
-            onClick={() => {}}
+            onClick={share}
           >
             {/* I’m ready */}
             Share room link
@@ -90,6 +96,6 @@ export const Room = () => {
           </div>
         </div>
       </div>
-    </>
+    </Page>
   )
 }

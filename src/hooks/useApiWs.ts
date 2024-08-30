@@ -12,22 +12,22 @@ if (!wsUrl) {
 }
 
 export const useApiWs = () => {
-  const { room, setState } = useStore()
+  const { roomId, setState } = useStore()
   const { userId } = useAuth()
 
   const ws = useMemo(() => {
-    if (!room || !userId) {
+    if (!roomId || !userId) {
       return null
     }
-    const url = `${wsUrl}/rooms/${room}/ws?player_id=${userId}`
+    const url = `${wsUrl}/rooms/${roomId}/ws?player_id=${userId}`
     return new ReconnectingWebSocket(url)
-  }, [room, userId])
+  }, [roomId, userId])
 
   useEffect(() => {
-    if (!!ws && (!room || !userId)) {
-      console.log('not', room, userId)
+    if (!!ws && (!roomId || !userId)) {
+      console.log('not', roomId, userId)
     }
-  }, [ws, room, userId])
+  }, [ws, roomId, userId])
 
   useEffect(() => {
     const onMessage = (event: MessageEvent) => {

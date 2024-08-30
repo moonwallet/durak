@@ -1,24 +1,28 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
-import { TState } from '../types'
+import { TState, TRoomId } from '../types'
 
 type TStore = {
   isDebug: boolean
   setDebug: (_: boolean) => void
+  isStarted: boolean
+  setIsStarted: (_: boolean) => void
   state: null | TState,
   setState: (state: TState) => void
-  room: null | string
-  setRoom: (_: null | string) => void
+  roomId: null | TRoomId
+  setRoomId: (_: null | TRoomId) => void
 }
 
 export const useStore = create<TStore>((set) => ({
   isDebug: false,
   setDebug: (isDebug) => set({ isDebug }),
+  isStarted: false,
+  setIsStarted: (isStarted) => set({ isStarted }),
   state: null,
   setState: (state: TState) => set({ state }),
-  room: null,
-  setRoom: (room: null | string) => set({ room }),
+  roomId: null,
+  setRoomId: (roomId: null | TRoomId) => set({ roomId }),
 }))
 
 type TPersistStore = {
@@ -31,9 +35,8 @@ export const usePersistStore = create<TPersistStore>()(
     (set) => ({
       isOnboarded: false,
       setIsOnboarded: (isOnboarded) => set({ isOnboarded }),
-    }),
-    {
+    }), {
       name: 'persist-storage',
-    }
-  )
+    },
+  ),
 )

@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 
 import i18n from '../i18n'
-import { Button, Menu } from '../kit'
+import { Page, Button, Menu } from '../kit'
 import { usePostRoom, useStore } from '../hooks'
 
 import deck from '../assets/deck.jpg'
@@ -15,7 +15,7 @@ export const Play = () => {
   const { t } = useTranslation()
   const navigate = useNavigate()
 
-  const { setRoom } = useStore()
+  const { setRoomId } = useStore()
 
   const [isBusy, setIsBusy] = useState(false)
   const postRoom = usePostRoom()
@@ -27,7 +27,7 @@ export const Play = () => {
         room_id,
         // invite_link,
       } = await postRoom()
-      setRoom(room_id)
+      setRoomId(room_id)
       // setInviteLink(invite_link)
     } catch (e) {
       console.error(e)
@@ -38,7 +38,7 @@ export const Play = () => {
   }
 
   return (
-    <>
+    <Page>
       <div className="Top mt-5 flex flex-col items-center gap-1">
         <div className="text-[60px] leading-[60px] font-semibold">0</div>
         <div className="text-[16px] leading-[16px] text-text/50">{t('yourPoints')}</div>
@@ -78,6 +78,6 @@ export const Play = () => {
         </div>
         <Menu />
       </div>
-    </>
+    </Page>
   )
 }

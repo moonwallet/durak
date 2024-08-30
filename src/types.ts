@@ -16,9 +16,10 @@ export type TMessageOutType = 'player.ready' | 'player.unready' | 'player.move'
 export type TMessageType = TMessageInType | TMessageOutType
 
 export type TUserId = string
+export type TRoomId = string
 
 export type TState = {
-  room_id: string
+  room_id: TRoomId
   room_host: TUserId
   players: TUserId[]
   players_data: {
@@ -30,4 +31,8 @@ export type TState = {
   last_loser: TUserId
   current_game_id: string
   invite_link: string // "https://t.me/durak"
+}
+
+export type TShareLinkData = {
+  room_id: string
 }
