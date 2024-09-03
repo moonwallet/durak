@@ -40,6 +40,7 @@
   "watchRules": "Watch 5 min video explaining durak rules",
   "watchVideo": "Watch the video",
 
-  "airdropComing": "Airdrop is coming. Your points will be converted into the $DRK token.",
+  "airdropComing": "Airdrop is coming.",
+  "pointsWillBeConverted": "Your points will be converted into the $DRK token.",
   "abilities": "You will be able to use them to sell, boost your card collection or to play & increase your wealth"
 }

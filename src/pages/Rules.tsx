@@ -1,23 +1,35 @@
 import { useTranslation } from 'react-i18next'
-// import { useNavigate } from 'react-router-dom'
 
-import { /* Button, */ Menu } from '../kit'
+import { Page, Menu, Button } from '../kit'
 
-// import deck from '../assets/deck.jpg'
+import watch from '../assets/watch.png'
+import { useOpenExternal } from '../hooks'
 
 export const Rules = () => {
   const { t } = useTranslation()
-  // const navigate = useNavigate()
+  const { openExternal } = useOpenExternal()
 
   return (
-    <>
-      <div className="Top mt-5 flex flex-col items-center gap-1">
-        {t('Rules content soon...')}
+    <Page>
+      <div className="Top"></div>
+      <div className="Center py-10 px-4 flex flex-col items-center justify-center">
+        <img
+          className="w-[210px] h-[166px] grayscale"
+          src={watch}
+        />
+        <div className="mt-8 max-w-[400px] text-[24px] leading-[29px] font-bold">{t('watchRules')}</div>
+        <Button
+          theme="big"
+          wrapperClassName='mt-10'
+          onClick={() => { openExternal('https://youtu.be/3JagmUmUJOc') }}
+        >
+          {t('watchVideo')}
+        </Button>
       </div>
 
       <div className="Bottom">
         <Menu />
       </div>
-    </>
+    </Page>
   )
 }

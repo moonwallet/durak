@@ -1,14 +1,12 @@
 import { useTranslation } from 'react-i18next'
-// import { useNavigate } from 'react-router-dom'
 
-import { Page, /* Button, */ Menu, Button } from '../kit'
+import { Page, Menu, Button } from '../kit'
 
 import find from '../assets/find.png'
 import { useOpenExternal } from '../hooks'
 
 export const Find = () => {
   const { t } = useTranslation()
-  // const navigate = useNavigate()
   const { openExternal } = useOpenExternal()
 
   return (
