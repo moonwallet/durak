@@ -1,3 +1,5 @@
+import { useWebApp } from '@vkruglikov/react-telegram-web-app'
+
 import cx from 'classnames'
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -6,7 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import { Page, Button, Card } from '../kit'
 
 import chair from '../assets/chair.png'
-import { useShareLink, useStore, useAuth } from '../hooks'
+import { useShareLink, useStore, useAuth, useCopy } from '../hooks'
 
 export const Room = () => {
   const { t } = useTranslation()
@@ -28,8 +30,16 @@ export const Room = () => {
 
   const { shareLink } = useShareLink({ roomId: roomId || '' })
 
+  const { copy, isCopied } = useCopy()
+  const WebApp = useWebApp()
+
   const share = () => {
     console.log(shareLink)
+    if (navigator.userAgent.includes('Telegram') && typeof WebApp !== 'undefined' && WebApp.openTelegramLink) {
+      WebApp.openTelegramLink(`https://t.me/share/url?url=${encodeURIComponent(shareLink)}`)
+    } else {
+      copy(shareLink)
+    }
   }
 
   return (
@@ -86,9 +96,10 @@ export const Room = () => {
           <Button
             theme="big"
             onClick={share}
+            disabled={isCopied}
           >
             {/* I’m ready */}
-            Share room link
+            {isCopied ? t('copied') : t('shareRoomLink') }
           </Button>
           <div className="relative w-[100px] h-[50px] flex flex-col items-end justify-end">
             <img src={chair} className="absolute -right-[20px] -top-[60px]" />
