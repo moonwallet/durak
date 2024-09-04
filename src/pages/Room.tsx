@@ -35,9 +35,9 @@ export const Room = () => {
 
   const share = () => {
     console.log(shareLink)
-    if (navigator.userAgent.includes('Telegram') && typeof WebApp !== 'undefined' && WebApp.openTelegramLink) {
+    try {
       WebApp.openTelegramLink(`https://t.me/share/url?url=${encodeURIComponent(shareLink)}`)
-    } else {
+    } catch {
       copy(shareLink)
     }
   }
