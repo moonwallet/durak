@@ -18,7 +18,7 @@ export const useShareLink = ({ roomId }: {
     .split('+').join('-')
     .split('/').join('_')
 
-  const shareLink = `${botUrl}/app?startapp=${encodedData}`
+  const shareLink = `${botUrl}?startapp=${encodedData}`
 
   return { shareLink }
 }
