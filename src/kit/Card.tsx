@@ -66,12 +66,19 @@ const cards: { [Key in TCard]: typeof ac } = {
 6* 7* 8* 9* 10* J* Q* K* A*
 */
 
-export const Card = ({ className, card }: {
+export const Card = ({ className, style, card }: {
   className?: string
+  style?: React.CSSProperties
   card?: TCard
 }) => {
   if (!card) {
-    return <img src={cardBack} className={cx('Card', className)} />
+    return (
+      <img
+        className={cx('Card', className)}
+        style={style}
+        src={cardBack}
+      />
+    )
   }
 
   const Comp = cards[card]
@@ -79,6 +86,7 @@ export const Card = ({ className, card }: {
   return (
     <Comp
       className={cx('Card', className)}
+      style={style}
       title={card}
     />
   )

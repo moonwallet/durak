@@ -7,6 +7,7 @@ import { Page, Button, Card } from '../kit'
 
 import chair from '../assets/chair.png'
 import { useApiWs, useShareLink, useStore, useAuth, useCopy, useOpenExternal } from '../hooks'
+import { TCard } from '../types'
 
 export const Room = () => {
   const { t } = useTranslation()
@@ -56,6 +57,13 @@ export const Room = () => {
       setSendedReady(false)
     }
   }, [status, isSendedReady])
+
+  const myCards: TCard[] = (['ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as'] as TCard[]).slice(0, 11)
+
+  const rotateCard = ({ i, n }: {
+    i: number
+    n: number
+  }) => `rotate(${n < 2 ? 0 : (-6 + 2 * 6 * i / (n-1))}deg)`
 
   return (
     <Page>
@@ -109,14 +117,18 @@ export const Room = () => {
           </div>
         }
       </div>
-      
       <div className="Bottom relative h-[200px]">
-        {!!status &&
-          <div className="flex items-center justify-center h-[110px] max-w-[100%] mx-auto">
-            <Card className="-mx-[90px] h-[150px] -rotate-6" card="ac" />
-            <Card className="-mx-[90px] h-[150px] -rotate-3" card="ad" />
-            <Card className="-mx-[90px] h-[150px] rotate-3" card="ah" />
-            <Card className="-mx-[90px] h-[150px] rotate-6" card="as" />
+        {!status &&
+          <div className="flex items-center justify-center h-[110px] max-w-[100%] mx-auto px-[90px]">
+            {myCards.map((card, i, arr) => (
+              <Card
+                className="-mx-[90px] h-[153px]"
+                style={{
+                  transform: rotateCard({ i, n: arr.length }),
+                }}
+                card={card}
+              />
+            ))}
           </div>
         }
         <div className="absolute h-[90px] bottom-0 left-0 w-full flex items-center justify-between p-5 bg-[#292834] rounded-t-[24px]">
