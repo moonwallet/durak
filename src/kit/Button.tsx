@@ -23,8 +23,8 @@ export const Button = ({ theme = 'default', className, wrapperClassName, childre
   }
 
   const themeStyle = {
-    'default': '',
-    'big': 'min-h-[50px] min-w-[142px] px-8 rounded-[16px] bg-main text-[#000] font-semibold text-[18px] leading-[20px]',
+    'default': 'disabled:opacity-30',
+    'big': 'min-h-[50px] min-w-[142px] px-8 rounded-[16px] bg-main text-[#000] font-semibold text-[18px] leading-[20px] disabled:bg-main/30 disabled:text-main',
   }[theme]
 
   return (
@@ -34,7 +34,7 @@ export const Button = ({ theme = 'default', className, wrapperClassName, childre
     )}>
       <button
         className={cx(
-          'w-full enabled:hover:brightness-[1.15] enabled:active:brightness-[1.3] transition-all disabled:opacity-30 disabled:cursor-not-allowed truncate',
+          'w-full enabled:hover:brightness-[1.15] enabled:active:brightness-[1.3] transition-all disabled:cursor-not-allowed truncate',
           themeStyle,
           className,
         )}
