@@ -58,7 +58,18 @@ export const Room = () => {
     }
   }, [status, isSendedReady])
 
-  const myCards: TCard[] = (['ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as'] as TCard[]).slice(0, 11)
+  const myCards: TCard[] = (['ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as'] as TCard[]).slice(0, 5)
+
+  const chunks: <T>(arr: T[], n: number) => T[][] = (arr, n) => {
+    return Array.from({ length: Math.ceil(arr.length / n) }, (_, i) =>
+      arr.slice(i * n, i * n + n),
+    )
+  }
+
+  const pairs = chunks<TCard>(myCards, 2)
+  console.log('pairs', pairs)
+
+  const pairGroupsRows = chunks<TCard[]>(pairs, 3)
 
   const rotateCard = ({ i, n }: {
     i: number
@@ -110,10 +121,20 @@ export const Room = () => {
             {t('tapReadyToStart')}
           </div>
         }
-        {!!status && !!opponent &&
-          <div className="Group relative h-[130px] w-[90px]">
-            <Card className="absolute left-0 top-0 w-full h-full -rotate-12" card="as" />
-            <Card className="absolute left-0 top-0 w-full h-full rotate-12" card="ah" />
+        {(!!status && !!opponent) &&
+          <div className="Groups flex flex-col gap-8">
+            {pairGroupsRows.map((row, i) => (
+              <div key={`row-${i}`} className="flex items-center justify-between gap-8">
+                {row.map((group, j) => (
+                  <div key={`group-${j}`} className="Group relative h-[79px] w-[54px]">
+                    <Card className={cx('absolute left-0 top-0 w-full h-full', group[1] && '-rotate-12')} card={group[0]} />
+                    {group[1] &&
+                      <Card className="absolute left-0 top-0 w-full h-full rotate-12" card={group[1]} />
+                    }
+                  </div>
+                ))}
+              </div>
+            ))}
           </div>
         }
       </div>
