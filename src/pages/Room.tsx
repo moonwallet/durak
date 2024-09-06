@@ -98,7 +98,7 @@ export const Room = () => {
           </div>
         }
         {!status && !!opponent &&
-          <div className="px-8 text-[24px] leading-[29px] font-bold">
+          <div className="px-[82px] text-[24px] leading-[29px] font-bold">
             {t('tapReadyToStart')}
           </div>
         }
