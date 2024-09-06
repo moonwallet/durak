@@ -1,5 +1,5 @@
 import cx from 'classnames'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 
@@ -41,12 +41,21 @@ export const Room = () => {
     }
   }
 
+  const [isSendedReady, setSendedReady] = useState(false)
+
   const ready = () => {
     send({
       'type': 'player.ready',
       'data': {},
     })
+    setSendedReady(true)
   }
+
+  useEffect(() => {
+    if (status && isSendedReady) {
+      setSendedReady(false)
+    }
+  }, [status, isSendedReady])
 
   return (
     <Page>
@@ -110,12 +119,23 @@ export const Room = () => {
             </Button>
           }
           {!!opponent && !status &&
-            <Button
-              theme="big"
-              onClick={ready}
-            >
-              {t('ready')}
-            </Button>
+            <>
+              {!isSendedReady ? (
+                <Button
+                  theme="big"
+                  onClick={ready}
+                >
+                  {t('ready')}
+                </Button>
+              ) : (
+                <Button
+                  theme="big"
+                  onClick={ready}
+                >
+                  {t('waiting')}
+                </Button>
+              )}
+            </>
           }
           <div className="relative w-[100px] h-[50px] flex flex-col items-end justify-end">
             <img src={chair} className="absolute -right-[20px] -top-[60px]" />
