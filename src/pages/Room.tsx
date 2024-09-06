@@ -81,16 +81,28 @@ export const Room = () => {
         </div>
       </div>
 
-      <div className="Side absolute left-0 top-[50%] -translate-y-[50%]">
-        <div className="absolute -top-[48px] right-[48px] text-white/50 text-[16px] leading-[16px] font-semibold">N?</div>
-        <div className="relative -top-[20px]">
-          <Card card="qs" className="absolute -left-[110px] top-[50%] -translate-y-[50%] h-[110px] rotate-90" />
-          <Card className="relative -left-[50px] h-[110px]" />
+      {!!opponent &&
+        <div className="Side absolute left-0 top-[50%] -translate-y-[50%]">
+          <div className="absolute -top-[48px] right-[48px] text-white/50 text-[16px] leading-[16px] font-semibold">N?</div>
+          <div className="relative -top-[20px]">
+            <Card card="qs" className="absolute -left-[110px] top-[50%] -translate-y-[50%] h-[110px] rotate-90" />
+            <Card className="relative -left-[50px] h-[110px]" />
+          </div>
         </div>
-      </div>
+      }
 
       <div className="Center flex items-center justify-center">
-        {!!status &&
+        {!status && !opponent &&
+          <div className="px-8 text-[24px] leading-[29px] font-bold">
+            {t('sendRoomLink')}
+          </div>
+        }
+        {!status && !!opponent &&
+          <div className="px-8 text-[24px] leading-[29px] font-bold">
+            {t('tapReadyToStart')}
+          </div>
+        }
+        {!!status && !!opponent &&
           <div className="Group relative h-[130px] w-[90px]">
             <Card className="absolute left-0 top-0 w-full h-full -rotate-12" card="as" />
             <Card className="absolute left-0 top-0 w-full h-full rotate-12" card="ah" />
@@ -108,7 +120,7 @@ export const Room = () => {
           </div>
         }
         <div className="absolute h-[90px] bottom-0 left-0 w-full flex items-center justify-between p-5 bg-[#292834] rounded-t-[24px]">
-          {!opponent &&
+          {!status && !opponent &&
             <Button
               theme="big"
               onClick={share}
@@ -118,7 +130,7 @@ export const Room = () => {
               {isCopied ? t('copied') : t('shareRoomLink') }
             </Button>
           }
-          {!!opponent && !status &&
+          {!status && !!opponent &&
             <>
               {!isSendedReady ? (
                 <Button
