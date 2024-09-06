@@ -6,7 +6,11 @@ export const useOpenExternal = () => {
 
   const openExternal = (url: string) => {
     if (isTg) {
-      WebApp.openLink(url)
+      if (url.startsWith('https://t.me')) {
+        WebApp.openTelegramLink(url)
+      } else {
+        WebApp.openLink(url)
+      }
     } else {
       window.open(url, '_blank')?.focus()
     }

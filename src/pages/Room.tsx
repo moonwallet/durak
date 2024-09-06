@@ -1,5 +1,3 @@
-import { useWebApp } from '@vkruglikov/react-telegram-web-app'
-
 import cx from 'classnames'
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -8,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { Page, Button, Card } from '../kit'
 
 import chair from '../assets/chair.png'
-import { useShareLink, useStore, useAuth, useCopy } from '../hooks'
+import { useShareLink, useStore, useAuth, useCopy, useOpenExternal } from '../hooks'
 
 export const Room = () => {
   const { t } = useTranslation()
@@ -28,17 +26,17 @@ export const Room = () => {
 
   const status = state?.status || false
 
-  const { shareLink } = useShareLink({ roomId: roomId || '' })
+  const { shareUrl, shareLink } = useShareLink({ roomId: roomId || '' })
+  const { openExternal } = useOpenExternal()
 
   const { copy, isCopied } = useCopy()
-  const WebApp = useWebApp()
 
   const share = () => {
-    console.log(shareLink)
+    console.log(shareUrl)
     try {
-      WebApp.openTelegramLink(`https://t.me/share/url?url=${encodeURIComponent(shareLink)}`)
+      openExternal(shareLink)
     } catch {
-      copy(shareLink)
+      copy(shareUrl)
     }
   }
 
