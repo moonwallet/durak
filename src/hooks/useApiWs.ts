@@ -58,4 +58,10 @@ export const useApiWs = () => {
       window.removeEventListener('beforeunload', closeWs)
     }
   }, [ws])
+
+  const send = (payload: unknown) => {
+    ws?.send(JSON.stringify(payload))
+  }
+
+  return { send }
 }

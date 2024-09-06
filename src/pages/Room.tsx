@@ -6,16 +6,17 @@ import { useNavigate } from 'react-router-dom'
 import { Page, Button, Card } from '../kit'
 
 import chair from '../assets/chair.png'
-import { useShareLink, useStore, useAuth, useCopy, useOpenExternal } from '../hooks'
+import { useApiWs, useShareLink, useStore, useAuth, useCopy, useOpenExternal } from '../hooks'
 
 export const Room = () => {
   const { t } = useTranslation()
   const { roomId, state } = useStore()
   const navigate = useNavigate()
+  const { send } = useApiWs()
 
   useEffect(() => {
     if (!roomId) {
-      navigate('/')
+      // navigate('/') // todo
     }
   }, [roomId, navigate])
 
@@ -38,6 +39,13 @@ export const Room = () => {
     } catch {
       copy(shareUrl)
     }
+  }
+
+  const ready = () => {
+    send({
+      'type': 'player.ready',
+      'data': {},
+    })
   }
 
   return (
@@ -91,14 +99,24 @@ export const Room = () => {
           </div>
         }
         <div className="absolute h-[90px] bottom-0 left-0 w-full flex items-center justify-between p-5 bg-[#292834] rounded-t-[24px]">
-          <Button
-            theme="big"
-            onClick={share}
-            disabled={isCopied}
-          >
-            {/* I’m ready */}
-            {isCopied ? t('copied') : t('shareRoomLink') }
-          </Button>
+          {!opponent &&
+            <Button
+              theme="big"
+              onClick={share}
+              disabled={isCopied}
+            >
+              {/* I’m ready */}
+              {isCopied ? t('copied') : t('shareRoomLink') }
+            </Button>
+          }
+          {!!opponent && !status &&
+            <Button
+              theme="big"
+              onClick={ready}
+            >
+              {t('ready')}
+            </Button>
+          }
           <div className="relative w-[100px] h-[50px] flex flex-col items-end justify-end">
             <img src={chair} className="absolute -right-[20px] -top-[60px]" />
             <div className="text-text text-[14px] text-right">@{userId}</div>
