@@ -27,10 +27,21 @@ export type TState = {
     ready: boolean
    }
   }
-  status: 0 | 1 // 0 - not ready, 1 - all read
+  status: 0 | 1 | 2 | 100 // 0 - not ready, 1 - all ready (no deck), 2 - playing, 100 - finished
   last_loser: TUserId
   current_game_id: string
   invite_link: string // "https://t.me/durak"
+  game_stats?: { // only for status 2
+    deck: number
+    table: TCard[]
+    trump_suit: TCard
+    current_attacker_id: TUserId
+    current_defender_id: TUserId
+    hand: TCard[]
+    players: {
+      [key: TUserId]: number // player_id, num cards
+    }
+  }
 }
 
 export type TShareLinkData = {
