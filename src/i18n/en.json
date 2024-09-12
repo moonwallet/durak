@@ -10,9 +10,10 @@
   "getAirdrop": "get $DRK airdrop",
 
   "roomIsEmpty": "Room is empty",
-  "sendRoomLink": "Send the room link to your fren to start the game",
-  "forEveryFren": "For every new fren - you  will receive 500 $DRK points.",
-  "forEveryWin": "For every win - 2000 $DRK points",
+  "sendRoomLink": "Send the room link to your fren to start the game",
+  "forEveryFren": "For every new fren you will receive",
+  "forEveryWin": "For every win - ",
+  "points": "$DRK points",
   "shareRoomLink": "Share room link",
   "copied": "Copied!",
   "tapReadyToStart": "Tap Ready to start the game",

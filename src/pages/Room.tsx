@@ -3,10 +3,11 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 
-import { Page, Button, Card } from '../kit'
-
 import chair from '../assets/chair.png'
+import game from '../assets/game.png'
+
 import { useApiWs, useShareLink, useStore, useAuth, useCopy, useOpenExternal } from '../hooks'
+import { Page, Button, Card } from '../kit'
 import { TCard } from '../types'
 
 export const Room = () => {
@@ -112,8 +113,18 @@ export const Room = () => {
 
       <div className="Center flex items-center justify-center">
         {!status && !opponent &&
-          <div className="px-8 text-[24px] leading-[29px] font-bold">
-            {t('sendRoomLink')}
+          <div className="">
+            <div className="-mb-[50px]">
+              <img src={game} className="mx-auto w-[294px] h-[232px]" />
+            </div>
+            <div className="px-8 text-[24px] leading-[29px] font-bold">
+              {t('sendRoomLink')}
+            </div>
+            <div className="mt-2 text-text/60 text-[16px] leading-[18px] font-medium">
+              <div>{t('forEveryFren')} <span className="text-main">500 {t('points')}</span></div>
+              <div>{t('forEveryWin')} <span className="text-main">2000 {t('points')}</span></div>
+              <div></div>
+            </div>
           </div>
         }
         {!status && !!opponent &&
@@ -139,7 +150,7 @@ export const Room = () => {
         }
       </div>
       <div className="Bottom relative h-[200px]">
-        {!status &&
+        {(!!status && !!opponent) &&
           <div className="flex items-center justify-center h-[110px] max-w-[100%] mx-auto px-[90px]">
             {myCards.map((card, i, arr) => (
               <Card
