@@ -7,7 +7,7 @@ import chair from '../assets/chair.png'
 import game from '../assets/game.png'
 
 import { useApiWs, useShareLink, useStore, useAuth, useCopy, useOpenExternal } from '../hooks'
-import { Page, Button, Card } from '../kit'
+import { Page, Button, Card, Ava, Tip } from '../kit'
 import { TCard } from '../types'
 
 export const Room = () => {
@@ -82,11 +82,17 @@ export const Room = () => {
       <div className="Top z-0 mt-1 flex flex-col items-center justify-center h-[158px]">
         <div className="z-[1] relative w-[150px] h-[90px] shadow-[0px_0px_30px_30px_#11101D]">
           <img src={chair} className={cx('mx-auto w-[90px] h-[90px]', !opponent && 'grayscale')} />
-          {opponent &&
-            <div className="absolute top-[85%] left-[50%] -translate-x-[50%] w-full text-[14px] leading-[14px]">@{opponent}</div>
-          }
           {!opponent &&
             <div className="absolute top-[85%] left-[50%] -translate-x-[50%] w-full text-[16px] leading-[16px] font-semibold text-text/50">{t('roomIsEmpty')}</div>
+          }
+          {!opponent &&
+            <>
+              <div className="absolute top-[85%] left-[50%] -translate-x-[50%] w-full text-[14px] leading-[14px]">@{opponent}</div>
+              <Ava className="absolute -top-[10%] left-[50%] -translate-x-[50%] scale-75" />
+              <Tip isReverse className="absolute top-[55%] left-[50%] -translate-x-[50%] scale-75">
+                {t('take')}
+              </Tip>
+            </>
           }
         </div>
         <div className="h-[70px]">
@@ -193,9 +199,13 @@ export const Room = () => {
               )}
             </>
           }
-          <div className="relative w-[100px] h-[50px] flex flex-col items-end justify-end">
-            <img src={chair} className="absolute -right-[20px] -top-[60px]" />
-            <div className="text-text text-[14px] text-right">@{userId}</div>
+          <div className="absolute bottom-6 right-0 w-[120px] h-[120px]">
+            <img src={chair} className="absolute top-[0px] w-[120px] h-[120px]" />
+            <div className="absolute right-[20px] -bottom-[1em] max-w-[110px] truncate text-text text-[14px] text-right">@{userId}</div>
+            <Ava className="absolute top-[0%] left-[50%] -translate-x-[50%] scale-[85%]" status='progress' />
+            <Tip className="absolute -top-[35%] left-[50%] -translate-x-[50%] scale-75">
+              {t('take')}
+            </Tip>
           </div>
         </div>
       </div>
