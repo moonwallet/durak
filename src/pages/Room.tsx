@@ -199,9 +199,9 @@ export const Room = () => {
               )}
             </>
           }
-          <div className="absolute bottom-6 right-0 w-[120px] h-[120px]">
-            <img src={chair} className="absolute top-[0px] w-[120px] h-[120px]" />
-            <div className="absolute right-[20px] -bottom-[1em] max-w-[110px] truncate text-text text-[14px] text-right">@{userId}</div>
+          <div className="absolute bottom-5 right-0 w-[120px] h-[120px]">
+            <img src={chair} className="absolute bottom-2 w-[120px] h-[120px]" />
+            <div className="absolute right-5 bottom-0 max-w-[110px] truncate text-text text-[14px] text-right">@{userId}</div>
             <Ava className="absolute top-[0%] left-[50%] -translate-x-[50%] scale-[85%]" status='progress' />
             <Tip className="absolute -top-[35%] left-[50%] -translate-x-[50%] scale-75">
               {t('take')}
