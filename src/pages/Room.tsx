@@ -85,7 +85,7 @@ export const Room = () => {
           {!opponent &&
             <div className="absolute top-[85%] left-[50%] -translate-x-[50%] w-full text-[16px] leading-[16px] font-semibold text-text/50">{t('roomIsEmpty')}</div>
           }
-          {!opponent &&
+          {opponent &&
             <>
               <div className="absolute top-[85%] left-[50%] -translate-x-[50%] w-full text-[14px] leading-[14px]">@{opponent}</div>
               <Ava className="absolute -top-[10%] left-[50%] -translate-x-[50%] scale-75" />
