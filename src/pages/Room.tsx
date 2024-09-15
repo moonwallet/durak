@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom'
 
 import chair from '../assets/chair.png'
 import game from '../assets/game.png'
+import win from '../assets/win.png'
+import loose from '../assets/loose.png'
 
 import { useApiWs, useShareLink, useStore, useAuth, useCopy, useOpenExternal } from '../hooks'
 import { Page, Button, Card, Ava, Tip } from '../kit'
@@ -27,7 +29,10 @@ export const Room = () => {
   const opponents = state?.players.filter(_ => _ !== String(userId))
   const opponent = !!opponents?.length && opponents[0] || null
 
-  const status = state?.status || false
+  const status = /* Math.random() < 2 ? 100 : */ state?.status
+  const isWin = true
+  const points = 100
+  const invitePoints = 1000
 
   const { shareUrl, shareLink } = useShareLink({ roomId: roomId || '' })
   const { openExternal } = useOpenExternal()
@@ -89,14 +94,16 @@ export const Room = () => {
             <>
               <div className="absolute top-[85%] left-[50%] -translate-x-[50%] w-full text-[14px] leading-[14px]">@{opponent}</div>
               <Ava className="absolute -top-[10%] left-[50%] -translate-x-[50%] scale-75" />
-              <Tip isReverse className="absolute top-[55%] left-[50%] -translate-x-[50%] scale-75">
-                {t('take')}
-              </Tip>
+              {false &&
+                <Tip isReverse className="absolute top-[55%] left-[50%] -translate-x-[50%] scale-75">
+                  {t('take')}
+                </Tip>
+              }
             </>
           }
         </div>
         <div className="h-[70px]">
-          {!!status &&
+          {status === 2 &&
             <div className="flex items-center justify-center h-[70px] max-w-[100%] mx-auto">
               <Card className="-mx-[10px] h-[60px] rotate-6" />
               <Card className="-mx-[10px] h-[60px] rotate-3" />
@@ -127,8 +134,8 @@ export const Room = () => {
               {t('sendRoomLink')}
             </div>
             <div className="mt-2 text-text/60 text-[16px] leading-[18px] font-medium">
-              <div>{t('forEveryFren')} <span className="text-main">500 {t('points')}</span></div>
-              <div>{t('forEveryWin')} <span className="text-main">2000 {t('points')}</span></div>
+              <div>{t('forEveryFren')} <span className="text-main">500 $DRK {t('points')}</span></div>
+              <div>{t('forEveryWin')} <span className="text-main">2000 $DRK {t('points')}</span></div>
               <div></div>
             </div>
           </div>
@@ -138,7 +145,7 @@ export const Room = () => {
             {t('tapReadyToStart')}
           </div>
         }
-        {(!!status && !!opponent) &&
+        {(status === 2 && !!opponent) &&
           <div className="Groups flex flex-col gap-8">
             {pairGroupsRows.map((row, i) => (
               <div key={`row-${i}`} className="flex items-center justify-between gap-8">
@@ -154,9 +161,38 @@ export const Room = () => {
             ))}
           </div>
         }
+        {(status === 100) &&
+          <div className="flex flex-col items-center">
+            {isWin &&
+              <img src={win} className="-mb-[40px] w-[148px] h-[163px]" />
+            }
+            {!isWin &&
+              <img src={loose} className="-mb-[70px] w-[188px] h-[188px]" />
+            }
+            {points &&
+              <div className="p-[10px] text-[36px] leading-[36px] font-semibold" style={{ textShadow: '-2px -2px #454456, -2px 2px #454456, 2px 2px #454456, 2px -2px #454456' }}>
+                +{points} {t('points')}
+              </div>
+            }
+            <div className="min-h-[22px]">
+              {invitePoints &&
+                <span className="text-main text-[18px] leading-[21px] font-semibold">{t('pointsForInviting')}</span>
+              }
+            </div>
+            <div className="mt-10 text-[48px] leading-[48px] font-extrabold">
+              {isWin && <div className="text-main">{t('win')}</div>}
+              {!isWin && <div className="text-[#DF0000]">{t('gameOver')}</div>}
+            </div>
+            <div className="mt-[9px] text-[16px] leading-[18px] text-text/60">
+              {!!opponent && isWin && <span>{t('tapReadyToPlayAgain')}</span>}
+              {!!opponent && !isWin && <span>{t('tapReadyForRevanche')}</span>}
+              {!opponent && <span>{t('opponentLeft')}</span>}
+            </div>
+          </div>
+        }
       </div>
       <div className="Bottom relative h-[200px]">
-        {(!!status && !!opponent) &&
+        {(status === 1 && !!opponent) &&
           <div className="flex items-center justify-center h-[110px] max-w-[100%] mx-auto px-[90px]">
             {myCards.map((card, i, arr) => (
               <Card
@@ -199,13 +235,26 @@ export const Room = () => {
               )}
             </>
           }
+
+          {status === 100 &&
+            <Button
+              theme="big"
+              onClick={ready}
+            >
+              {(!isWin && opponent)
+                ? t('ready') : t('startNew') }
+            </Button>
+          }
+
           <div className="absolute bottom-5 right-0 w-[120px] h-[120px]">
             <img src={chair} className="absolute bottom-2 w-[120px] h-[120px]" />
             <div className="absolute right-5 bottom-0 max-w-[110px] truncate text-text text-[14px] text-right">@{userId}</div>
-            <Ava className="absolute top-[0%] left-[50%] -translate-x-[50%] scale-[85%]" status='progress' />
-            <Tip className="absolute -top-[35%] left-[50%] -translate-x-[50%] scale-75">
-              {t('take')}
-            </Tip>
+            <Ava className="absolute top-[0%] left-[50%] -translate-x-[50%] scale-[85%]" />
+            {false &&
+              <Tip className="absolute -top-[35%] left-[50%] -translate-x-[50%] scale-75">
+                {t('take')}
+              </Tip>
+            }
           </div>
         </div>
       </div>

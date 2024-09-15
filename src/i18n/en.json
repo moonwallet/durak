@@ -13,7 +13,7 @@
   "sendRoomLink": "Send the room link to your fren to start the game",
   "forEveryFren": "For every new fren you will receive",
   "forEveryWin": "For every win - ",
-  "points": "$DRK points",
+  "points": "points",
   "shareRoomLink": "Share room link",
   "copied": "Copied!",
   "tapReadyToStart": "Tap Ready to start the game",
@@ -27,6 +27,8 @@
   "pointsForInviting": "+1,000 points for inviting",
   "tapReadyToPlayAgain": "Tap ready to play again",
   "tapReadyForRevanche": "Tap ready for a revanche",
+  "opponentLeft": "Your opponent has left the game",
+  "startNew": "Start new",
 
   "ready": "I’m ready",
   "waiting": "Waiting for the opponent…",
