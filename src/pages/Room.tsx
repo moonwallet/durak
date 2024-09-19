@@ -26,10 +26,15 @@ export const Room = () => {
 
   const { userId } = useAuth()
 
+  const status = /* Math.random() < 2 ? 2 : */ state?.status
+
   const opponents = state?.players.filter(_ => _ !== String(userId))
   const opponent = !!opponents?.length && opponents[0] || null
 
-  const status = /* Math.random() < 2 ? 100 : */ state?.status
+  const opponentCardsN: null | number = 10
+  const deckCardsN: null | number = 4
+  const trump: TCard = 'qc'
+
   const isWin = true
   const points = 100
   const invitePoints = 1000
@@ -105,10 +110,14 @@ export const Room = () => {
         <div className="h-[70px]">
           {status === 2 &&
             <div className="flex items-center justify-center h-[70px] max-w-[100%] mx-auto">
-              <Card className="-mx-[10px] h-[60px] rotate-6" />
-              <Card className="-mx-[10px] h-[60px] rotate-3" />
-              <Card className="-mx-[10px] h-[60px] -rotate-3" />
-              <Card className="-mx-[10px] h-[60px] -rotate-6" />
+              {Array(opponentCardsN).map((_, i, arr) => (
+                <Card
+                  className="-mx-[10px] h-[60px]"
+                  style={{
+                    transform: rotateCard({ i, n: arr.length }),
+                  }}
+                />
+              ))}
             </div>
           }
         </div>
@@ -116,10 +125,21 @@ export const Room = () => {
 
       {!!opponent &&
         <div className="Side absolute left-0 top-[50%] -translate-y-[50%]">
-          <div className="absolute -top-[48px] right-[48px] text-white/50 text-[16px] leading-[16px] font-semibold">N?</div>
+          {!!deckCardsN &&
+            <div className="absolute -top-[48px] right-[48px] text-white/50 text-[16px] leading-[16px] font-semibold">{deckCardsN}</div>
+          }
           <div className="relative -top-[20px]">
-            <Card card="qs" className="absolute -left-[110px] top-[50%] -translate-y-[50%] h-[110px] rotate-90" />
-            <Card className="relative -left-[50px] h-[110px]" />
+            {deckCardsN >= 1 && trump &&
+              <Card card={trump} className="absolute -left-[110px] top-[50%] -translate-y-[50%] h-[110px] rotate-90" />
+            }
+            {deckCardsN >= 2 &&
+              <div className="relative -left-[50px] w-[75px] h-[110px]">
+                <Card className="absolute inset-0 w-[75px] h-[110px]" />
+                {deckCardsN >= 3 &&
+                  <Card className="absolute inset-0 w-[75px] h-[110px] rotate-6" />
+                }
+              </div>
+            }
           </div>
         </div>
       }
