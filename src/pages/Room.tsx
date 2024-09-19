@@ -31,7 +31,7 @@ export const Room = () => {
   const opponents = state?.players.filter(_ => _ !== String(userId))
   const opponent = !!opponents?.length && opponents[0] || null
 
-  const opponentCardsN: null | number = 10
+  const opponentCardsN: null | number = opponent && state?.game_stats?.players[opponent] || 0
   const deckCardsN: null | number = 4
   const trump: TCard = 'qc'
 
@@ -82,15 +82,16 @@ export const Room = () => {
 
   const pairGroupsRows = chunks<TCard[]>(pairs, 3)
 
-  const rotateCard = ({ i, n }: {
+  const rotateCard = ({ i, n, isReverse }: {
     i: number
     n: number
-  }) => `rotate(${n < 2 ? 0 : (-6 + 2 * 6 * i / (n-1))}deg)`
+    isReverse?: boolean
+  }) => `rotate(${n < 2 ? 0 : (isReverse ? -1 : 1)* (-6 + 2 * 6 * i / (n-1))}deg)`
 
   return (
     <Page>
       <div className="Top z-0 mt-1 flex flex-col items-center justify-center h-[158px]">
-        <div className="z-[1] relative w-[150px] h-[90px] shadow-[0px_0px_30px_30px_#11101D]">
+        <div className="z-[1] relative w-[200px] h-[90px] shadow-[0px_0px_30px_30px_#11101D]">
           <img src={chair} className={cx('mx-auto w-[90px] h-[90px]', !opponent && 'grayscale')} />
           {!opponent &&
             <div className="absolute top-[85%] left-[50%] -translate-x-[50%] w-full text-[16px] leading-[16px] font-semibold text-text/50">{t('roomIsEmpty')}</div>
@@ -110,11 +111,11 @@ export const Room = () => {
         <div className="h-[70px]">
           {status === 2 &&
             <div className="flex items-center justify-center h-[70px] max-w-[100%] mx-auto">
-              {Array(opponentCardsN).map((_, i, arr) => (
+              {[...Array(opponentCardsN)].map((_, i, arr) => (
                 <Card
                   className="-mx-[10px] h-[60px]"
                   style={{
-                    transform: rotateCard({ i, n: arr.length }),
+                    transform: rotateCard({ i, n: arr.length, isReverse: true }),
                   }}
                 />
               ))}
