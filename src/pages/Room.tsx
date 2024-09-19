@@ -32,8 +32,8 @@ export const Room = () => {
   const opponent = !!opponents?.length && opponents[0] || null
 
   const opponentCardsN: null | number = opponent && state?.game_stats?.players[opponent] || 0
-  const deckCardsN: null | number = 4
-  const trump: TCard = 'qc'
+  const deckCardsN: null | number = state?.game_stats?.deck || 0
+  const trump: TCard | undefined = state?.game_stats?.trump_suit
 
   const isWin = true
   const points = 100
