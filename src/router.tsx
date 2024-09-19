@@ -13,10 +13,6 @@ export const router = createHashRouter([
     element: <Play />,
   },
   {
-    path: '/play',
-    element: <Play />,
-  },
-  {
     path: '/find',
     element: <Find />,
   },

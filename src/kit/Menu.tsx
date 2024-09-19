@@ -18,7 +18,7 @@ export const Menu = () => {
     {
       icon: menuPlay,
       text: t('play'),
-      pathname: '/play',
+      pathname: '/',
     },
     {
       icon: menuFind,
