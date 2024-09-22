@@ -1,6 +1,6 @@
 import { createHashRouter } from 'react-router-dom'
 
-import { Room, Play, Find, Airdrop, Rules } from './pages'
+import { Room, Play, Find, Points, Rules } from './pages'
 
 export const router = createHashRouter([
   {
@@ -17,8 +17,8 @@ export const router = createHashRouter([
     element: <Find />,
   },
   {
-    path: '/airdrop',
-    element: <Airdrop />,
+    path: '/points',
+    element: <Points />,
   },
   {
     path: '/rules',

@@ -6,7 +6,7 @@ import { Button } from '../kit'
 
 import { ReactComponent as menuPlay } from '../assets/menuPlay.svg'
 import { ReactComponent as menuFind } from '../assets/menuFind.svg'
-import { ReactComponent as menuAirdrop } from '../assets/menuAirdrop.svg'
+import { ReactComponent as menuPoints } from '../assets/menuPoints.svg'
 import { ReactComponent as menuRules } from '../assets/menuRules.svg'
 
 export const Menu = () => {
@@ -17,22 +17,22 @@ export const Menu = () => {
   const items = [
     {
       icon: menuPlay,
-      text: t('play'),
+      text: t('menu.play'),
       pathname: '/',
     },
     {
       icon: menuFind,
-      text: t('find'),
+      text: t('menu.find'),
       pathname: '/find',
     },
     {
-      icon: menuAirdrop,
-      text: t('airdrop'),
-      pathname: '/airdrop',
+      icon: menuPoints,
+      text: t('menu.points'),
+      pathname: '/points',
     },
     {
       icon: menuRules,
-      text: t('rules'),
+      text: t('menu.rules'),
       pathname: '/rules',
     },
   ]

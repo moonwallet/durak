@@ -155,8 +155,8 @@ export const Room = () => {
               {t('sendRoomLink')}
             </div>
             <div className="mt-2 text-text/60 text-[16px] leading-[18px] font-medium">
-              <div>{t('forEveryFren')} <span className="text-main">500 $DRK {t('points')}</span></div>
-              <div>{t('forEveryWin')} <span className="text-main">2000 $DRK {t('points')}</span></div>
+              <div>{t('forEveryFren')} <span className="text-main">500 $DRK {t('points_')}</span></div>
+              <div>{t('forEveryWin')} <span className="text-main">2000 $DRK {t('points_')}</span></div>
               <div></div>
             </div>
           </div>

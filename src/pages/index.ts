@@ -1,5 +1,5 @@
-export * from './Airdrop'
 export * from './Find'
 export * from './Play'
+export * from './Points'
 export * from './Room'
 export * from './Rules'
