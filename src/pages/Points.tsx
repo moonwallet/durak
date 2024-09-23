@@ -45,32 +45,6 @@ export const Points = () => {
 
         {tab === 1 &&
           <div className="text-left">
-            <div className="mt-[56px]">
-              <div className="flex flex-col gap-1">
-                <div className="text-[18px] leading-[22px] font-semibold">{t('points.aboutPoints')}</div>
-                <div className="text-[20px] leading-[24px]" style={textGradient}>{t('points.aboutPointsText')}</div>
-              </div>
-            </div>
-            <div className="mt-10">
-              <div className="flex flex-col gap-1">
-                <div className="text-[18px] leading-[22px] font-semibold">{t('points.howToEarn')}</div>
-                <div className="flex flex-col gap-3">
-                  <div className="flex items-start gap-1">
-                    <Check className="w-[30px] h-[30px] text-main" />
-                    <div className="flex-1 text-[20px] leading-[24px]" style={textGradient}>{t('points.howToEarn1', { winPoints: '???', gamePoints: '???' })}</div>
-                  </div>
-                  <div className="flex items-start gap-1">
-                    <Check className="w-[30px] h-[30px] text-main" />
-                    <div className="flex-1 text-[20px] leading-[24px]" style={textGradient}>{t('points.howToEarn2', { invitePoints: '???' })}</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        }
-
-        {tab === 2 &&
-          <div className="text-left">
             <div className="mt-10 ml-[6px] text-[18px] leading-[22px] font-semibold">{t('points.durakQuests')}</div>
             <div className="mt-3 flex flex-col gap-2">
               <Quest
@@ -100,7 +74,34 @@ export const Points = () => {
             </div>
           </div>
         }
+
+        {tab === 2 &&
+          <div className="text-left">
+            <div className="mt-[56px]">
+              <div className="flex flex-col gap-1">
+                <div className="text-[18px] leading-[22px] font-semibold">{t('points.aboutPoints')}</div>
+                <div className="text-[20px] leading-[24px]" style={textGradient}>{t('points.aboutPointsText')}</div>
+              </div>
+            </div>
+            <div className="mt-10">
+              <div className="flex flex-col gap-1">
+                <div className="text-[18px] leading-[22px] font-semibold">{t('points.howToEarn')}</div>
+                <div className="flex flex-col gap-3">
+                  <div className="flex items-start gap-1">
+                    <Check className="w-[30px] h-[30px] text-main" />
+                    <div className="flex-1 text-[20px] leading-[24px]" style={textGradient}>{t('points.howToEarn1', { winPoints: '???', gamePoints: '???' })}</div>
+                  </div>
+                  <div className="flex items-start gap-1">
+                    <Check className="w-[30px] h-[30px] text-main" />
+                    <div className="flex-1 text-[20px] leading-[24px]" style={textGradient}>{t('points.howToEarn2', { invitePoints: '???' })}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
       </div>
+
 
       <div className="Bottom mt-4">
         <div className="mb-5 flex items-center justify-center">
