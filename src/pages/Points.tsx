@@ -1,6 +1,8 @@
+import cx from 'classnames'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { Page, Menu } from '../kit'
+import { Page, Menu, Button } from '../kit'
 
 import pointsLeft from '../assets/pointsLeft.png'
 import pointsRight from '../assets/pointsRight.png'
@@ -17,6 +19,8 @@ export const Points = () => {
     backgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
   }
+
+  const [tab, setTab] = useState<1|2>(1)
 
   return (
     <Page>
@@ -39,32 +43,81 @@ export const Points = () => {
           />
         </div>
 
-        <div className="text-left">
-          <div className="mt-[56px]">
-            <div className="flex flex-col gap-1">
-              <div className="text-[18px] leading-[22px] font-semibold">{t('points.aboutPoints')}</div>
-              <div className="text-[20px] leading-[24px]" style={textGradient}>{t('points.aboutPointsText')}</div>
+        {tab === 1 &&
+          <div className="text-left">
+            <div className="mt-[56px]">
+              <div className="flex flex-col gap-1">
+                <div className="text-[18px] leading-[22px] font-semibold">{t('points.aboutPoints')}</div>
+                <div className="text-[20px] leading-[24px]" style={textGradient}>{t('points.aboutPointsText')}</div>
+              </div>
             </div>
-          </div>
-          <div className="mt-10">
-            <div className="flex flex-col gap-1">
-              <div className="text-[18px] leading-[22px] font-semibold">{t('points.howToEarn')}</div>
-              <div className="flex flex-col gap-3">
-                <div className="flex items-start gap-1">
-                  <Check className="w-[30px] h-[30px] text-main" />
-                  <div className="flex-1 text-[20px] leading-[24px]" style={textGradient}>{t('points.howToEarn1', { winPoints: '???', gamePoints: '???' })}</div>
-                </div>
-                <div className="flex items-start gap-1">
-                  <Check className="w-[30px] h-[30px] text-main" />
-                  <div className="flex-1 text-[20px] leading-[24px]" style={textGradient}>{t('points.howToEarn2', { invitePoints: '???' })}</div>
+            <div className="mt-10">
+              <div className="flex flex-col gap-1">
+                <div className="text-[18px] leading-[22px] font-semibold">{t('points.howToEarn')}</div>
+                <div className="flex flex-col gap-3">
+                  <div className="flex items-start gap-1">
+                    <Check className="w-[30px] h-[30px] text-main" />
+                    <div className="flex-1 text-[20px] leading-[24px]" style={textGradient}>{t('points.howToEarn1', { winPoints: '???', gamePoints: '???' })}</div>
+                  </div>
+                  <div className="flex items-start gap-1">
+                    <Check className="w-[30px] h-[30px] text-main" />
+                    <div className="flex-1 text-[20px] leading-[24px]" style={textGradient}>{t('points.howToEarn2', { invitePoints: '???' })}</div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        }
+
+        {tab === 2 &&
+          <div className="text-left">
+            <div className="mt-10 text-[18px] leading-[22px] font-semibold">{t('points.durakQuests')}</div>
+            <div className="flex flex-col gap-2">
+              {/*
+              <Quest
+                title=""
+                subtitle=""
+                isSuccess={true}
+              />
+              */}
+            </div>
+            <div className="mt-10 text-[18px] leading-[22px] font-semibold">{t('points.partnerQuests')}</div>
+            <div className="flex flex-col gap-2">
+              {/*
+              <Quest
+                title=""
+                subtitle=""
+                isSuccess={true}
+              />
+              */}
+            </div>
+          </div>
+        }
       </div>
 
-      <div className="Bottom">
+      <div className="Bottom mt-4">
+        <div className="mb-5 flex items-center justify-center">
+          <div className="flex items-center justify-center bg-main/10 rounded-[12px]">
+          <Button
+            className={cx(
+              'min-w-[100px] p-2 rounded-[12px] text-[16px] leading-[19px] font-semibold',
+              tab === 1 ? 'bg-main text-black' : 'text-main',
+            )}
+            onClick={() => { setTab(1) }}
+          >
+            {t('points.tasks')}
+          </Button>
+          <Button
+            className={cx(
+              'min-w-[100px] p-2 rounded-[12px] text-[16px] leading-[19px] font-semibold',
+              tab === 2 ? 'bg-main text-black' : 'text-main',
+            )}
+            onClick={() => { setTab(2) }}
+          >
+            {t('points.info')}
+          </Button>
+          </div>
+        </div>
         <Menu />
       </div>
     </Page>
