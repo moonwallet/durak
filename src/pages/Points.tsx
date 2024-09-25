@@ -4,10 +4,12 @@ import { useTranslation } from 'react-i18next'
 
 import { Page, Menu, Button, Quest } from '../kit'
 
-import pointsLeft from '../assets/pointsLeft.png'
-import pointsRight from '../assets/pointsRight.png'
 import { ReactComponent as Point } from '../assets/point.svg'
 import { ReactComponent as Check } from '../assets/check.svg'
+import pointsLeft from '../assets/pointsLeft.png'
+import pointsRight from '../assets/pointsRight.png'
+import questDurak from '../assets/questDurak.png'
+import questMoon from '../assets/questMoon.png'
 
 export const Points = () => {
   const { t } = useTranslation()
@@ -46,16 +48,16 @@ export const Points = () => {
         {tab === 1 &&
           <div className="text-left">
             <div className="mt-10 ml-[6px] text-[18px] leading-[22px] font-semibold">{t('points.durakQuests')}</div>
-            <div className="mt-3 flex flex-col gap-2">
+            <div className="mt-3 flex flex-col gap-3">
               <Quest
-                image={undefined}
-                title={t('points.joinChannel', { name: 'Durak' })}
+                image={questDurak}
+                title={t('points.followChannel', { name: 'Durak' })}
                 subtitle={`+1,000 ${t('points.points')}`}
-                buttonText={t('points.join')}
+                buttonText={t('points.follow')}
                 link="https://t.me/durakton_news"
               />
               <Quest
-                image={undefined}
+                image={questDurak}
                 title={t('points.joinChat', { name: 'Durak' })}
                 subtitle={`+1,000 ${t('points.points')}`}
                 buttonText={t('points.join')}
@@ -63,13 +65,20 @@ export const Points = () => {
               />
             </div>
             <div className="mt-10 ml-[6px] text-[18px] leading-[22px] font-semibold">{t('points.partnerQuests')}</div>
-            <div className="mt-3 flex flex-col gap-2">
+            <div className="mt-3 flex flex-col gap-3">
               <Quest
-                image={undefined}
+                image={questMoon}
                 title={t('points.launchApp', { name: 'Moon' })}
                 subtitle={`+1,000 ${t('points.points')}`}
                 link="https://t.me/moonWallet_solbot"
                 buttonText={t('points.launch')}
+              />
+              <Quest
+                image={questMoon}
+                title={t('points.joinChat', { name: 'Moon' })}
+                subtitle={`+1,000 ${t('points.points')}`}
+                link="https://t.me/moon_wallet_xyz"
+                buttonText={t('points.join')}
               />
             </div>
           </div>

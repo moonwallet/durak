@@ -7,7 +7,7 @@ import { ReactComponent as Check } from '../assets/check.svg'
 
 export const Quest = ({ className, image, title, subtitle, buttonText, link, isSuccess } : {
   className?: string
-  image?: undefined
+  image?: string
   title: string
   subtitle: string
   buttonText: string
@@ -21,8 +21,8 @@ export const Quest = ({ className, image, title, subtitle, buttonText, link, isS
       'Quest flex items-center gap-3 p-3 bg-[#1C1B2A] rounded-[24px]',
       className,
     )}>
-      <div className="w-[44px] h-[44px] bg-white/10 rounded-[8px]">
-        {image}
+      <div className="w-[44px] h-[44px] bg-white/10 rounded-[8px] overflow-hidden">
+        <img src={image} className="w-[44px] h-[44px]" />
       </div>
       <div className="flex-1 flex flex-col gap-1">
         <div className="text-[16px] leading-[19px] font-semibold">{title}</div>
