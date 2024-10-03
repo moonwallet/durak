@@ -26,7 +26,7 @@ export const Room = () => {
 
   const { userId } = useAuth()
 
-  const status = /* Math.random() < 2 ? 2 : */ state?.status
+  const status = /*Math.random() < 2 ? 2 :*/ state?.status
 
   const opponents = state?.players.filter(_ => _ !== String(userId))
   const opponent = !!opponents?.length && opponents[0] || null
@@ -87,6 +87,10 @@ export const Room = () => {
     n: number
     isReverse?: boolean
   }) => `rotate(${n < 2 ? 0 : (isReverse ? -1 : 1)* (-6 + 2 * 6 * i / (n-1))}deg)`
+
+  const onCardClick = (card: TCard) => {
+    console.log('onCardClick', card)
+  }
 
   return (
     <Page>
@@ -166,7 +170,7 @@ export const Room = () => {
             {t('tapReadyToStart')}
           </div>
         }
-        {(status === 2 && !!opponent) &&
+        {(status === 2) &&
           <div className="Groups flex flex-col gap-8">
             {pairGroupsRows.map((row, i) => (
               <div key={`row-${i}`} className="flex items-center justify-between gap-8">
@@ -213,7 +217,7 @@ export const Room = () => {
         }
       </div>
       <div className="Bottom relative h-[200px]">
-        {(status === 1 && !!opponent) &&
+        {(status === 2) &&
           <div className="flex items-center justify-center h-[110px] max-w-[100%] mx-auto px-[90px]">
             {myCards.map((card, i, arr) => (
               <Card
@@ -222,6 +226,7 @@ export const Room = () => {
                   transform: rotateCard({ i, n: arr.length }),
                 }}
                 card={card}
+                onClick={onCardClick}
               />
             ))}
           </div>

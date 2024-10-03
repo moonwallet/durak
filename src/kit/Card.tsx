@@ -66,10 +66,11 @@ const cards: { [Key in TCard]: typeof ac } = {
 6* 7* 8* 9* 10* J* Q* K* A*
 */
 
-export const Card = ({ className, style, card }: {
+export const Card = ({ className, style, card, onClick }: {
   className?: string
   style?: React.CSSProperties
   card?: TCard
+  onClick?: (_: TCard) => void
 }) => {
   if (!card) {
     return (
@@ -77,6 +78,11 @@ export const Card = ({ className, style, card }: {
         className={cx('Card', className)}
         style={style}
         src={cardBack}
+        onClick={() => {
+          if (card && onClick) {
+            onClick(card)
+          }
+        }}
       />
     )
   }
@@ -88,6 +94,11 @@ export const Card = ({ className, style, card }: {
       className={cx('Card', className)}
       style={style}
       title={card}
+      onClick={() => {
+        if (card && onClick) {
+          onClick(card)
+        }
+      }}
     />
   )
 }
