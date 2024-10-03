@@ -26,7 +26,7 @@ export const Room = () => {
 
   const { userId } = useAuth()
 
-  const status = /*Math.random() < 2 ? 2 :*/ state?.status
+  const status = /* Math.random() < 2 ? 2 : */ state?.status
 
   const opponents = state?.players.filter(_ => _ !== String(userId))
   const opponent = !!opponents?.length && opponents[0] || null
@@ -90,6 +90,12 @@ export const Room = () => {
 
   const onCardClick = (card: TCard) => {
     console.log('onCardClick', card)
+    send({
+      'type': 'player.move',
+      'data': {
+        card: card,
+      },
+    })
   }
 
   return (
