@@ -10,7 +10,7 @@ import loose from '../assets/loose.png'
 
 import { useApiWs, useShareLink, useStore, useAuth, useCopy, useOpenExternal } from '../hooks'
 import { Page, Button, Card, Ava, Tip } from '../kit'
-import { TCard, TUserId } from '../types'
+import { TCard, TPlayer, TUserId } from '../types'
 
 export const Room = () => {
   const { t } = useTranslation()
@@ -30,9 +30,11 @@ export const Room = () => {
 
   const players = state?.players || {}
   const playersKeys = Object.keys(players)
+
   const opponentIds = playersKeys.filter(_ => _ !== String(userId))
   const opponentId: TUserId | null = opponentIds[0] || null
-  const opponent = !!opponentId && players[opponentId] || null
+  const opponent: TPlayer | null = !!opponentId && players[opponentId] || null
+  const me: TPlayer | null = userId && players[userId] || null
 
   const opponentCardsN: null | number = opponent?.cards?.length || 0
   const deckCardsN: null | number = state?.game?.deck || 0
@@ -64,7 +66,7 @@ export const Room = () => {
   const ready = () => {
     send({
       'type': 'player.ready',
-      'data': {},
+      'data': null,
     })
     setSendedReady(true)
   }
@@ -75,7 +77,9 @@ export const Room = () => {
     }
   }, [status, isSendedReady])
 
-  const myCards: TCard[] = (['ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as'] as TCard[]).slice(0, 5)
+  /* const myCards: TCard[] = (['ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as'] as TCard[]).slice(0, 5) */
+
+  const myCards: TCard[] = me?.cards || []
 
   const chunks: <T>(arr: T[], n: number) => T[][] = (arr, n) => {
     return Array.from({ length: Math.ceil(arr.length / n) }, (_, i) =>
