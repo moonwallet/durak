@@ -10,7 +10,7 @@ import loose from '../assets/loose.png'
 
 import { useApiWs, useShareLink, useStore, useAuth, useCopy, useOpenExternal } from '../hooks'
 import { Page, Button, Card, Ava, Tip } from '../kit'
-import { TCard } from '../types'
+import { TCard, TUserId } from '../types'
 
 export const Room = () => {
   const { t } = useTranslation()
@@ -28,12 +28,17 @@ export const Room = () => {
 
   const status = /* Math.random() < 2 ? 2 : */ state?.status
 
-  const opponents = state?.players.filter(_ => _ !== String(userId))
-  const opponent = !!opponents?.length && opponents[0] || null
+  const players = state?.players || {}
+  const playersKeys = Object.keys(players)
+  const opponentIds = playersKeys.filter(_ => _ !== String(userId))
+  const opponentId: TUserId | null = opponentIds[0] || null
+  const opponent = !!opponentId && players[opponentId] || null
 
-  const opponentCardsN: null | number = opponent && state?.game_stats?.players[opponent] || 0
-  const deckCardsN: null | number = state?.game_stats?.deck || 0
-  const trump: TCard | undefined = state?.game_stats?.trump_suit
+  const opponentCardsN: null | number = opponent?.cards?.length || 0
+  const deckCardsN: null | number = state?.game?.deck || 0
+
+  // @ts-expect-error ...
+  const trump: TCard | undefined = state?.game?.trump_suit ? `a${state?.game?.trump_suit}` : undefined
 
   const isWin = true
   const points = 100
@@ -46,6 +51,7 @@ export const Room = () => {
 
   const share = () => {
     console.log(shareUrl)
+    console.log('roomId', roomId)
     try {
       openExternal(shareLink)
     } catch {
@@ -108,7 +114,7 @@ export const Room = () => {
           }
           {opponent &&
             <>
-              <div className="absolute top-[85%] left-[50%] -translate-x-[50%] w-full text-[14px] leading-[14px]">@{opponent}</div>
+              <div className="absolute top-[85%] left-[50%] -translate-x-[50%] w-full text-[14px] leading-[14px]">@{opponent.username}</div>
               <Ava className="absolute -top-[10%] left-[50%] -translate-x-[50%] scale-75" />
               {false &&
                 <Tip isReverse className="absolute top-[55%] left-[50%] -translate-x-[50%] scale-75">

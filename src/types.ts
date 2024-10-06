@@ -18,29 +18,35 @@ export type TMessageType = TMessageInType | TMessageOutType
 export type TUserId = string
 export type TRoomId = string
 
+export type TPlayer = {
+  id: TUserId
+  username: string | null
+  name: string | null
+  ready: boolean
+  cards: TCard[] | null
+ }
+
 export type TState = {
   room_id: TRoomId
   room_host: TUserId
-  players: TUserId[]
-  players_data: {
-   [key: TUserId]: {
-    ready: boolean
-   }
+  players: {
+   [key: TUserId]: TPlayer
   }
   status: 0 | 1 | 2 | 100 // 0 - not ready, 1 - all ready (no deck), 2 - playing, 100 - finished
   last_loser: TUserId
   current_game_id: string
   invite_link: string // "https://t.me/durak"
-  game_stats?: { // only for status 2
+  game: null | { // only for status 2
     deck: number
     table: TCard[]
     trump_suit: TCard
-    current_attacker_id: TUserId
-    current_defender_id: TUserId
-    hand: TCard[]
+    current_attacker_id: TUserId | null
+    current_defender_id: TUserId | null
     players: {
       [key: TUserId]: number // player_id, num cards
     }
+    next_move_until: string // iso time
+    status: 2 | 10 | 11 | 100 // 2 - dealing, 10 - attacking, 11 - defending, 100 - finish
   }
 }
 
