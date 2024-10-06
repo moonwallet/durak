@@ -24,6 +24,7 @@ export type TPlayer = {
   name: string | null
   ready: boolean
   cards: TCard[] | null
+  image_url: string | null
  }
 
 export type TState = {
@@ -33,7 +34,7 @@ export type TState = {
    [key: TUserId]: TPlayer
   }
   status: 0 | 1 | 2 | 100 // 0 - not ready, 1 - all ready (no deck), 2 - playing, 100 - finished
-  last_loser: TUserId
+  last_loser_id: TUserId | null
   current_game_id: string
   invite_link: string // "https://t.me/durak"
   game: null | { // only for status 2

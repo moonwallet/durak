@@ -86,10 +86,12 @@ export const Room = () => {
     )
   }
 
-  const pairs = chunks<TCard>(myCards, 2)
-  console.log('pairs', pairs)
+  // const pairs = chunks<TCard>(myCards, 2)
+  // console.log('pairs', pairs)
 
-  const pairGroupsRows = chunks<TCard[]>(pairs, 3)
+  const table = state?.game?.table || []
+
+  const pairGroupsRows = chunks<TCard[]>(table, 3)
 
   const rotateCard = ({ i, n, isReverse }: {
     i: number
