@@ -38,8 +38,8 @@ export type TState = {
   invite_link: string // "https://t.me/durak"
   game: null | { // only for status 2
     deck: number
-    table: TCard[]
-    trump_suit: TCard
+    table: TCard[][] | null
+    trump: TCard
     current_attacker_id: TUserId | null
     current_defender_id: TUserId | null
     players: {

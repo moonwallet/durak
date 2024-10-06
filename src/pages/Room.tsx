@@ -39,8 +39,7 @@ export const Room = () => {
   const opponentCardsN: null | number = opponent?.cards?.length || 0
   const deckCardsN: null | number = state?.game?.deck || 0
 
-  // @ts-expect-error ...
-  const trump: TCard | undefined = state?.game?.trump_suit ? `a${state?.game?.trump_suit}` : undefined
+  const trump: TCard | undefined = state?.game?.trump || undefined
 
   const isWin = true
   const points = 100
