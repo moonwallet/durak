@@ -215,7 +215,7 @@ export const Room = () => {
             }
             {points &&
               <div className="p-[10px] text-[36px] leading-[36px] font-semibold" style={{ textShadow: '-2px -2px #454456, -2px 2px #454456, 2px 2px #454456, 2px -2px #454456' }}>
-                +{points} {t('points')}
+                +{points} {t('points_')}
               </div>
             }
             <div className="min-h-[22px]">
