@@ -9,7 +9,7 @@ import win from '../assets/win.png'
 import loose from '../assets/loose.png'
 
 import { useApiWs, useShareLink, useStore, useAuth, useCopy, useOpenExternal } from '../hooks'
-import { Page, Button, Card, Ava, Tip } from '../kit'
+import { Page, Button, Card, Ava, Tip, Username } from '../kit'
 import { TCard, TPlayer, TUserId } from '../types'
 
 export const Room = () => {
@@ -119,7 +119,9 @@ export const Room = () => {
           }
           {opponent &&
             <>
-              <div className="absolute top-[85%] left-[50%] -translate-x-[50%] w-full text-[14px] leading-[14px]">@{opponent.username}</div>
+              <div className="absolute top-[85%] left-[50%] -translate-x-[50%] w-full text-[14px] leading-[14px]">
+                <Username player={opponent} />
+              </div>
               <Ava className="absolute -top-[10%] left-[50%] -translate-x-[50%] scale-75" />
               {false &&
                 <Tip isReverse className="absolute top-[55%] left-[50%] -translate-x-[50%] scale-75">
@@ -291,7 +293,9 @@ export const Room = () => {
 
           <div className="absolute bottom-5 right-0 w-[120px] h-[120px]">
             <img src={chair} className="absolute bottom-2 w-[120px] h-[120px]" />
-            <div className="absolute right-5 bottom-0 max-w-[110px] truncate text-text text-[14px] text-right">@{userId}</div>
+            <div className="absolute right-5 bottom-0 max-w-[110px] truncate text-text text-[14px] text-right">
+              <Username player={me} />
+            </div>
             <Ava className="absolute top-[0%] left-[50%] -translate-x-[50%] scale-[85%]" />
             {false &&
               <Tip className="absolute -top-[35%] left-[50%] -translate-x-[50%] scale-75">
