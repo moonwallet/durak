@@ -22,7 +22,7 @@ export const Points = () => {
     WebkitTextFillColor: 'transparent',
   }
 
-  const [tab, setTab] = useState<1|2>(1)
+  const [tab, setTab] = useState<1|2>(2)
 
   return (
     <Page>
@@ -113,6 +113,7 @@ export const Points = () => {
 
 
       <div className="Bottom mt-4">
+        {Math.random() > 2 &&
         <div className="mb-5 flex items-center justify-center">
           <div className="flex items-center justify-center bg-main/10 rounded-[12px]">
           <Button
@@ -135,6 +136,7 @@ export const Points = () => {
           </Button>
           </div>
         </div>
+        }
         <Menu />
       </div>
     </Page>
