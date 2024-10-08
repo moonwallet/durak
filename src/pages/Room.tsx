@@ -26,7 +26,7 @@ export const Room = () => {
 
   const { userId } = useAuth()
 
-  const status = /* Math.random() < 2 ? 2 : */ state?.status
+  const status = Math.random() < 2 ? 100 : state?.status
 
   const players = state?.players || {}
   const playersKeys = Object.keys(players)

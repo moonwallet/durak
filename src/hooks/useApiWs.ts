@@ -34,10 +34,17 @@ export const useApiWs = () => {
       try {
         const parsedMessage: {
           type: string
-          data: TState
+          data?: TState
+          error?: string
         } = JSON.parse(event.data)
         console.log('WS:', parsedMessage)
-        setState(parsedMessage.data)
+
+        if (parsedMessage.error) {
+          console.error('WS error', parsedMessage.error)
+        }
+        if (parsedMessage.data) {
+          setState(parsedMessage.data)
+        }
       } catch (e) {
         console.error('WS: cannot decode message', e)
       }
