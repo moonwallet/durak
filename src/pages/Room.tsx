@@ -1,5 +1,5 @@
 import cx from 'classnames'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 
@@ -69,14 +69,11 @@ export const Room = () => {
     }
   }
 
-  const [isSendedReady, setSendedReady] = useState(false)
-
   const ready = () => {
     send({
       'type': 'player.ready',
       'data': null,
     })
-    setSendedReady(true)
   }
 
   const action = (action: TAction) => {
@@ -87,12 +84,6 @@ export const Room = () => {
       },
     })
   }
-
-  useEffect(() => {
-    if (status && isSendedReady) {
-      setSendedReady(false)
-    }
-  }, [status, isSendedReady])
 
   const myCardsMock: TCard[] | false = false && (['ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as'] as TCard[]).slice(0, 5)
 
@@ -283,13 +274,12 @@ export const Room = () => {
               onClick={share}
               disabled={isCopied}
             >
-              {/* I’m ready */}
               {isCopied ? t('copied') : t('shareRoomLink') }
             </Button>
           }
-          {!status && !!opponent &&
+          {!status && !!opponent && !!me &&
             <>
-              {!isSendedReady ? (
+              {!me.ready ? (
                 <Button
                   theme="big"
                   onClick={ready}
@@ -300,6 +290,7 @@ export const Room = () => {
                 <Button
                   theme="big"
                   onClick={ready}
+                  disabled
                 >
                   {t('waiting')}
                 </Button>
@@ -334,14 +325,25 @@ export const Room = () => {
             </Button>
           }
 
-          {status === 100 &&
-            <Button
-              theme="big"
-              onClick={ready}
-            >
-              {(!isWin && opponent)
-                ? t('ready') : t('startNew') }
-            </Button>
+          {status === 100 && !!opponent && !!me &&
+            <>
+              {!me.ready ? (
+                <Button
+                  theme="big"
+                  onClick={ready}
+                >
+                  {isWin ? t('startNew') : t('ready')}
+                </Button>
+              ) : (
+                <Button
+                  theme="big"
+                  onClick={ready}
+                  disabled
+                >
+                  {t('waiting')}
+                </Button>
+              )}
+            </>
           }
 
           <div className="absolute bottom-5 right-0 w-[120px] h-[120px]">
