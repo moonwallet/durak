@@ -178,7 +178,7 @@ export const Room = () => {
       }
 
       <div className="Center flex items-center justify-center">
-        {!status && !opponent &&
+        {status === 0 && !opponent &&
           <div className="">
             <div className="-mb-[50px]">
               <img src={game} className="mx-auto w-[294px] h-[232px]" />
@@ -193,7 +193,7 @@ export const Room = () => {
             </div>
           </div>
         }
-        {!status && !!opponent &&
+        {status === 0 && !!opponent &&
           <div className="px-[82px] text-[24px] leading-[29px] font-bold">
             {t('tapReadyToStart')}
           </div>
@@ -268,7 +268,7 @@ export const Room = () => {
           </div>
         }
         <div className="absolute h-[90px] bottom-0 left-0 w-full flex items-center justify-between p-5 bg-[#292834] rounded-t-[24px]">
-          {!status && !opponent &&
+          {status === 0 && !opponent &&
             <Button
               theme="big"
               onClick={share}
@@ -277,7 +277,7 @@ export const Room = () => {
               {isCopied ? t('copied') : t('shareRoomLink') }
             </Button>
           }
-          {!status && !!opponent && !!me &&
+          {status === 0 && !!opponent && !!me &&
             <>
               {!me.ready ? (
                 <Button
