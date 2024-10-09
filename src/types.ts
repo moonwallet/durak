@@ -54,3 +54,5 @@ export type TState = {
 export type TShareLinkData = {
   room_id: string
 }
+
+export type TAction = 'bat' | 'take' | 'pass'

@@ -10,7 +10,7 @@ import loose from '../assets/loose.png'
 
 import { useApiWs, useShareLink, useStore, useAuth, useCopy, useOpenExternal } from '../hooks'
 import { Page, Button, Card, Ava, Tip, Username } from '../kit'
-import { TCard, TPlayer, TUserId } from '../types'
+import { TAction, TCard, TPlayer, TUserId } from '../types'
 
 export const Room = () => {
   const { t } = useTranslation()
@@ -41,6 +41,14 @@ export const Room = () => {
 
   const trump: TCard | undefined = state?.game?.trump || undefined
 
+  const isMyMove = status === 2 && state?.game?.current_attacker_id === userId
+  const isOpponentsMove = status === 2 && state?.game?.current_defender_id === userId
+
+  const notCoupled = status === 2 && !!state?.game?.table?.length && state.game.table[0].length === 1
+  const isCoupled = status === 2 && !!state?.game?.table?.length && state.game.table[0].length === 2
+
+  const isPassAvailable = false // todo
+
   const isWin = true
   const points = 100
   const invitePoints = 1000
@@ -68,6 +76,15 @@ export const Room = () => {
       'data': null,
     })
     setSendedReady(true)
+  }
+
+  const action = (action: TAction) => {
+    send({
+      'type': 'player.move',
+      'data': {
+        action,
+      },
+    })
   }
 
   useEffect(() => {
@@ -279,6 +296,33 @@ export const Room = () => {
                 </Button>
               )}
             </>
+          }
+
+          {isOpponentsMove && isCoupled &&
+            <Button
+              theme="big"
+              onClick={() => { action('bat') }}
+            >
+              {t('bat')}
+            </Button>
+          }
+
+          {isMyMove && notCoupled &&
+            <Button
+              theme="big"
+              onClick={() => { action('take') }}
+            >
+              {t('take')}
+            </Button>
+          }
+
+          {isMyMove && isPassAvailable &&
+            <Button
+              theme="big"
+              onClick={() => { action('pass') }}
+            >
+              {t('pass')}
+            </Button>
           }
 
           {status === 100 &&
