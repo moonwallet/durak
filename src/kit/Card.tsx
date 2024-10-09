@@ -66,32 +66,23 @@ const cards: { [Key in TCard]: typeof ac } = {
 6* 7* 8* 9* 10* J* Q* K* A*
 */
 
+const cardUnknown = ({ className }: { className: string }) => (<img className={cx('', className)} src={cardBack} />)
+
 export const Card = ({ className, style, card, onClick }: {
   className?: string
   style?: React.CSSProperties
   card?: TCard
   onClick?: (_: TCard) => void
 }) => {
-  if (!card) {
-    return (
-      <img
-        className={cx('Card', className)}
-        style={style}
-        src={cardBack}
-        onClick={() => {
-          if (card && onClick) {
-            onClick(card)
-          }
-        }}
-      />
-    )
-  }
-
-  const Comp = cards[card]
+  const Comp = card && cards[card] || cardUnknown
 
   return (
-    <Comp
-      className={cx('Card', className)}
+    <button
+      className={cx(
+        'Card transition-all',
+        onClick && 'hover:brightness-125 active:brightness-125',
+        className,
+      )}
       style={style}
       title={card}
       onClick={() => {
@@ -99,6 +90,12 @@ export const Card = ({ className, style, card, onClick }: {
           onClick(card)
         }
       }}
-    />
+    >
+      <Comp
+        className={cx(
+          'w-full h-full',
+        )}
+      />
+    </button>
   )
 }

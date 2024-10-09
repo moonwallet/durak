@@ -26,7 +26,8 @@ export const Room = () => {
 
   const { userId } = useAuth()
 
-  const status = Math.random() < 2 ? 100 : state?.status
+  const mockStatus: number | false = false && 2
+  const status = mockStatus || state?.status
 
   const players = state?.players || {}
   const playersKeys = Object.keys(players)
@@ -93,9 +94,9 @@ export const Room = () => {
     }
   }, [status, isSendedReady])
 
-  /* const myCards: TCard[] = (['ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as'] as TCard[]).slice(0, 5) */
+  const myCardsMock: TCard[] | false = false && (['ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as'] as TCard[]).slice(0, 5)
 
-  const myCards: TCard[] = me?.cards || []
+  const myCards: TCard[] = myCardsMock || me?.cards || []
 
   const chunks: <T>(arr: T[], n: number) => T[][] = (arr, n) => {
     return Array.from({ length: Math.ceil(arr.length / n) }, (_, i) =>
@@ -252,18 +253,26 @@ export const Room = () => {
           </div>
         }
       </div>
-      <div className="Bottom relative h-[200px]">
+      <div className="Bottom relative h-[210px]">
         {(status === 2) &&
-          <div className="flex items-center justify-center h-[110px] max-w-[100%] mx-auto px-[90px]">
+          <div className="flex items-center justify-center h-[162px] max-w-[100%] mx-auto px-[60px]">
             {myCards.map((card, i, arr) => (
-              <Card
-                className="-mx-[90px] h-[153px]"
-                style={{
-                  transform: rotateCard({ i, n: arr.length }),
-                }}
-                card={card}
-                onClick={onCardClick}
-              />
+              <div className="relative w-[40px] h-full">
+                <div className="absolute top-0 left-[50%] -translate-x-[50%]">
+                  <div
+                    style={{
+                      transform: rotateCard({ i, n: arr.length }),
+                    }}
+                  >
+                    <Card
+                      key={`my-card-${card}`}
+                      className="h-[162px] w-[116px] hover:-translate-y-5 active:-translate-y-5"
+                      card={card}
+                      onClick={onCardClick}
+                    />
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         }
