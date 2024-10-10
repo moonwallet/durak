@@ -50,9 +50,9 @@ export const Room = () => {
 
   const isPassAvailable: boolean = isOpponentsMove && !!state?.game?.has_taking
 
-  const isWin = true
-  const points = 100
-  const invitePoints = 1000
+  const isWin = true // todo
+  const points = 100 // todo
+  const invitePoints = 1000 // todo
 
   const { shareUrl, shareLink } = useShareLink({ roomId: roomId || '' })
   const { openExternal } = useOpenExternal()
@@ -229,7 +229,7 @@ export const Room = () => {
             }
             <div className="min-h-[22px]">
               {invitePoints &&
-                <span className="text-main text-[18px] leading-[21px] font-semibold">{t('pointsForInviting')}</span>
+                <span className="text-main text-[18px] leading-[21px] font-semibold">+{invitePoints} {t('pointsForInviting')}</span>
               }
             </div>
             <div className="mt-10 text-[48px] leading-[48px] font-extrabold">
