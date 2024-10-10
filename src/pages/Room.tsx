@@ -42,13 +42,13 @@ export const Room = () => {
 
   const trump: TCard | undefined = state?.game?.trump || undefined
 
-  const isMyMove = status === 2 && state?.game?.current_attacker_id === userId
-  const isOpponentsMove = status === 2 && state?.game?.current_defender_id === userId
+  const isMyMove: boolean = status === 2 && state?.game?.current_attacker_id === userId
+  const isOpponentsMove: boolean = status === 2 && state?.game?.current_defender_id === userId
 
-  const notCoupled = status === 2 && !!state?.game?.table?.length && state.game.table[0].length === 1
-  const isCoupled = status === 2 && !!state?.game?.table?.length && state.game.table[0].length === 2
+  const notCoupled: boolean = status === 2 && !!state?.game?.table?.length && state.game.table[0].length === 1
+  const isCoupled: boolean = status === 2 && !!state?.game?.table?.length && state.game.table[0].length === 2
 
-  const isPassAvailable = false // todo
+  const isPassAvailable: boolean = isOpponentsMove && !!state?.game?.has_taking
 
   const isWin = true
   const points = 100
@@ -259,7 +259,7 @@ export const Room = () => {
                       key={`my-card-${card}`}
                       className="h-[162px] w-[116px] hover:-translate-y-5 active:-translate-y-5"
                       card={card}
-                      onClick={onCardClick}
+                      onClick={isMyMove ? onCardClick : undefined}
                     />
                   </div>
                 </div>

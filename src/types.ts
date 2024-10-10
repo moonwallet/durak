@@ -25,6 +25,7 @@ export type TPlayer = {
   ready: boolean
   cards: TCard[] | null
   image_url: string | null
+  action: TAction | null // ?
  }
 
 export type TState = {
@@ -48,6 +49,7 @@ export type TState = {
     }
     next_move_until: string // iso time
     status: 2 | 10 | 11 | 100 // 2 - dealing, 10 - attacking, 11 - defending, 100 - finish
+    has_taking: boolean // current defender
   }
 }
 
