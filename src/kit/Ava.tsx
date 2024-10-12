@@ -1,5 +1,7 @@
 import cx from 'classnames'
 
+import { TAvaStatus } from '../types'
+
 import avaWaiting from '../assets/avaWaiting.png'
 import avaReady from '../assets/avaReady.png'
 import avaProgress from '../assets/avaProgress.png'
@@ -8,7 +10,7 @@ import avaDefault from '../assets/avaDefault.png'
 
 export const Ava = ({ className, status } : {
   className?: string
-  status?: 'waiting' | 'ready' | 'progress' | 'timeLow'
+  status?: TAvaStatus | undefined
 }) => {
   return (
     <div className={cx('Ava w-[76px] h-[76px]', className)}>

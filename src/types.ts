@@ -58,3 +58,5 @@ export type TShareLinkData = {
 }
 
 export type TAction = 'bat' | 'take' | 'pass'
+
+export type TAvaStatus = 'waiting' | 'ready' | 'progress' | 'timeLow'

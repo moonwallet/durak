@@ -10,7 +10,7 @@ import loose from '../assets/loose.png'
 
 import { useApiWs, useShareLink, useStore, useAuth, useCopy, useOpenExternal } from '../hooks'
 import { Page, Button, Card, Ava, Tip, Username } from '../kit'
-import { TAction, TCard, TPlayer, TUserId } from '../types'
+import { TAction, TAvaStatus, TCard, TPlayer, TUserId } from '../types'
 
 export const Room = () => {
   const { t } = useTranslation()
@@ -52,6 +52,10 @@ export const Room = () => {
   const isCoupled: boolean = status === 2 && !!state?.game?.table?.length && state.game.table[0].length === 2
 
   const isPassAvailable: boolean = isOpponentsMove && !!state?.game?.has_taking
+
+  const myStatus: undefined | TAvaStatus = (isMyMove && state?.game?.status === 10 || isOpponentsMove && state?.game?.status === 11) ? 'progress' : undefined
+
+  const opponentStatus: undefined | TAvaStatus = (isMyMove && state?.game?.status === 11 || isOpponentsMove && state?.game?.status === 10) ? 'progress' : undefined
 
   const isWin = true // todo
   const points = 100 // todo
@@ -134,7 +138,7 @@ export const Room = () => {
               <div className="absolute top-[85%] left-[50%] -translate-x-[50%] w-full text-[14px] leading-[14px]">
                 <Username player={opponent} />
               </div>
-              <Ava className="absolute -top-[10%] left-[50%] -translate-x-[50%] scale-75" />
+              <Ava className="absolute -top-[10%] left-[50%] -translate-x-[50%] scale-75" status={opponentStatus} />
               {false &&
                 <Tip isReverse className="absolute top-[55%] left-[50%] -translate-x-[50%] scale-75">
                   {t('take')}
@@ -354,7 +358,7 @@ export const Room = () => {
             <div className="absolute right-5 bottom-0 max-w-[110px] truncate text-text text-[14px] text-right">
               <Username player={me} />
             </div>
-            <Ava className="absolute top-[0%] left-[50%] -translate-x-[50%] scale-[85%]" />
+            <Ava className="absolute top-[0%] left-[50%] -translate-x-[50%] scale-[85%]" status={myStatus} />
             {false &&
               <Tip className="absolute -top-[35%] left-[50%] -translate-x-[50%] scale-75">
                 {t('take')}
