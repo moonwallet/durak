@@ -301,7 +301,7 @@ export const Room = () => {
             </>
           }
 
-          {isOpponentsMove && isCoupled &&
+          {isMyMove && isCoupled &&
             <Button
               theme="big"
               onClick={() => { action('bat') }}
@@ -310,7 +310,7 @@ export const Room = () => {
             </Button>
           }
 
-          {isMyMove && notCoupled &&
+          {isOpponentsMove && notCoupled &&
             <Button
               theme="big"
               onClick={() => { action('take') }}
