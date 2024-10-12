@@ -26,24 +26,27 @@ export const Room = () => {
 
   const { userId } = useAuth()
 
+  const myIdNumber: number | undefined = userId || undefined
+  const myIdString: string | undefined = userId ? String(userId) : undefined
+
   const mockStatus: number | false = false && 2
   const status = mockStatus || state?.status
 
   const players = state?.players || {}
   const playersKeys = Object.keys(players)
 
-  const opponentIds = playersKeys.filter(_ => _ !== String(userId))
+  const opponentIds = playersKeys.filter(_ => _ !== myIdString)
   const opponentId: TUserId | null = opponentIds[0] || null
   const opponent: TPlayer | null = !!opponentId && players[opponentId] || null
-  const me: TPlayer | null = userId && players[userId] || null
+  const me: TPlayer | null = myIdNumber && players[myIdNumber] || null
 
   const opponentCardsN: null | number = opponent?.cards?.length || 0
   const deckCardsN: null | number = state?.game?.deck || 0
 
   const trump: TCard | undefined = state?.game?.trump || undefined
 
-  const isMyMove: boolean = status === 2 && state?.game?.current_attacker_id === userId
-  const isOpponentsMove: boolean = status === 2 && state?.game?.current_defender_id === userId
+  const isMyMove: boolean = status === 2 && state?.game?.current_attacker_id === myIdString
+  const isOpponentsMove: boolean = status === 2 && state?.game?.current_defender_id === myIdString
 
   const notCoupled: boolean = status === 2 && !!state?.game?.table?.length && state.game.table[0].length === 1
   const isCoupled: boolean = status === 2 && !!state?.game?.table?.length && state.game.table[0].length === 2
