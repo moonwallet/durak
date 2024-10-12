@@ -163,7 +163,7 @@ export const Room = () => {
         </div>
       </div>
 
-      {!!opponent &&
+      {status === 2 &&
         <div className="Side absolute left-0 top-[50%] -translate-y-[50%]">
           {!!deckCardsN &&
             <div className="absolute -top-[48px] right-[48px] text-white/50 text-[16px] leading-[16px] font-semibold">{deckCardsN}</div>
