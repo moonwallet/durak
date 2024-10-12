@@ -166,7 +166,7 @@ export const Room = () => {
           }
           <div className="relative -top-[20px]">
             {deckCardsN >= 1 && trump &&
-              <Card card={trump} className="absolute -left-[110px] top-[50%] -translate-y-[50%] h-[110px] rotate-90" />
+              <Card card={trump} className="absolute -left-[30px] top-[50%] -translate-y-[50%] h-[110px] rotate-90" />
             }
             {deckCardsN >= 2 &&
               <div className="relative -left-[50px] w-[75px] h-[110px]">
@@ -262,7 +262,7 @@ export const Room = () => {
                       key={`my-card-${card}`}
                       className="h-[162px] w-[116px] hover:-translate-y-5 active:-translate-y-5"
                       card={card}
-                      onClick={isMyMove ? onCardClick : undefined}
+                      onClick={onCardClick}
                     />
                   </div>
                 </div>
