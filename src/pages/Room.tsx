@@ -154,7 +154,7 @@ export const Room = () => {
             <div className="flex items-center justify-center h-[70px] max-w-[100%] mx-auto">
               {[...Array(opponentCardsN)].map((_, i, arr) => (
                 <Card
-                  className="-mx-[10px] h-[60px]"
+                  className="-mx-[10px] h-[60px] w-[40px]"
                   style={{
                     transform: rotateCard({ i, n: arr.length, isReverse: true }),
                   }}
