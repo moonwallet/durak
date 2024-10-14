@@ -188,7 +188,7 @@ export const Room = () => {
 
       <div className="Center flex items-center justify-center">
         {!status && !opponent &&
-          <div className="">
+          <div className="px-4">
             <div className="-mb-[50px]">
               <img src={game} className="mx-auto w-[294px] h-[232px]" />
             </div>
