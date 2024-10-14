@@ -210,7 +210,7 @@ export const Room = () => {
         {(status === 2) &&
           <div className="Groups flex flex-col gap-8">
             {pairGroupsRows.map((row, i) => (
-              <div key={`row-${i}`} className="flex items-center justify-between gap-8">
+              <div key={`row-${i}`} className="flex items-center justify-center gap-8">
                 {row.map((group, j) => (
                   <div key={`group-${j}`} className="Group relative h-[79px] w-[54px]">
                     <Card className={cx('absolute left-0 top-0 w-full h-full', group[1] && '-rotate-12')} card={group[0]} />
