@@ -48,10 +48,12 @@ export const Room = () => {
   const isMyMove: boolean = status === 2 && state?.game?.current_attacker_id === myIdString
   const isOpponentsMove: boolean = status === 2 && state?.game?.current_defender_id === myIdString
 
-  const notCoupled: boolean = status === 2 && !!state?.game?.table?.length && state.game.table[0].length === 1
-  const isCoupled: boolean = status === 2 && !!state?.game?.table?.length && state.game.table[0].length === 2
+  // const notCoupled: boolean = status === 2 && !!state?.game?.table?.length && state.game.table[0].length === 1
+  // const isCoupled: boolean = status === 2 && !!state?.game?.table?.length && state.game.table[0].length === 2
 
-  const isPassAvailable: boolean = isOpponentsMove && !!state?.game?.has_taking
+  const isBatAvailable: boolean = isMyMove && state?.game?.status === 10 && !!state?.game.table && state?.game.table.length > 0
+  const isTakeAvailable: boolean = isOpponentsMove && state?.game?.status === 11 && state?.game?.has_taken === false
+  const isPassAvailable: boolean = isMyMove && state?.game?.status === 10 &&!!state?.game?.has_taken
 
   const myStatus: undefined | TAvaStatus = (isMyMove && state?.game?.status === 10 || isOpponentsMove && state?.game?.status === 11) ? 'progress' : undefined
 
@@ -305,7 +307,7 @@ export const Room = () => {
             </>
           }
 
-          {isMyMove && isCoupled &&
+          {isBatAvailable &&
             <Button
               theme="big"
               onClick={() => { action('bat') }}
@@ -314,7 +316,7 @@ export const Room = () => {
             </Button>
           }
 
-          {isOpponentsMove && notCoupled &&
+          {isTakeAvailable &&
             <Button
               theme="big"
               onClick={() => { action('take') }}
@@ -323,7 +325,7 @@ export const Room = () => {
             </Button>
           }
 
-          {isMyMove && isPassAvailable &&
+          {isPassAvailable &&
             <Button
               theme="big"
               onClick={() => { action('pass') }}
