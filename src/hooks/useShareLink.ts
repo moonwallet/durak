@@ -18,7 +18,7 @@ export const useShareLink = ({ roomId }: {
     .split('+').join('-')
     .split('/').join('_')
 
-  const shareUrl = `${botUrl}?startapp=${encodedData}`
+  const shareUrl = `${botUrl}/app?startapp=${encodedData}`
   const shareLink = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}`
 
   return { shareUrl, shareLink }
