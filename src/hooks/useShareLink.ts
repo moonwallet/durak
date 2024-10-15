@@ -1,4 +1,5 @@
 import { TShareLinkData } from '../types'
+import { useAuth } from '../hooks/useAuth'
 
 const botUrl = import.meta.env.VITE_BOT_URL
 
@@ -9,8 +10,11 @@ if (!botUrl) {
 export const useShareLink = ({ roomId }: {
   roomId: string
 }) => {
+  const { userId } = useAuth()
+
   const data: TShareLinkData = {
     room_id: roomId,
+    ref: userId ? String(userId) : undefined,
   }
 
   const encodedData = btoa(JSON.stringify(data))
