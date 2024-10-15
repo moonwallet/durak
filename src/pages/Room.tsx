@@ -56,9 +56,9 @@ export const Room = () => {
 
   const opponentStatus: undefined | TAvaStatus = (isMyMove && state?.game?.status === 11 || isOpponentsMove && state?.game?.status === 10) ? 'progress' : undefined
 
-  const isWin = !state?.game?.rewards?.is_loser
-  const points = state?.game?.rewards?.points
-  const invitePoints = state?.game?.rewards?.invite_points
+  const isWin: boolean | undefined = !!myIdString && state?.game?.rewards?.[myIdString] && !state.game.rewards[myIdString].is_loser
+  const points: number | undefined = !!myIdString && state?.game?.rewards?.[myIdString] && state.game.rewards[myIdString].points || undefined
+  const invitePoints: number | undefined = !!myIdString && state?.game?.rewards?.[myIdString] && state.game.rewards[myIdString].invite_points || undefined
 
   const { shareUrl, shareLink } = useShareLink({ roomId: roomId || '' })
   const { openExternal } = useOpenExternal()

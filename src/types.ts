@@ -51,9 +51,11 @@ export type TState = {
     status: 2 | 10 | 11 | 100 // 2 - dealing, 10 - attacking, 11 - defending, 100 - finish
     has_taken: boolean // current defender
     rewards: null | {
-      is_loser: boolean
-      points: number
-      invite_points: number
+      [key: TUserId]: {
+        is_loser: boolean
+        points: number
+        invite_points: number
+      }
     }
   }
 }
