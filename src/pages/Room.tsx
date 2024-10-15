@@ -167,9 +167,9 @@ export const Room = () => {
           {!!deckCardsN &&
             <div className="absolute -top-[48px] right-[48px] text-white/50 text-[16px] leading-[16px] font-semibold">{deckCardsN}</div>
           }
-          <div className="relative -top-[20px]">
+          <div className="relative -top-[20px] w-[75px] h-[110px]">
             {deckCardsN >= 1 && trump &&
-              <Card card={trump} className="absolute -left-[30px] top-[50%] -translate-y-[50%] h-[110px] rotate-90" />
+              <Card card={trump} className="absolute -left-[30px] top-[50%] -translate-y-[50%] w-[75px] h-[110px] rotate-90" />
             }
             {deckCardsN >= 2 &&
               <div className="relative -left-[50px] w-[75px] h-[110px]">
