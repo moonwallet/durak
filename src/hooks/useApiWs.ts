@@ -19,7 +19,7 @@ export const useApiWs = () => {
     if (!roomId || !userId) {
       return null
     }
-    const url = `${wsUrl}/rooms/${roomId}/ws?player_id=${userId}&auth=${authString}`
+    const url = `${wsUrl}/rooms/${roomId}/ws?player_id=${userId}&auth=${encodeURIComponent(authString)}`
     return new ReconnectingWebSocket(url)
   }, [roomId, userId, authString])
 
