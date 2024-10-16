@@ -56,7 +56,7 @@ export const Room = () => {
 
   const opponentStatus: undefined | TAvaStatus = (isMyMove && state?.game?.status === 11 || isOpponentsMove && state?.game?.status === 10) ? 'progress' : undefined
 
-  const result: TResult | undefined = !!myIdString && state?.game?.rewards?.[myIdString] && !state.game.rewards[myIdString].result
+  const result: TResult | undefined = !!myIdString && state?.game?.rewards?.[myIdString] && !state.game.rewards[myIdString].result || undefined
   const points: number | undefined = !!myIdString && state?.game?.rewards?.[myIdString] && state.game.rewards[myIdString].points || undefined
   const invitePoints: number | undefined = !!myIdString && state?.game?.rewards?.[myIdString] && state.game.rewards[myIdString].invite_points || undefined
 
@@ -338,7 +338,7 @@ export const Room = () => {
                   theme="big"
                   onClick={ready}
                 >
-                  {isWin ? t('startNew') : t('ready')}
+                  {result === 'win' ? t('startNew') : t('ready')}
                 </Button>
               ) : (
                 <Button
