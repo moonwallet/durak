@@ -3,7 +3,7 @@ import ReconnectingWebSocket from 'reconnecting-websocket'
 import { useEffect, useMemo } from 'react'
 
 import { TState } from '../types'
-import { useStore, useAuth } from './'
+import { useStore, usePersistStore, useAuth } from '../hooks'
 
 const wsUrl: undefined | string = import.meta.env.VITE_API_WS_URL
 
@@ -13,15 +13,16 @@ if (!wsUrl) {
 
 export const useApiWs = () => {
   const { roomId, setState } = useStore()
+  const { ref } = usePersistStore()
   const { userId, authString } = useAuth()
 
   const ws = useMemo(() => {
     if (!roomId || !userId) {
       return null
     }
-    const url = `${wsUrl}/rooms/${roomId}/ws?player_id=${userId}&auth=${encodeURIComponent(authString)}`
+    const url = `${wsUrl}/rooms/${roomId}/ws?player_id=${userId}${ref ? `&ref=${ref}` : ''}auth=${encodeURIComponent(authString)}`
     return new ReconnectingWebSocket(url)
-  }, [roomId, userId, authString])
+  }, [roomId, userId, authString, ref])
 
   useEffect(() => {
     if (!!ws && (!roomId || !userId)) {

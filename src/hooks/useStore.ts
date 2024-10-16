@@ -28,6 +28,8 @@ export const useStore = create<TStore>((set) => ({
 type TPersistStore = {
   isOnboarded: boolean
   setIsOnboarded: (isOnboarded: boolean) => void
+  ref: undefined | string
+  setRef: (_: string) => void
 }
 
 export const usePersistStore = create<TPersistStore>()(
@@ -35,6 +37,8 @@ export const usePersistStore = create<TPersistStore>()(
     (set) => ({
       isOnboarded: false,
       setIsOnboarded: (isOnboarded) => set({ isOnboarded }),
+      ref: undefined,
+      setRef: (ref: string) => set({ ref }),
     }), {
       name: 'persist-storage',
     },
