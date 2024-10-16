@@ -52,9 +52,9 @@ export type TState = {
     has_taken: boolean // current defender
     rewards: null | {
       [key: TUserId]: {
-        is_loser: boolean
         points: number
         invite_points: number
+        result: TResult
       }
     }
   }
@@ -68,3 +68,5 @@ export type TShareLinkData = {
 export type TAction = 'bat' | 'take' | 'pass'
 
 export type TAvaStatus = 'waiting' | 'ready' | 'progress' | 'timeLow'
+
+export type TResult = 'draw' | 'win' | 'lose'

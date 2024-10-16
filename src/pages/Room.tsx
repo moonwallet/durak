@@ -10,7 +10,7 @@ import loose from '../assets/loose.png'
 
 import { useApiWs, useShareLink, useStore, useAuth, useCopy, useOpenExternal } from '../hooks'
 import { Page, Button, Card, Ava, Tip, Username } from '../kit'
-import { TAction, TAvaStatus, TCard, TPlayer, TUserId } from '../types'
+import { TAction, TAvaStatus, TCard, TPlayer, TResult, TUserId } from '../types'
 
 export const Room = () => {
   const { t } = useTranslation()
@@ -56,7 +56,7 @@ export const Room = () => {
 
   const opponentStatus: undefined | TAvaStatus = (isMyMove && state?.game?.status === 11 || isOpponentsMove && state?.game?.status === 10) ? 'progress' : undefined
 
-  const isWin: boolean | undefined = !!myIdString && state?.game?.rewards?.[myIdString] && !state.game.rewards[myIdString].is_loser
+  const result: TResult | undefined = !!myIdString && state?.game?.rewards?.[myIdString] && !state.game.rewards[myIdString].result
   const points: number | undefined = !!myIdString && state?.game?.rewards?.[myIdString] && state.game.rewards[myIdString].points || undefined
   const invitePoints: number | undefined = !!myIdString && state?.game?.rewards?.[myIdString] && state.game.rewards[myIdString].invite_points || undefined
 
@@ -222,10 +222,10 @@ export const Room = () => {
         }
         {(status === 100) &&
           <div className="flex flex-col items-center">
-            {isWin &&
+            {result === 'win' &&
               <img src={win} className="-mb-[40px] w-[148px] h-[163px]" />
             }
-            {!isWin &&
+            {result === 'lose' &&
               <img src={loose} className="-mb-[70px] w-[188px] h-[188px]" />
             }
             {points &&
@@ -239,12 +239,12 @@ export const Room = () => {
               }
             </div>
             <div className="mt-10 text-[48px] leading-[48px] font-extrabold">
-              {isWin && <div className="text-main">{t('win')}</div>}
-              {!isWin && <div className="text-[#DF0000]">{t('gameOver')}</div>}
+              {result === 'win' && <div className="text-main">{t('win')}</div>}
+              {result === 'lose' && <div className="text-[#DF0000]">{t('gameOver')}</div>}
             </div>
             <div className="mt-[9px] text-[16px] leading-[18px] text-text/60">
-              {!!opponent && isWin && <span>{t('tapReadyToPlayAgain')}</span>}
-              {!!opponent && !isWin && <span>{t('tapReadyForRevanche')}</span>}
+              {!!opponent && result === 'win' && <span>{t('tapReadyToPlayAgain')}</span>}
+              {!!opponent && result === 'lose' && <span>{t('tapReadyForRevanche')}</span>}
               {!opponent && <span>{t('opponentLeft')}</span>}
             </div>
           </div>
