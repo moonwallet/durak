@@ -13,15 +13,15 @@ if (!wsUrl) {
 
 export const useApiWs = () => {
   const { roomId, setState } = useStore()
-  const { userId } = useAuth()
+  const { userId, authString } = useAuth()
 
   const ws = useMemo(() => {
     if (!roomId || !userId) {
       return null
     }
-    const url = `${wsUrl}/rooms/${roomId}/ws?player_id=${userId}`
+    const url = `${wsUrl}/rooms/${roomId}/ws?player_id=${userId}&auth=${authString}`
     return new ReconnectingWebSocket(url)
-  }, [roomId, userId])
+  }, [roomId, userId, authString])
 
   useEffect(() => {
     if (!!ws && (!roomId || !userId)) {
