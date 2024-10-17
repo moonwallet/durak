@@ -1,7 +1,7 @@
 import cx from 'classnames'
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 import chair from '../assets/chair.png'
 import game from '../assets/game.png'
@@ -12,17 +12,25 @@ import { useApiWs, useShareLink, useStore, useAuth, useCopy, useOpenExternal } f
 import { Page, Button, Card, Ava, Tip, Username } from '../kit'
 import { TAction, TAvaStatus, TCard, TPlayer, TResult, TUserId } from '../types'
 
+
 export const Room = () => {
   const { t } = useTranslation()
-  const { roomId, state } = useStore()
+  const { setRoomId, state } = useStore()
   const navigate = useNavigate()
   const { send } = useApiWs()
 
+  const location = useLocation()
+  const searchParams = new URLSearchParams(location.search)
+  const roomId = searchParams.get('roomId')
+
   useEffect(() => {
-    if (!roomId) {
-      // navigate('/') // todo
+    if (roomId) {
+      setRoomId(roomId)
+    } else {
+      alert('no roomId')
+      // navigate('/')
     }
-  }, [roomId, navigate])
+  }, [roomId, navigate, setRoomId])
 
   const { userId } = useAuth()
 

@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 
 import i18n from '../i18n'
-import { Page, Button, Menu } from '../kit'
+import { Page, Button, Menu, Modal } from '../kit'
 import { usePostRoom, useStore } from '../hooks'
 
 import deck from '../assets/deck.jpg'
@@ -15,7 +15,7 @@ export const Play = () => {
   const { t } = useTranslation()
   const navigate = useNavigate()
 
-  const { setRoomId } = useStore()
+  const { roomId, setRoomId } = useStore()
 
   const [isBusy, setIsBusy] = useState(false)
   const postRoom = usePostRoom()
@@ -23,18 +23,15 @@ export const Play = () => {
   const createRoom = async () => {
     setIsBusy(true)
     try {
-      const {
-        room_id,
-        // invite_link,
-      } = await postRoom()
-      setRoomId(room_id)
-      // setInviteLink(invite_link)
+      const { room_id } = await postRoom()
+      if (room_id) {
+        navigate(`/room?roomId=${room_id}`)
+      }
     } catch (e) {
       console.error(e)
     } finally {
       setIsBusy(false)
     }
-    navigate('/room')
   }
 
   return (
@@ -78,6 +75,28 @@ export const Play = () => {
         </div>
         <Menu />
       </div>
+
+      {!!roomId &&
+        <Modal>
+          <div className="mx-auto mb-[50px] max-w-[240px] text-[16px] leading-[18px] font-medium text-text/60">{t('leaveSure')}</div>
+          <div className="flex flex-col gap-4">
+            <Button
+              theme='big'
+              onClick={() => {
+                navigate(`/room?roomId=${roomId}`)
+              }}>
+              {t('stayAndPlay')}
+            </Button>
+            <Button
+              theme='big'
+              onClick={() => {
+                setRoomId(null)
+              }}>
+              {t('leaveAndLoose')}
+            </Button>
+          </div>
+        </Modal>
+      }
     </Page>
   )
 }
