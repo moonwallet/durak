@@ -28,8 +28,7 @@ export const Room = () => {
     if (roomId) {
       setRoomId(roomId)
     } else {
-      alert('no roomId')
-      // navigate('/')
+      navigate('/')
     }
   }, [roomId, navigate, setRoomId])
 
