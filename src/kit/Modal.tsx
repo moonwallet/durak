@@ -6,8 +6,10 @@ export const Modal = ({ className, children } : {
   children: ReactNode
 }) => {
   return (
-    <span className={cx('Modal fixed w-full h-full inset-0 bg-black/60', className)}>
-      {children}
-    </span>
+    <div className={cx('Modal fixed w-full h-full inset-0 flex items-center justify-center bg-black/60', className)}>
+      <div className="Modal-inner py-9 px-[14px] w-full max-w-[400px] rounded-[10px] bg-[#11101D]">
+        {children}
+      </div>
+    </div>
   )
 }

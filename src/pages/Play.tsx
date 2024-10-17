@@ -76,9 +76,12 @@ export const Play = () => {
         <Menu />
       </div>
 
-      {!!roomId &&
+      {(true || !!roomId) &&
         <Modal>
-          <div className="mx-auto mb-[50px] max-w-[240px] text-[16px] leading-[18px] font-medium text-text/60">{t('leaveSure')}</div>
+          <div className="mx-auto mb-[50px] max-w-[280px] text-[16px] leading-[18px] font-medium text-text/60">
+            <div>{t('gameWillBeLost')}</div>
+            <div>{t('areYouSure')}</div>
+          </div>
           <div className="flex flex-col gap-4">
             <Button
               theme='big'
