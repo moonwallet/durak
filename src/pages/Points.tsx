@@ -2,6 +2,7 @@ import cx from 'classnames'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
+import { useCopy, useOpenExternal, useShareLink } from '../hooks'
 import { Page, Menu, Button, Quest } from '../kit'
 
 import { ReactComponent as Point } from '../assets/point.svg'
@@ -23,6 +24,20 @@ export const Points = () => {
   }
 
   const [tab, setTab] = useState<1|2>(2)
+
+  const { shareUrl, shareLink } = useShareLink({})
+  const { openExternal } = useOpenExternal()
+
+  const { copy, isCopied } = useCopy()
+
+  const share = () => {
+    console.log(shareUrl)
+    try {
+      openExternal(shareLink)
+    } catch {
+      copy(shareUrl)
+    }
+  }
 
   return (
     <Page>
@@ -111,6 +126,13 @@ export const Points = () => {
         }
       </div>
 
+      <Button
+        theme="default"
+        onClick={share}
+        disabled={isCopied}
+      >
+        {isCopied ? t('copied') : t('shareRefLink') }
+      </Button>
 
       <div className="Bottom mt-4">
         {Math.random() > 2 &&

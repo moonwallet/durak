@@ -8,7 +8,7 @@ if (!botUrl) {
 }
 
 export const useShareLink = ({ roomId }: {
-  roomId: string
+  roomId?: string
 }) => {
   const { userId } = useAuth()
 

@@ -21,7 +21,7 @@ export const Room = () => {
 
   const location = useLocation()
   const searchParams = new URLSearchParams(location.search)
-  const roomId = searchParams.get('roomId')
+  const roomId: string | undefined = searchParams.get('roomId') || undefined
 
   useEffect(() => {
     if (roomId) {
@@ -68,7 +68,7 @@ export const Room = () => {
   const points: number | undefined = !!myIdString && state?.game?.rewards?.[myIdString] && state.game.rewards[myIdString].points || undefined
   const invitePoints: number | undefined = !!myIdString && state?.game?.rewards?.[myIdString] && state.game.rewards[myIdString].invite_points || undefined
 
-  const { shareUrl, shareLink } = useShareLink({ roomId: roomId || '' })
+  const { shareUrl, shareLink } = useShareLink({ roomId })
   const { openExternal } = useOpenExternal()
 
   const { copy, isCopied } = useCopy()

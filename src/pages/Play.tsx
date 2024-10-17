@@ -76,7 +76,7 @@ export const Play = () => {
         <Menu />
       </div>
 
-      {(true || !!roomId) &&
+      {(false || !!roomId) &&
         <Modal>
           <div className="mx-auto mb-[50px] max-w-[280px] text-[16px] leading-[18px] font-medium text-text/60">
             <div>{t('gameWillBeLost')}</div>
@@ -92,6 +92,7 @@ export const Play = () => {
             </Button>
             <Button
               theme='big'
+              className=""
               onClick={() => {
                 setRoomId(null)
               }}>
