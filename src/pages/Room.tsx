@@ -1,3 +1,4 @@
+import { BackButton } from '@vkruglikov/react-telegram-web-app'
 import cx from 'classnames'
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -134,6 +135,7 @@ export const Room = () => {
 
   return (
     <Page>
+      <BackButton onClick={() => { navigate('/') }} />
       <div className="Top z-0 mt-1 flex flex-col items-center justify-center h-[158px]">
         <div className="z-[1] relative w-[200px] h-[90px] shadow-[0px_0px_30px_30px_#11101D]">
           <img src={chair} className={cx('mx-auto w-[90px] h-[90px]', !opponent && 'grayscale')} />
