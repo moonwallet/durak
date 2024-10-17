@@ -37,10 +37,8 @@ export const useSendRef = () => {
     ref: ref || '',
   })}`
 
-  console.log('useSendRef', !!authString, !!ref)
-
   return useQuery<unknown, Error>({
-    queryKey: [`me-${authString}-${ref}`],
+    queryKey: [`ref-${authString}-${ref}`],
     queryFn: () => fetch(url, {
       method: 'GET',
     }).then(handleJsonResponse),
