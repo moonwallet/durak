@@ -1,4 +1,5 @@
-import { useAuth, useJsonResponse } from '../hooks'
+import { useQuery } from '@tanstack/react-query'
+import { useAuth, useJsonResponse, usePersistStore } from '../hooks'
 
 export const apiUrl = import.meta.env.VITE_API_URL
 
@@ -25,4 +26,22 @@ export const usePostRoom = () => {
       // body: JSON.stringify({ }),
     }).then(handleJsonResponse)
   }
+}
+
+export const useSendRef = () => {
+  const { handleJsonResponse } = useJsonResponse()
+  const { ref } = usePersistStore()
+  const { authString } = useAuth()
+  const url = `${apiUrl}/users/me?${new URLSearchParams({
+    auth: encodeURIComponent(authString) || '',
+    ref: ref || '',
+  })}`
+
+  return useQuery<unknown, Error>({
+    queryKey: [`me-${authString}-${ref}`],
+    queryFn: () => fetch(url, {
+      method: 'GET',
+    }).then(handleJsonResponse),
+    enabled: !!authString && !!ref,
+  })
 }

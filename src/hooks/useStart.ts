@@ -12,15 +12,10 @@ export const useStart = () => {
   const navigate = useNavigate()
   const routerLocation = useLocation()
 
-  let startParam = initDataUnsafe?.start_param
+  const queryParameters = new URLSearchParams(routerLocation.search)
 
-  if (!startParam) {
-    const queryParameters = new URLSearchParams(routerLocation.search)
-    const queryStartParam = queryParameters.get('start')
-    if (queryStartParam) {
-      startParam = queryStartParam
-    }
-  }
+  const startParam: string | undefined = initDataUnsafe?.start_param || queryParameters.get('start') || undefined
+
 
   let startParamJson: undefined | TShareLinkData
 
@@ -37,23 +32,23 @@ export const useStart = () => {
     }
   }
 
+  const ref: string | undefined = startParamJson?.ref || queryParameters.get('ref') || undefined
+  const roomId: string | undefined = startParamJson?.room_id || queryParameters.get('room_id') || undefined
+
   useEffect(() => {
     if (!isStarted) {
       setIsStarted(true)
 
-      const ref = startParamJson?.ref
       if (ref) {
         setRef(ref)
       }
 
-      const roomId = startParamJson?.room_id
       if (roomId) {
         setRoomId(roomId)
-        navigate('/room')
-        return
+        navigate(`/room?roomId=${roomId}`)
       }
     }
-  }, [startParamJson, isStarted, navigate, setIsStarted])
+  }, [isStarted, ref, roomId, navigate, setIsStarted])
 
   return { startParam, startParamJson }
 }
