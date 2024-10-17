@@ -45,5 +45,6 @@ export const useSendRef = () => {
       method: 'GET',
     }).then(handleJsonResponse),
     enabled: !!authString && !!ref,
+    staleTime: Infinity,
   })
 }
