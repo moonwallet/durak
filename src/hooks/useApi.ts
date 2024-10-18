@@ -15,13 +15,14 @@ export const usePostRoom = () => {
 
     const url = `${apiUrl}/rooms?${new URLSearchParams({
       player_id: String(userId || ''),
+      auth: encodeURIComponent(authString) || '',
     })}`
 
     return fetch(url, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
-        'Authorization': authString,
+        // 'Authorization': authString,
       },
       // body: JSON.stringify({ }),
     }).then(handleJsonResponse)
@@ -34,7 +35,7 @@ export const useSendRef = () => {
   const { authString } = useAuth()
   const url = `${apiUrl}/users/me?${new URLSearchParams({
     auth: encodeURIComponent(authString) || '',
-    ref: ref || '',
+    ...(ref ? { ref } : {} ),
   })}`
 
   return useQuery<unknown, Error>({
@@ -42,7 +43,6 @@ export const useSendRef = () => {
     queryFn: () => fetch(url, {
       method: 'GET',
     }).then(handleJsonResponse),
-    enabled: !!authString && !!ref,
-    staleTime: Infinity,
+    enabled: !!authString,
   })
 }
