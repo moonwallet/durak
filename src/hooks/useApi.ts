@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 
-import { useAuth, useJsonResponse, usePersistStore } from '../hooks'
+import { useAuth, useJsonResponse, usePersistStore, useStore } from '../hooks'
 import { TMe } from '../types'
 
 export const apiUrl = import.meta.env.VITE_API_URL
@@ -34,14 +34,17 @@ export const usePostRoom = () => {
 export const useGetMe = () => {
   const { handleJsonResponse } = useJsonResponse()
   const { ref } = usePersistStore()
+  const { roomId } = useStore()
+
   const { authString } = useAuth()
   const url = `${apiUrl}/users/me?${new URLSearchParams({
     auth: encodeURIComponent(authString) || '',
     ...(ref ? { ref } : {} ),
+    ...(roomId ? { room_id: roomId } : {}),
   })}`
 
   return useQuery<TMe, Error>({
-    queryKey: [`ref-${authString}-${ref}`],
+    queryKey: [`ref-${authString}-${ref}-${roomId}`],
     queryFn: () => fetch(url, {
       method: 'GET',
     }).then(handleJsonResponse),

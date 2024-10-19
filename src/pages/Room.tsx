@@ -9,7 +9,7 @@ import game from '../assets/game.png'
 import win from '../assets/win.png'
 import loose from '../assets/loose.png'
 
-import { useApiWs, useShareLink, useStore, useAuth, useCopy, useOpenExternal } from '../hooks'
+import { useApiWs, useShareLink, useStore, useAuth, useCopy, useOpenExternal, useGetMe } from '../hooks'
 import { Page, Button, Card, Ava, Tip, Username } from '../kit'
 import { TAction, TAvaStatus, TCard, TPlayer, TResult, TUserId } from '../types'
 
@@ -19,6 +19,7 @@ export const Room = () => {
   const { setRoomId, state } = useStore()
   const navigate = useNavigate()
   const { send } = useApiWs()
+  useGetMe()
 
   const location = useLocation()
   const searchParams = new URLSearchParams(location.search)
