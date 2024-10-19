@@ -30,9 +30,9 @@ export type TPlayer = {
 
 export type TMe = {
   id: TUserId
-  username: string
-  first_name: string
-  last_name: string
+  username: string | null
+  first_name: string | null
+  last_name: string | null
   ref: {
     code: string
     count: number
