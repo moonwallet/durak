@@ -2,7 +2,7 @@ import cx from 'classnames'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { useCopy, useOpenExternal, useShareLink } from '../hooks'
+import { useCopy, useGetMe, useOpenExternal, useShareLink } from '../hooks'
 import { Page, Menu, Button, Quest } from '../kit'
 
 import { ReactComponent as Point } from '../assets/point.svg'
@@ -14,8 +14,7 @@ import questMoon from '../assets/questMoon.png'
 
 export const Points = () => {
   const { t } = useTranslation()
-
-  const points = 0
+  const { data: me } = useGetMe()
 
   const textGradient = {
     background: 'linear-gradient(91.1deg, #FFFFFF 0.94%, #999999 117.2%)',
@@ -48,7 +47,7 @@ export const Points = () => {
             src={pointsLeft}
           />
           <div className="flex flex-col gap-1">
-            <div className="text-[48px] leading-[58px] font-bold">{points}</div>
+            <div className="text-[48px] leading-[58px] font-bold">{me?.total_points || 0}</div>
             <div className="flex items-center text-main font-bold">
               <Point className="w-6 h-6" />
               <span>$DRK {t('points.points')}</span>
