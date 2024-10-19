@@ -38,6 +38,13 @@ export const Points = () => {
     }
   }
 
+  const points = {
+    invite: 1000,
+    win: 1000,
+    draw: 500,
+    lose: 100,
+  }
+
   return (
     <Page>
       <div className="Top px-3">
@@ -112,11 +119,11 @@ export const Points = () => {
                 <div className="flex flex-col gap-3">
                   <div className="flex items-start gap-1">
                     <Check className="w-[30px] h-[30px] text-main" />
-                    <div className="flex-1 text-[20px] leading-[24px]" style={textGradient}>{t('points.howToEarn1', { winPoints: '???', gamePoints: '???' })}</div>
+                    <div className="flex-1 text-[20px] leading-[24px]" style={textGradient}>{t('points.howToEarn1', { winPoints: points.win, gamePoints: points.lose })}</div>
                   </div>
                   <div className="flex items-start gap-1">
                     <Check className="w-[30px] h-[30px] text-main" />
-                    <div className="flex-1 text-[20px] leading-[24px]" style={textGradient}>{t('points.howToEarn2', { invitePoints: '???' })}</div>
+                    <div className="flex-1 text-[20px] leading-[24px]" style={textGradient}>{t('points.howToEarn2', { invitePoints: points.invite })}</div>
                   </div>
                 </div>
               </div>
@@ -126,11 +133,12 @@ export const Points = () => {
       </div>
 
       <Button
-        theme="default"
+        theme="big"
+        className="!w-auto"
         onClick={share}
         disabled={isCopied}
       >
-        {isCopied ? t('copied') : t('shareRefLink') }
+        {isCopied ? t('copied') : t('points.shareRefLink') }
       </Button>
 
       <div className="Bottom mt-4">

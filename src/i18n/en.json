@@ -65,6 +65,7 @@
     "howToEarn1": "Play with your friends. For every win you get {{winPoints}} points and for every game you get {{gamePoints}} points.",
     "howToEarn2": "Invite more friends. For every invite you get {{invitePoints}} points.",
     "tasks": "Tasks",
-    "info": "Info"
+    "info": "Info",
+    "shareRefLink": "Share ref link"
   }
 }
