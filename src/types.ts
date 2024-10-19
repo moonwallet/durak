@@ -26,7 +26,20 @@ export type TPlayer = {
   cards: TCard[] | null
   image_url: string | null
   action: TAction | null // ?
- }
+}
+
+export type TMe = {
+  id: TUserId
+  username: string
+  first_name: string
+  last_name: string
+  ref: {
+    code: string
+    count: number
+    points: number
+  },
+  total_points: number
+}
 
 export type TState = {
   room_id: TRoomId

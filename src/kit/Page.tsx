@@ -1,7 +1,7 @@
 import cx from 'classnames'
 import { ReactNode } from 'react'
 
-import { useSendRef, useStart } from '../hooks'
+import { useStart } from '../hooks'
 
 // import Debug from './Debug'
 
@@ -12,7 +12,6 @@ export const Page = ({ className, contentClassName, children, bottom }: {
   bottom?: ReactNode
 }) => {
   useStart()
-  useSendRef()
 
   return (
     <div

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 import i18n from '../i18n'
 import { Page, Button, Menu, Modal } from '../kit'
-import { usePostRoom, useStore } from '../hooks'
+import { usePostRoom, useStore, useGetMe } from '../hooks'
 
 import deck from '../assets/deck.jpg'
 import { ReactComponent as LangRu } from '../assets/langRu.svg'
@@ -16,6 +16,8 @@ export const Play = () => {
   const navigate = useNavigate()
 
   const { roomId, setRoomId } = useStore()
+
+  const { data: me } = useGetMe()
 
   const [isBusy, setIsBusy] = useState(false)
   const postRoom = usePostRoom()
@@ -37,7 +39,7 @@ export const Play = () => {
   return (
     <Page>
       <div className="Top mt-5 flex flex-col items-center gap-1">
-        <div className="text-[60px] leading-[60px] font-semibold">0</div>
+        <div className="text-[60px] leading-[60px] font-semibold">{me?.total_points || 0}</div>
         <div className="text-[16px] leading-[16px] text-text/50">{t('yourPoints')}</div>
       </div>
 
