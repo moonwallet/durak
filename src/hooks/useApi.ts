@@ -51,3 +51,15 @@ export const useGetMe = () => {
     enabled: !!authString,
   })
 }
+
+export const useGetPoints = () => {
+  const points = {
+    invite: 3000,
+    win: 1000,
+    draw: 500,
+    lose: 100,
+  }
+  return {
+    points,
+  }
+}

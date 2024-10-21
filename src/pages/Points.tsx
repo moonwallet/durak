@@ -2,7 +2,7 @@ import cx from 'classnames'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { useCopy, useGetMe, useOpenExternal, useShareLink } from '../hooks'
+import { useCopy, useGetMe, useGetPoints, useOpenExternal, useShareLink } from '../hooks'
 import { Page, Menu, Button, Quest } from '../kit'
 
 import { ReactComponent as Point } from '../assets/point.svg'
@@ -38,12 +38,7 @@ export const Points = () => {
     }
   }
 
-  const points = {
-    invite: 1000,
-    win: 1000,
-    draw: 500,
-    lose: 100,
-  }
+  const { points } = useGetPoints()
 
   return (
     <Page>

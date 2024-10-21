@@ -9,7 +9,7 @@ import game from '../assets/game.png'
 import win from '../assets/win.png'
 import loose from '../assets/loose.png'
 
-import { useApiWs, useShareLink, useStore, useAuth, useCopy, useOpenExternal, useGetMe } from '../hooks'
+import { useApiWs, useShareLink, useStore, useAuth, useCopy, useOpenExternal, useGetMe, useGetPoints } from '../hooks'
 import { Page, Button, Card, Ava, Tip, Username } from '../kit'
 import { TAction, TAvaStatus, TCard, TPlayer, TResult, TUserId } from '../types'
 
@@ -18,6 +18,7 @@ export const Room = () => {
   const { t } = useTranslation()
   const { setRoomId, state } = useStore()
   const navigate = useNavigate()
+  const { points } = useGetPoints()
   const { send } = useApiWs()
   useGetMe()
 
@@ -66,7 +67,7 @@ export const Room = () => {
   const opponentStatus: undefined | TAvaStatus = (isMyMove && state?.game?.status === 11 || isOpponentsMove && state?.game?.status === 10) ? 'progress' : undefined
 
   const result: TResult | undefined = !!myIdString && state?.game?.rewards?.[myIdString] && state.game.rewards[myIdString].result || undefined
-  const points: number | undefined = !!myIdString && state?.game?.rewards?.[myIdString] && state.game.rewards[myIdString].points || undefined
+  const rewardPoints: number | undefined = !!myIdString && state?.game?.rewards?.[myIdString] && state.game.rewards[myIdString].points || undefined
   const invitePoints: number | undefined = !!myIdString && state?.game?.rewards?.[myIdString] && state.game.rewards[myIdString].invite_points || undefined
 
   const { shareUrl, shareLink } = useShareLink({ roomId })
@@ -203,8 +204,8 @@ export const Room = () => {
               {t('sendRoomLink')}
             </div>
             <div className="mt-2 text-text/60 text-[16px] leading-[18px] font-medium">
-              <div>{t('forEveryFren')} <span className="text-main">500 $DRK {t('points_')}</span></div>
-              <div>{t('forEveryWin')} <span className="text-main">2000 $DRK {t('points_')}</span></div>
+              <div>{t('forEveryFren')} <span className="text-main">{points.invite} $DRK {t('points_')}</span></div>
+              <div>{t('forEveryWin')} <span className="text-main">{points.win} $DRK {t('points_')}</span></div>
               <div></div>
             </div>
           </div>
@@ -238,9 +239,9 @@ export const Room = () => {
             {result === 'lose' &&
               <img src={loose} className="-mb-[70px] w-[188px] h-[188px]" />
             }
-            {points &&
+            {rewardPoints &&
               <div className="p-[10px] text-[36px] leading-[36px] font-semibold" style={{ textShadow: '-2px -2px #454456, -2px 2px #454456, 2px 2px #454456, 2px -2px #454456' }}>
-                +{points} {t('points_')}
+                +{rewardPoints} {t('points_')}
               </div>
             }
             <div className="min-h-[22px]">
