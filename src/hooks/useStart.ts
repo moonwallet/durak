@@ -45,5 +45,5 @@ export const useStart = () => {
     }
   }, [isStarted, ref, roomId, navigate, setIsStarted, setRoomId])
 
-  return { startParam, startParamJson, ref }
+  return { startParam, startParamJson, ref, roomId }
 }

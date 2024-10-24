@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 
-import { useAuth, useJsonResponse, useStart, useStore } from '../hooks'
+import { useAuth, useJsonResponse, useStart } from '../hooks'
 import { TMe } from '../types'
 
 export const apiUrl = import.meta.env.VITE_API_URL
@@ -33,8 +33,7 @@ export const usePostRoom = () => {
 
 export const useGetMe = () => {
   const { handleJsonResponse } = useJsonResponse()
-  const { ref } = useStart()
-  const { roomId } = useStore()
+  const { ref, roomId } = useStart()
 
   const { authString } = useAuth()
   const url = `${apiUrl}/users/me?${new URLSearchParams({
