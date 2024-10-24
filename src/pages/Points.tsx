@@ -22,7 +22,7 @@ export const Points = () => {
     WebkitTextFillColor: 'transparent',
   }
 
-  const [tab, setTab] = useState<1|2>(2)
+  const [tab, setTab] = useState<1|2>(1)
 
   const { shareUrl, shareLink } = useShareLink({})
   const { openExternal } = useOpenExternal()
@@ -67,15 +67,34 @@ export const Points = () => {
             <div className="mt-3 flex flex-col gap-3">
               <Quest
                 image={questDurak}
+                title={t('points.inviteFriends')}
+                subtitle={`${t('points.pointsForInvite', { points: points.invite })}`}
+                buttonText={isCopied ? t('copied') : t('points.invite')}
+                onClick={share}
+                bottom={
+                  <div className="flex flex-col gap-2">
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="">{t('points.pointsEarned')}:</div>
+                      <div className="">{me?.ref.points || 0}</div>
+                    </div>
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="">{t('points.friendsInvited')}:</div>
+                      <div className="">{me?.ref.count || 0}</div>
+                    </div>
+                  </div>
+                }
+              />
+              <Quest
+                image={questDurak}
                 title={t('points.followChannel', { name: 'Durak' })}
-                subtitle={`+1,000 ${t('points.points')}`}
+                subtitle={`${t('points.thankYou')}`}
                 buttonText={t('points.follow')}
                 link="https://t.me/durakton_news"
               />
               <Quest
                 image={questDurak}
                 title={t('points.joinChat', { name: 'Durak' })}
-                subtitle={`+1,000 ${t('points.points')}`}
+                subtitle={`${t('points.thankYou')}`}
                 buttonText={t('points.join')}
                 link="https://t.me/durakton_chat"
               />
@@ -85,14 +104,14 @@ export const Points = () => {
               <Quest
                 image={questMoon}
                 title={t('points.launchApp', { name: 'Moon' })}
-                subtitle={`+1,000 ${t('points.points')}`}
+                subtitle={`${t('points.thankYou')}`} // {`+1,000 ${t('points.points')}`}
                 link="https://t.me/moonWallet_solbot"
                 buttonText={t('points.launch')}
               />
               <Quest
                 image={questMoon}
                 title={t('points.joinChat', { name: 'Moon' })}
-                subtitle={`+1,000 ${t('points.points')}`}
+                subtitle={`${t('points.thankYou')}`} // {`+1,000 ${t('points.points')}`}
                 link="https://t.me/moon_wallet_xyz"
                 buttonText={t('points.join')}
               />
@@ -127,17 +146,7 @@ export const Points = () => {
         }
       </div>
 
-      <Button
-        theme="big"
-        className="!w-auto"
-        onClick={share}
-        disabled={isCopied}
-      >
-        {isCopied ? t('copied') : t('points.shareRefLink') }
-      </Button>
-
       <div className="Bottom mt-4">
-        {Math.random() > 2 &&
         <div className="mb-5 flex items-center justify-center">
           <div className="flex items-center justify-center bg-main/10 rounded-[12px]">
           <Button
@@ -160,7 +169,6 @@ export const Points = () => {
           </Button>
           </div>
         </div>
-        }
         <Menu />
       </div>
     </Page>

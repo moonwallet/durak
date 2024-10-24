@@ -49,8 +49,14 @@
 
   "points": {
     "points": "поинтов",
+    "thankYou": "Спасибо!",
     "durakQuests": "Задания от Дурака",
     "partnerQuests": "Задания партнёров",
+    "inviteFriends": "Пригласить друзей",
+    "invite": "Пригласить",
+    "pointsForInvite": "+{{points}} очков за 1 друга",
+    "pointsEarned": "Поинтов получено",
+    "friendsInvited": "Друзей приглашено",
     "followChannel": "Вступить в канал {{name}}",
     "joinChat": "Вступить в чат {{name}}",
     "launchApp": "Запустить апп {{name}}",
@@ -65,7 +71,6 @@
     "howToEarn1": "Играйте с друзьями. За каждую победу вы получаете {{winPoints}} поинтов, а за каждую игру вы получаете {{gamePoints}} поинтов.",
     "howToEarn2": "Пригласите больше друзей. За каждое приглашение вы получаете {{invitePoints}} поинтов.",
     "tasks": "Задания",
-    "info": "Инфо",
-    "shareRefLink": "Поделиться реф-ссылкой"
+    "info": "Инфо"
   }
 }

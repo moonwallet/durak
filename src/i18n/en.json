@@ -49,8 +49,14 @@
 
   "points": {
     "points": "Points",
+    "thankYou": "Thank you!",
     "durakQuests": "Durak Quests",
     "partnerQuests": "Partner Quests",
+    "inviteFriends": "Invite friends",
+    "invite": "Invite",
+    "pointsForInvite": "+{{points}} points for 1 invite",
+    "pointsEarned": "Points earned",
+    "friendsInvited": "Friends invited",
     "followChannel": "Follow {{name}} channel",
     "joinChat": "Join {{name}} chat",
     "launchApp": "Launch {{name}} app",
@@ -65,7 +71,6 @@
     "howToEarn1": "Play with your friends. For every win you get {{winPoints}} points and for every game you get {{gamePoints}} points.",
     "howToEarn2": "Invite more friends. For every invite you get {{invitePoints}} points.",
     "tasks": "Tasks",
-    "info": "Info",
-    "shareRefLink": "Share ref link"
+    "info": "Info"
   }
 }
