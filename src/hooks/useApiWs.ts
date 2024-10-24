@@ -3,7 +3,7 @@ import ReconnectingWebSocket from 'reconnecting-websocket'
 import { useEffect, useMemo } from 'react'
 
 import { TState } from '../types'
-import { useStore, usePersistStore, useAuth } from '../hooks'
+import { useStore, useStart, useAuth } from '../hooks'
 
 const wsUrl: undefined | string = import.meta.env.VITE_API_WS_URL
 
@@ -13,7 +13,7 @@ if (!wsUrl) {
 
 export const useApiWs = () => {
   const { roomId, setState } = useStore()
-  const { ref } = usePersistStore()
+  const { ref } = useStart()
   const { userId, authString } = useAuth()
 
   const ws = useMemo(() => {

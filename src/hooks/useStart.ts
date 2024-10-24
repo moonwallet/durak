@@ -2,13 +2,12 @@ import { useInitData } from '@vkruglikov/react-telegram-web-app'
 import { useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-import { useStore, usePersistStore } from '../hooks'
+import { useStore } from '../hooks'
 import { TShareLinkData } from '../types'
 
 export const useStart = () => {
   const [initDataUnsafe] = useInitData()
   const { isStarted, setIsStarted, setRoomId } = useStore()
-  const { setRef } = usePersistStore()
   const navigate = useNavigate()
   const routerLocation = useLocation()
 
@@ -39,16 +38,12 @@ export const useStart = () => {
     if (!isStarted) {
       setIsStarted(true)
 
-      if (ref) {
-        setRef(ref)
-      }
-
       if (roomId) {
         setRoomId(roomId)
         navigate(`/room?roomId=${roomId}`)
       }
     }
-  }, [isStarted, ref, roomId, navigate, setIsStarted])
+  }, [isStarted, ref, roomId, navigate, setIsStarted, setRoomId])
 
-  return { startParam, startParamJson }
+  return { startParam, startParamJson, ref }
 }
