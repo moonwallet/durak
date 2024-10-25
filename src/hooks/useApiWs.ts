@@ -67,6 +67,12 @@ export const useApiWs = () => {
     }
   }, [ws])
 
+  useEffect(() => {
+    return () => {
+      ws?.close()
+    }
+  })
+
   const send = (payload: unknown) => {
     ws?.send(JSON.stringify(payload))
   }
