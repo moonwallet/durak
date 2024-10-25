@@ -7,7 +7,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import chair from '../assets/chair.png'
 import game from '../assets/game.png'
 import win from '../assets/win.png'
-import loose from '../assets/loose.png'
+import lose from '../assets/lose.png'
 
 import { useApiWs, useShareLink, useStore, useAuth, useCopy, useOpenExternal, useGetMe, useGetPoints } from '../hooks'
 import { Page, Button, Card, Ava, Tip, Username, Modal } from '../kit'
@@ -246,7 +246,7 @@ export const Room = () => {
               <img src={win} className="-mb-[40px] w-[148px] h-[163px]" />
             }
             {result === 'lose' &&
-              <img src={loose} className="-mb-[70px] w-[188px] h-[188px]" />
+              <img src={lose} className="-mb-[70px] w-[188px] h-[188px]" />
             }
             {rewardPoints &&
               <div className="p-[10px] text-[36px] leading-[36px] font-semibold" style={{ textShadow: '-2px -2px #454456, -2px 2px #454456, 2px 2px #454456, 2px -2px #454456' }}>
@@ -408,7 +408,7 @@ export const Room = () => {
                 setRoomId(null)
                 navigate('/')
               }}>
-              {t('leaveAndLoose')}
+              {t('leaveAndLose')}
             </Button>
           </div>
         </Modal>
