@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 import i18n from '../i18n'
 import { Page, Button, Menu } from '../kit'
-import { usePostRoom, useGetMe } from '../hooks'
+import { usePostRoom, useGetMe, track } from '../hooks'
 
 import deck from '../assets/deck.jpg'
 import { ReactComponent as LangRu } from '../assets/langRu.svg'
@@ -25,6 +25,7 @@ export const Play = () => {
     try {
       const { room_id } = await postRoom()
       if (room_id) {
+        track('Room created')
         navigate(`/room?roomId=${room_id}`)
       }
     } catch (e) {
