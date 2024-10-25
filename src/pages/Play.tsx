@@ -3,8 +3,8 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 
 import i18n from '../i18n'
-import { Page, Button, Menu, Modal } from '../kit'
-import { usePostRoom, useStore, useGetMe } from '../hooks'
+import { Page, Button, Menu } from '../kit'
+import { usePostRoom, useGetMe } from '../hooks'
 
 import deck from '../assets/deck.jpg'
 import { ReactComponent as LangRu } from '../assets/langRu.svg'
@@ -14,8 +14,6 @@ import { ReactComponent as LangEn } from '../assets/langEn.svg'
 export const Play = () => {
   const { t } = useTranslation()
   const navigate = useNavigate()
-
-  const { roomId, setRoomId } = useStore()
 
   const { data: me } = useGetMe()
 
@@ -77,32 +75,6 @@ export const Play = () => {
         </div>
         <Menu />
       </div>
-
-      {(false || !!roomId) &&
-        <Modal>
-          <div className="mx-auto mb-[50px] max-w-[280px] text-[16px] leading-[18px] font-medium text-text/60">
-            <div>{t('gameWillBeLost')}</div>
-            <div>{t('areYouSure')}</div>
-          </div>
-          <div className="flex flex-col gap-4">
-            <Button
-              theme='big'
-              onClick={() => {
-                navigate(`/room?roomId=${roomId}`)
-              }}>
-              {t('stayAndPlay')}
-            </Button>
-            <Button
-              theme='big'
-              className=""
-              onClick={() => {
-                setRoomId(null)
-              }}>
-              {t('leaveAndLoose')}
-            </Button>
-          </div>
-        </Modal>
-      }
     </Page>
   )
 }

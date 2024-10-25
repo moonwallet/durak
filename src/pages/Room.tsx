@@ -1,6 +1,6 @@
 import { BackButton } from '@vkruglikov/react-telegram-web-app'
 import cx from 'classnames'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useLocation, useNavigate } from 'react-router-dom'
 
@@ -10,7 +10,7 @@ import win from '../assets/win.png'
 import loose from '../assets/loose.png'
 
 import { useApiWs, useShareLink, useStore, useAuth, useCopy, useOpenExternal, useGetMe, useGetPoints } from '../hooks'
-import { Page, Button, Card, Ava, Tip, Username } from '../kit'
+import { Page, Button, Card, Ava, Tip, Username, Modal } from '../kit'
 import { TAction, TAvaStatus, TCard, TPlayer, TResult, TUserId } from '../types'
 
 
@@ -101,6 +101,13 @@ export const Room = () => {
     })
   }
 
+  const leave = () => {
+    send({
+      'type': 'player.leave',
+      'data': null,
+    })
+  }
+
   const myCardsMock: TCard[] | false = false && (['ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as', 'ac', 'ad', 'ah', 'as'] as TCard[]).slice(0, 5)
 
   const myCards: TCard[] = myCardsMock || me?.cards || []
@@ -134,9 +141,11 @@ export const Room = () => {
     })
   }
 
+  const [isLeaveModalOpen, setIsLeaveModalOpen] = useState(false)
+
   return (
     <Page>
-      <BackButton onClick={() => { navigate('/') }} />
+      <BackButton onClick={() => { setIsLeaveModalOpen(true) }} />
       <div className="Top z-0 mt-1 flex flex-col items-center justify-center h-[158px]">
         <div className="z-[1] relative w-[200px] h-[90px] shadow-[0px_0px_30px_30px_#11101D]">
           <img src={chair} className={cx('mx-auto w-[90px] h-[90px]', !opponent && 'grayscale')} />
@@ -377,6 +386,33 @@ export const Room = () => {
           </div>
         </div>
       </div>
+
+      {isLeaveModalOpen &&
+        <Modal>
+          <div className="mx-auto mb-[50px] max-w-[280px] text-[16px] leading-[18px] font-medium text-text/60">
+            <div>{t('gameWillBeLost')}</div>
+            <div>{t('areYouSure')}</div>
+          </div>
+          <div className="flex flex-col gap-4">
+            <Button
+              theme='big'
+              onClick={() => { setIsLeaveModalOpen(false) }}>
+              {t('stayAndPlay')}
+            </Button>
+            <Button
+              theme='big'
+              className=""
+              onClick={() => {
+                leave()
+                setIsLeaveModalOpen(false)
+                setRoomId(null)
+                navigate('/')
+              }}>
+              {t('leaveAndLoose')}
+            </Button>
+          </div>
+        </Modal>
+      }
     </Page>
   )
 }
