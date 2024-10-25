@@ -12,6 +12,20 @@ if (AMPLITUDE_KEY) {
   console.error('⚠️ NO AMPLITUDE_KEY')
 }
 
-export const track: (_: string) => void = AMPLITUDE_KEY
-  ? amplitude.track
-  : (event: string) => { console.info('[NO-track]', event) }
+export const track: (_: TEvent) => void = (event: TEvent) => {
+  if (AMPLITUDE_KEY) {
+    amplitude.track(event)
+  } else {
+    console.info('[NO-track]', event)
+  }
+}
+
+type TEvent =
+  'Launch first time' |
+  'Session start' |
+  'Room created' |
+  'Share room pressed' |
+  'Game started' |
+  'Game finished' |
+  'Points viewed' |
+  'Points info viewed'
