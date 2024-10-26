@@ -245,7 +245,7 @@ export const Room = () => {
         }
         {(status === 100) &&
           <div className="flex flex-col items-center">
-            {result === 'win' &&
+            {(result === 'win' || result === 'draw') &&
               <img src={win} className="-mb-[40px] w-[148px] h-[163px]" />
             }
             {result === 'lose' &&
@@ -263,10 +263,11 @@ export const Room = () => {
             </div>
             <div className="mt-10 text-[48px] leading-[48px] font-extrabold">
               {result === 'win' && <div className="text-main">{t('win')}</div>}
-              {result === 'lose' && <div className="text-[#DF0000]">{t('gameOver')}</div>}
+              {result === 'draw' && <div className="text-main">{t('draw')}</div>}
+              {result === 'lose' && <div className="text-[#DF0000]">{t('lose')}</div>}
             </div>
             <div className="mt-[9px] text-[16px] leading-[18px] text-text/60">
-              {!!opponent && result === 'win' && <span>{t('tapReadyToPlayAgain')}</span>}
+              {!!opponent && (result === 'win' || result === 'draw') && <span>{t('tapReadyToPlayAgain')}</span>}
               {!!opponent && result === 'lose' && <span>{t('tapReadyForRevanche')}</span>}
               {!opponent && <span>{t('opponentLeft')}</span>}
             </div>
@@ -361,7 +362,7 @@ export const Room = () => {
                   theme="big"
                   onClick={ready}
                 >
-                  {result === 'win' ? t('startNew') : t('ready')}
+                  {/*(result === 'win' || result === 'draw') ? t('startNew') : t('ready')*/ t('ready')}
                 </Button>
               ) : (
                 <Button

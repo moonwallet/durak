@@ -82,4 +82,4 @@ export type TAction = 'bat' | 'take' | 'pass'
 
 export type TAvaStatus = 'waiting' | 'ready' | 'progress' | 'timeLow'
 
-export type TResult = 'draw' | 'win' | 'lose'
+export type TResult = 'win' | 'draw' | 'lose'
