@@ -263,7 +263,7 @@ export const Room = () => {
             </div>
             <div className="mt-10 text-[48px] leading-[48px] font-extrabold">
               {result === 'win' && <div className="text-main">{t('win')}</div>}
-              {result === 'draw' && <div className="text-main">{t('draw')}</div>}
+              {result === 'draw' && <div className="text-[#EBECEA]">{t('draw')}</div>}
               {result === 'lose' && <div className="text-[#DF0000]">{t('lose')}</div>}
             </div>
             <div className="mt-[9px] text-[16px] leading-[18px] text-text/60">
