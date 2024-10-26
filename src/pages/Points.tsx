@@ -2,7 +2,7 @@ import cx from 'classnames'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { useCopy, useGetMe, useGetPoints, useOpenExternal, useShareLink } from '../hooks'
+import { useCopy, useGetMe, useGetPoints, useOpenExternal, useShareLink, usePlatform } from '../hooks'
 import { Page, Menu, Button, Quest } from '../kit'
 
 import { ReactComponent as Point } from '../assets/point.svg'
@@ -26,13 +26,16 @@ export const Points = () => {
 
   const { shareUrl, shareLink } = useShareLink({})
   const { openExternal } = useOpenExternal()
-
   const { copy, isCopied } = useCopy()
+  const { isTg } = usePlatform()
 
   const share = () => {
     console.log(shareUrl)
     try {
       openExternal(shareLink)
+      if (!isTg) {
+        copy(shareUrl)
+      }
     } catch {
       copy(shareUrl)
     }

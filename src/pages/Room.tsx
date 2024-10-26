@@ -9,7 +9,7 @@ import game from '../assets/game.png'
 import win from '../assets/win.png'
 import lose from '../assets/lose.png'
 
-import { useApiWs, useShareLink, useStore, useAuth, useCopy, useOpenExternal, useGetMe, useGetPoints } from '../hooks'
+import { useApiWs, useShareLink, useStore, useAuth, useCopy, useOpenExternal, useGetMe, useGetPoints, usePlatform } from '../hooks'
 import { Page, Button, Card, Ava, Tip, Username, Modal } from '../kit'
 import { TAction, TAvaStatus, TCard, TPlayer, TResult, TUserId } from '../types'
 
@@ -72,14 +72,17 @@ export const Room = () => {
 
   const { shareUrl, shareLink } = useShareLink({ roomId })
   const { openExternal } = useOpenExternal()
-
   const { copy, isCopied } = useCopy()
+  const { isTg } = usePlatform()
 
   const share = () => {
     console.log(shareUrl)
     console.log('roomId', roomId)
     try {
       openExternal(shareLink)
+      if (!isTg) {
+        copy(shareUrl)
+      }
     } catch {
       copy(shareUrl)
     }

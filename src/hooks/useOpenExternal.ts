@@ -1,8 +1,10 @@
 import { useWebApp } from '@vkruglikov/react-telegram-web-app'
 
+import { usePlatform } from '../hooks'
+
 export const useOpenExternal = () => {
   const WebApp = useWebApp()
-  const isTg = window.Telegram?.WebApp.platform !== 'unknown'
+  const { isTg } = usePlatform()
 
   const openExternal = (url: string) => {
     if (isTg) {
