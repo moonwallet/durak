@@ -1,8 +1,8 @@
 import cx from 'classnames'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { useCopy, useGetMe, useGetPoints, useOpenExternal, useShareLink, usePlatform } from '../hooks'
+import { useCopy, useGetMe, useGetPoints, useOpenExternal, useShareLink, usePlatform, track } from '../hooks'
 import { Page, Menu, Button, Quest } from '../kit'
 
 import { ReactComponent as Point } from '../assets/point.svg'
@@ -42,6 +42,17 @@ export const Points = () => {
   }
 
   const { points } = useGetPoints()
+
+  useEffect(() => {
+    if (tab === 1) {
+      track('Points viewed')
+      console.log('Points viewed')
+    }
+    if (tab === 2) {
+      track('Points info viewed')
+      console.log('Points info viewed')
+    }
+  }, [tab])
 
   return (
     <Page>
