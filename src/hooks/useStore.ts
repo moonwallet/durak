@@ -28,6 +28,9 @@ export const useStore = create<TStore>((set) => ({
 type TPersistStore = {
   isOnboarded: boolean
   setIsOnboarded: (isOnboarded: boolean) => void
+
+  isLaunchedFirstTime: boolean
+  setIsLauncedFirstTime: (_: boolean) => void
 }
 
 export const usePersistStore = create<TPersistStore>()(
@@ -35,6 +38,9 @@ export const usePersistStore = create<TPersistStore>()(
     (set) => ({
       isOnboarded: false,
       setIsOnboarded: (isOnboarded) => set({ isOnboarded }),
+
+      isLaunchedFirstTime: true,
+      setIsLauncedFirstTime: (isLaunchedFirstTime) => set({ isLaunchedFirstTime }),
     }), {
       name: 'persist-storage',
     },

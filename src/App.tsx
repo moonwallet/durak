@@ -3,13 +3,14 @@ import { useEffect, useMemo, useState } from 'react'
 import { RouterProvider } from 'react-router-dom'
 
 import { router } from './router'
-import { track } from './hooks'
+import { track, usePersistStore } from './hooks'
 
 import './i18n'
 
 export const App = () => {
-
   const queryClient = useMemo(() => new QueryClient(), [])
+
+  const { isLaunchedFirstTime, setIsLauncedFirstTime } = usePersistStore()
 
   const [isTracked, setIsTracked] = useState(false)
   useEffect(() => {
@@ -18,6 +19,13 @@ export const App = () => {
       track('Session start')
     }
   }, [isTracked, setIsTracked])
+
+  useEffect(() => {
+    if (isLaunchedFirstTime) {
+      setIsLauncedFirstTime(false)
+      track('Launch first time')
+    }
+  }, [isLaunchedFirstTime, setIsLauncedFirstTime])
 
   return (
     <QueryClientProvider client={queryClient}>
