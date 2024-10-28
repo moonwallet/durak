@@ -9,7 +9,7 @@ import game from '../assets/game.png'
 import win from '../assets/win.png'
 import lose from '../assets/lose.png'
 
-import { useApiWs, useShareLink, useStore, useAuth, useCopy, useOpenExternal, useGetMe, useGetPoints, usePlatform } from '../hooks'
+import { useApiWs, useShareLink, useStore, useAuth, useCopy, useOpenExternal, useGetMe, useGetPoints, usePlatform, track } from '../hooks'
 import { Page, Button, Card, Ava, Tip, Username, Modal } from '../kit'
 import { TAction, TAvaStatus, TCard, TPlayer, TResult, TUserId } from '../types'
 
@@ -86,6 +86,7 @@ export const Room = () => {
     } catch {
       copy(shareUrl)
     }
+    track('Share room pressed')
   }
 
   const ready = () => {
@@ -145,6 +146,15 @@ export const Room = () => {
   }
 
   const [isLeaveModalOpen, setIsLeaveModalOpen] = useState(false)
+
+  useEffect(() => {
+    if (status === 2) {
+      track('Game started')
+    }
+    if (status === 100) {
+      track('Game finished')
+    }
+  }, [status])
 
   return (
     <Page>
