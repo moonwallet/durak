@@ -117,7 +117,21 @@ export const Points = () => {
 
             <div className="mt-10 ml-[6px] text-[18px] leading-[22px] font-semibold">{t('points.partnerQuests')}</div>
             <div className="mt-3 flex flex-col gap-3">
-              <Quest
+              {(tasks || []).filter(task => task.is_partner).map(task => (
+                <Quest
+                  key={`task-${task.id}`}
+                  id={task.id}
+                  image={questMoon}
+                  title={task.name}
+                  subtitle={task.description}
+                  buttonText={task.cta}
+                  link={task.target_url}
+                  claimable={task.claimable}
+                  afterClaim={afterClaim}
+                  isSuccess={task.is_completed}
+                />
+              ))}
+              {/* <Quest
                 id={-1}
                 claimable={false}
                 image={questMoon}
@@ -134,7 +148,7 @@ export const Points = () => {
                 subtitle={`${t('points.thankYou')}`} // {`+1,000 ${t('points.points')}`}
                 link="https://t.me/moon_wallet_xyz"
                 buttonText={t('points.join')}
-              />
+              /> */}
             </div>
           </div>
         }
