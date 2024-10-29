@@ -86,7 +86,7 @@ export const Points = () => {
           <div className="text-left">
             <div className="mt-10 ml-[6px] text-[18px] leading-[22px] font-semibold">{t('points.durakQuests')}</div>
             <div className="mt-3 flex flex-col gap-3">
-              {(tasks || []).map(task => (
+              {(tasks || []).filter(task => !task.is_partner).map(task => (
                 <Quest
                   key={`task-${task.id}`}
                   id={task.id}
