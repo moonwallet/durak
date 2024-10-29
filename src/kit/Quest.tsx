@@ -1,23 +1,45 @@
 import cx from 'classnames'
-import { ReactElement } from 'react'
+import { useState, ReactElement } from 'react'
+import { useTranslation } from 'react-i18next'
 
-import { useOpenExternal } from '../hooks'
+import { useOpenExternal, usePostTask } from '../hooks'
 import { Button } from '../kit'
 
 import { ReactComponent as Check } from '../assets/check.svg'
 
-export const Quest = ({ className, image, title, subtitle, buttonText, link, isSuccess, bottom, onClick } : {
+export const Quest = ({ className, id, image, title, subtitle, buttonText, link, claimable, isSuccess, bottom, onClick, afterClaim } : {
   className?: string
+  id: number
   image?: string
   title: string
   subtitle: string
   buttonText: string
   link: string | null
+  claimable: boolean
   isSuccess?: boolean
   bottom?: ReactElement
   onClick?: () => void
+  afterClaim?: () => void
 }) => {
+  const { t } = useTranslation()
   const { openExternal } = useOpenExternal()
+
+  const [isDone, setIsDone] = useState(false)
+
+  const postTask = usePostTask()
+
+  const [isBusy, setIsBusy] = useState(false)
+  const onClaim = async () => {
+    setIsBusy(true)
+    try {
+      await postTask({ taskId: id })
+      afterClaim?.()
+    } catch (e) {
+      console.error(e)
+    } finally {
+      setIsBusy(false)
+    }
+  }
 
   return (
     <div className={cx(
@@ -33,15 +55,30 @@ export const Quest = ({ className, image, title, subtitle, buttonText, link, isS
           <div className="text-[14px] leading-[14px] font-medium text-white/50">{subtitle}</div>
         </div>
         {!isSuccess ? (
-          <Button
-            className="min-w-[72px] p-2 border border-main rounded-[12px] bg-main/10 text-[16px] leading-[19px] font-semibold text-main"
-            onClick={
-              onClick ? onClick :
-              link ? () => { openExternal(link) } :
-              () => {}
-            }>
-            {buttonText}
-          </Button>
+          !isDone ? (
+            <Button
+              className="min-w-[72px] p-2 border border-main rounded-[12px] bg-main/10 text-[16px] leading-[19px] font-semibold text-main"
+              onClick={
+                onClick ? onClick :
+                link ? () => {
+                  openExternal(link)
+                  if (claimable) {
+                    setIsDone(true)
+                  }
+                } :
+                () => {}
+              }>
+              {buttonText}
+            </Button>
+          ) : (
+            <Button
+              className="min-w-[72px] p-2 border border-main rounded-[12px] bg-main/10 text-[16px] leading-[19px] font-semibold text-main"
+              onClick={onClaim}
+              disabled={isBusy}
+            >
+              {t('points.claim')}
+            </Button>
+          )
         ) : (
           <Check className="w-[30px] h-[30px] text-main" />
         )}

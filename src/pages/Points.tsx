@@ -14,7 +14,7 @@ import questMoon from '../assets/questMoon.png'
 
 export const Points = () => {
   const { t } = useTranslation()
-  const { data: me } = useGetMe()
+  const { data: me, refetch: refetchMe } = useGetMe()
 
   const textGradient = {
     background: 'linear-gradient(91.1deg, #FFFFFF 0.94%, #999999 117.2%)',
@@ -54,7 +54,12 @@ export const Points = () => {
     }
   }, [tab])
 
-  const { data: tasks } = useGetTasks()
+  const { data: tasks, refetch: refetchTasks } = useGetTasks()
+
+  const afterClaim = () => {
+    refetchMe()
+    refetchTasks()
+  }
 
   return (
     <Page>
@@ -84,11 +89,14 @@ export const Points = () => {
               {(tasks || []).map(task => (
                 <Quest
                   key={`task-${task.id}`}
+                  id={task.id}
                   image={questDurak}
                   title={task.name}
                   subtitle={task.description}
                   buttonText={(task.id === 1 && isCopied) ? t('copied') : task.cta}
                   link={task.target_url}
+                  claimable={task.claimable}
+                  afterClaim={afterClaim}
                   isSuccess={task.is_completed}
                   onClick={task.id === 1 ? share : undefined}
                   bottom={task.id === 1 ? (
@@ -110,6 +118,8 @@ export const Points = () => {
             <div className="mt-10 ml-[6px] text-[18px] leading-[22px] font-semibold">{t('points.partnerQuests')}</div>
             <div className="mt-3 flex flex-col gap-3">
               <Quest
+                id={-1}
+                claimable={false}
                 image={questMoon}
                 title={t('points.launchApp', { name: 'Moon' })}
                 subtitle={`${t('points.thankYou')}`} // {`+1,000 ${t('points.points')}`}
@@ -117,6 +127,8 @@ export const Points = () => {
                 buttonText={t('points.launch')}
               />
               <Quest
+                id={-2}
+                claimable={false}
                 image={questMoon}
                 title={t('points.joinChat', { name: 'Moon' })}
                 subtitle={`${t('points.thankYou')}`} // {`+1,000 ${t('points.points')}`}

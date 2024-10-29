@@ -82,13 +82,13 @@ export const useGetTasks = () => {
   })
 }
 
-export const usePostTask = ({ taskId }: {
-  taskId: string
-}) => {
+export const usePostTask = () => {
   const { handleJsonResponse } = useJsonResponse()
   const { authString } = useAuth()
 
-  return (): Promise<unknown> => {
+  return ({ taskId }: {
+    taskId: number
+  }): Promise<unknown> => {
     const url = `${apiUrl}/tasks/${taskId}?${new URLSearchParams({
       auth: encodeURIComponent(authString) || '',
     })}`
