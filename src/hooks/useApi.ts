@@ -1,7 +1,8 @@
 import { useQuery } from '@tanstack/react-query'
 
+import i18n from '../i18n'
 import { useAuth, useJsonResponse, useStart } from '../hooks'
-import { TMe } from '../types'
+import { TMe, TTask } from '../types'
 
 export const apiUrl = import.meta.env.VITE_API_URL
 
@@ -60,5 +61,45 @@ export const useGetPoints = () => {
   }
   return {
     points,
+  }
+}
+
+export const useGetTasks = () => {
+  const { handleJsonResponse } = useJsonResponse()
+  const { authString, userId } = useAuth()
+
+  const url = `${apiUrl}/tasks?${new URLSearchParams({
+    lang: i18n.language,
+    auth: encodeURIComponent(authString) || '',
+  })}`
+
+  return useQuery<TTask[], Error>({
+    queryKey: [`task-${userId}`],
+    queryFn: () => fetch(url, {
+      method: 'GET',
+    }).then(handleJsonResponse),
+    enabled: !!authString,
+  })
+}
+
+export const usePostTask = ({ taskId }: {
+  taskId: string
+}) => {
+  const { handleJsonResponse } = useJsonResponse()
+  const { authString } = useAuth()
+
+  return (): Promise<unknown> => {
+    const url = `${apiUrl}/tasks/${taskId}?${new URLSearchParams({
+      auth: encodeURIComponent(authString) || '',
+    })}`
+
+    return fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+        // 'Authorization': authString,
+      },
+      // body: JSON.stringify({ }),
+    }).then(handleJsonResponse)
   }
 }

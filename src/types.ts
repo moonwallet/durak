@@ -83,3 +83,16 @@ export type TAction = 'bat' | 'take' | 'pass'
 export type TAvaStatus = 'waiting' | 'ready' | 'progress' | 'timeLow'
 
 export type TResult = 'win' | 'draw' | 'lose'
+
+export type TTask = {
+  id: number
+  name: string
+  description: string
+  position_order: number
+  points: number
+  cta: string
+  target_url: null | string
+  is_completed: boolean
+  claimable: boolean
+  is_partner?: boolean
+}

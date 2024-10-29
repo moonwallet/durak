@@ -2,7 +2,7 @@ import cx from 'classnames'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { useCopy, useGetMe, useGetPoints, useOpenExternal, useShareLink, usePlatform, track } from '../hooks'
+import { useCopy, useGetMe, useGetPoints, useOpenExternal, useShareLink, usePlatform, track, useGetTasks } from '../hooks'
 import { Page, Menu, Button, Quest } from '../kit'
 
 import { ReactComponent as Point } from '../assets/point.svg'
@@ -54,6 +54,8 @@ export const Points = () => {
     }
   }, [tab])
 
+  const { data: tasks } = useGetTasks()
+
   return (
     <Page>
       <div className="Top px-3">
@@ -79,40 +81,32 @@ export const Points = () => {
           <div className="text-left">
             <div className="mt-10 ml-[6px] text-[18px] leading-[22px] font-semibold">{t('points.durakQuests')}</div>
             <div className="mt-3 flex flex-col gap-3">
-              <Quest
-                image={questDurak}
-                title={t('points.inviteFriends')}
-                subtitle={`${t('points.pointsForInvite', { points: points.invite })}`}
-                buttonText={isCopied ? t('copied') : t('points.invite')}
-                onClick={share}
-                bottom={
-                  <div className="flex flex-col gap-2">
-                    <div className="flex items-center justify-between gap-2">
-                      <div className="">{t('points.pointsEarned')}:</div>
-                      <div className="">{me?.ref.points || 0}</div>
+              {(tasks || []).map(task => (
+                <Quest
+                  key={`task-${task.id}`}
+                  image={questDurak}
+                  title={task.name}
+                  subtitle={task.description}
+                  buttonText={(task.id === 1 && isCopied) ? t('copied') : task.cta}
+                  link={task.target_url}
+                  isSuccess={task.is_completed}
+                  onClick={task.id === 1 ? share : undefined}
+                  bottom={task.id === 1 ? (
+                    <div className="flex flex-col gap-2">
+                      <div className="flex items-center justify-between gap-2">
+                        <div className="">{t('points.pointsEarned')}:</div>
+                        <div className="">{me?.ref.points || 0}</div>
+                      </div>
+                      <div className="flex items-center justify-between gap-2">
+                        <div className="">{t('points.friendsInvited')}:</div>
+                        <div className="">{me?.ref.count || 0}</div>
+                      </div>
                     </div>
-                    <div className="flex items-center justify-between gap-2">
-                      <div className="">{t('points.friendsInvited')}:</div>
-                      <div className="">{me?.ref.count || 0}</div>
-                    </div>
-                  </div>
-                }
-              />
-              <Quest
-                image={questDurak}
-                title={t('points.followChannel', { name: 'Durak' })}
-                subtitle={`${t('points.thankYou')}`}
-                buttonText={t('points.follow')}
-                link="https://t.me/durakton_news"
-              />
-              <Quest
-                image={questDurak}
-                title={t('points.joinChat', { name: 'Durak' })}
-                subtitle={`${t('points.thankYou')}`}
-                buttonText={t('points.join')}
-                link="https://t.me/durakton_chat"
-              />
+                  ) : undefined}
+                />
+              ))}
             </div>
+
             <div className="mt-10 ml-[6px] text-[18px] leading-[22px] font-semibold">{t('points.partnerQuests')}</div>
             <div className="mt-3 flex flex-col gap-3">
               <Quest

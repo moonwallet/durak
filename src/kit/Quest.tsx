@@ -12,7 +12,7 @@ export const Quest = ({ className, image, title, subtitle, buttonText, link, isS
   title: string
   subtitle: string
   buttonText: string
-  link?: string
+  link: string | null
   isSuccess?: boolean
   bottom?: ReactElement
   onClick?: () => void
