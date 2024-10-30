@@ -36,7 +36,26 @@ export const Play = () => {
   }
 
   return (
-    <Page>
+    <Page bottom={
+      <>
+        <div className="mb-[18px]">
+          <Button
+            wrapperClassName="inline-block"
+            className="w-[64px] p-3 bg-[#D9D9D91A] rounded-full backdrop-blur-lg"
+            onClick={() => { i18n.changeLanguage(i18n.language === 'en' ? 'ru' : 'en') }}
+          >
+            <div className="flex items-center gap-1">
+              <div className="w-4 h-3 mr-1">
+                {i18n.language === 'ru' && <LangRu />}
+                {i18n.language === 'en' && <LangEn />}
+              </div>
+              <div className="text-[10px] leading-[12px] uppercase">{i18n.language}</div>
+            </div>
+          </Button>
+        </div>
+        <Menu />
+      </>
+    }>
       <div className="Top mt-5 flex flex-col items-center gap-1">
         <div className="text-[60px] leading-[60px] font-semibold">{me?.total_points || 0}</div>
         <div className="text-[16px] leading-[16px] text-text/50">{t('yourPoints')}</div>
@@ -58,24 +77,7 @@ export const Play = () => {
         </Button>
       </div>
 
-      <div className="Bottom">
-        <div className="my-[18px]">
-          <Button
-            wrapperClassName="inline-block"
-            className="w-[64px] p-3 bg-[#D9D9D91A] rounded-full"
-            onClick={() => { i18n.changeLanguage(i18n.language === 'en' ? 'ru' : 'en') }}
-          >
-            <div className="flex items-center gap-1">
-              <div className="w-4 h-3 mr-1">
-                {i18n.language === 'ru' && <LangRu />}
-                {i18n.language === 'en' && <LangEn />}
-              </div>
-              <div className="text-[10px] leading-[12px] uppercase">{i18n.language}</div>
-            </div>
-          </Button>
-        </div>
-        <Menu />
-      </div>
+      <div className="Bottom" />
     </Page>
   )
 }

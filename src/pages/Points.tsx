@@ -64,7 +64,33 @@ export const Points = () => {
   }
 
   return (
-    <Page>
+    <Page bottom={
+      <>
+        <div className="mb-5 flex items-center justify-center">
+          <div className="flex items-center justify-center bg-main/10 rounded-[12px] backdrop-blur-lg">
+          <Button
+            className={cx(
+              'min-w-[100px] p-2 rounded-[12px] text-[16px] leading-[19px] font-semibold',
+              tab === 1 ? 'bg-main text-black' : 'text-main',
+            )}
+            onClick={() => { setTab(1) }}
+          >
+            {t('points.tasks')}
+          </Button>
+          <Button
+            className={cx(
+              'min-w-[100px] p-2 rounded-[12px] text-[16px] leading-[19px] font-semibold',
+              tab === 2 ? 'bg-main text-black' : 'text-main',
+            )}
+            onClick={() => { setTab(2) }}
+          >
+            {t('points.info')}
+          </Button>
+          </div>
+        </div>
+        <Menu />
+      </>
+    }>
       <div className="Top px-3">
         <div className="mt-4 flex items-center justify-between">
           <img
@@ -162,32 +188,6 @@ export const Points = () => {
             </div>
           </div>
         }
-      </div>
-
-      <div className="Bottom mt-4">
-        <div className="mb-5 flex items-center justify-center">
-          <div className="flex items-center justify-center bg-main/10 rounded-[12px]">
-          <Button
-            className={cx(
-              'min-w-[100px] p-2 rounded-[12px] text-[16px] leading-[19px] font-semibold',
-              tab === 1 ? 'bg-main text-black' : 'text-main',
-            )}
-            onClick={() => { setTab(1) }}
-          >
-            {t('points.tasks')}
-          </Button>
-          <Button
-            className={cx(
-              'min-w-[100px] p-2 rounded-[12px] text-[16px] leading-[19px] font-semibold',
-              tab === 2 ? 'bg-main text-black' : 'text-main',
-            )}
-            onClick={() => { setTab(2) }}
-          >
-            {t('points.info')}
-          </Button>
-          </div>
-        </div>
-        <Menu />
       </div>
     </Page>
   )

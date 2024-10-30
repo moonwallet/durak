@@ -22,7 +22,7 @@ export const Page = ({ className, contentClassName, children, bottom }: {
         {/* <Debug /> */}
       </div>
       {bottom && (
-        <div className="mt-4">
+        <div className="mt-4 sticky bottom-0">
           {bottom}
         </div>
       )}

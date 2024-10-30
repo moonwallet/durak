@@ -10,7 +10,7 @@ export const Rules = () => {
   const { openExternal } = useOpenExternal()
 
   return (
-    <Page>
+    <Page bottom={<Menu />}>
       <div className="Top"></div>
       <div className="Center py-10 px-4 flex flex-col items-center justify-center">
         <img
@@ -26,10 +26,7 @@ export const Rules = () => {
           {t('watchVideo')}
         </Button>
       </div>
-
-      <div className="Bottom">
-        <Menu />
-      </div>
+      <div className="Bottom"></div>
     </Page>
   )
 }

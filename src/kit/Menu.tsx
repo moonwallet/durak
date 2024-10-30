@@ -38,7 +38,12 @@ export const Menu = () => {
   ]
 
   return (
-    <div className="flex items-center bg-[#3C3C435C] border-t border-t-[#FFFFFF08]">
+    <div
+      className="flex items-center bg-[#3C3C435C] border-t border-t-[#FFFFFF08] backdrop-blur-lg"
+      style={{
+        paddingBottom: 'env(safe-area-inset-bottom)',
+      }}
+    >
       {items.map((item, i) => (
         <Button
           key={`button-${i}`}

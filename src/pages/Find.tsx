@@ -10,7 +10,7 @@ export const Find = () => {
   const { openExternal } = useOpenExternal()
 
   return (
-    <Page>
+    <Page bottom={<Menu />}>
       <div className="Top"></div>
       <div className="Center py-10 flex flex-col items-center justify-center">
         <img
@@ -26,10 +26,7 @@ export const Find = () => {
           {t('joinGroup')}
         </Button>
       </div>
-
-      <div className="Bottom">
-        <Menu />
-      </div>
+      <div className="Bottom"></div>
     </Page>
   )
 }
