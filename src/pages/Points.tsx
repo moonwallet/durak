@@ -40,6 +40,7 @@ export const Points = () => {
     } catch {
       copy(shareUrl)
     }
+    track('Points invite pressed')
   }
 
   const { points } = useGetPoints()

@@ -2,7 +2,7 @@ import cx from 'classnames'
 import { useState, ReactElement } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { useOpenExternal, usePostTask } from '../hooks'
+import { useOpenExternal, usePostTask, track } from '../hooks'
 import { Button } from '../kit'
 
 import { ReactComponent as Check } from '../assets/check.svg'
@@ -39,6 +39,7 @@ export const Quest = ({ className, id, image, title, subtitle, buttonText, link,
     } finally {
       setIsBusy(false)
     }
+    track('Points claim pressed')
   }
 
   return (
@@ -68,6 +69,7 @@ export const Quest = ({ className, id, image, title, subtitle, buttonText, link,
                   if (claimable) {
                     setIsDone(true)
                   }
+                  track('Points link pressed')
                 } :
                 () => {}
               }>

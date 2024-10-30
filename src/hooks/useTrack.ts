@@ -28,4 +28,7 @@ type TEvent =
   'Game started' |
   'Game finished' |
   'Points viewed' |
-  'Points info viewed'
+  'Points info viewed' |
+  'Points invite pressed' |
+  'Points link pressed' |
+  'Points claim pressed'
