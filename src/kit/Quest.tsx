@@ -48,10 +48,13 @@ export const Quest = ({ className, id, image, title, subtitle, buttonText, link,
     )}>
       <div className="flex items-center gap-3">
         <div className="w-[44px] h-[44px] bg-white/10 rounded-[8px] overflow-hidden">
-          <img src={image} className="w-[44px] h-[44px]" />
+          <img src={image} className={cx('w-[44px] h-[44px]', isSuccess && 'grayscale')} />
         </div>
         <div className="flex-1 flex flex-col gap-1">
-          <div className="text-[16px] leading-[19px] font-semibold">{title}</div>
+          <div className={cx(
+            'text-[16px] leading-[19px] font-semibold',
+            isSuccess && 'line-through',
+          )}>{title}</div>
           <div className="text-[14px] leading-[14px] font-medium text-white/50">{subtitle}</div>
         </div>
         {!isSuccess ? (
