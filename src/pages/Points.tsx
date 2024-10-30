@@ -11,6 +11,7 @@ import pointsLeft from '../assets/pointsLeft.png'
 import pointsRight from '../assets/pointsRight.png'
 import questDurak from '../assets/questDurak.png'
 import questMoon from '../assets/questMoon.png'
+import questSatoshi from '../assets/questSatoshi.png'
 
 export const Points = () => {
   const { t } = useTranslation()
@@ -121,7 +122,7 @@ export const Points = () => {
                 <Quest
                   key={`task-${task.id}`}
                   id={task.id}
-                  image={questMoon}
+                  image={task.name.toLowerCase().includes('satoshi') ? questSatoshi : questMoon}
                   title={task.name}
                   subtitle={task.description}
                   buttonText={task.cta}
@@ -131,24 +132,6 @@ export const Points = () => {
                   isSuccess={task.is_completed}
                 />
               ))}
-              {/* <Quest
-                id={-1}
-                claimable={false}
-                image={questMoon}
-                title={t('points.launchApp', { name: 'Moon' })}
-                subtitle={`${t('points.thankYou')}`} // {`+1,000 ${t('points.points')}`}
-                link="https://t.me/moonWallet_solbot"
-                buttonText={t('points.launch')}
-              />
-              <Quest
-                id={-2}
-                claimable={false}
-                image={questMoon}
-                title={t('points.joinChat', { name: 'Moon' })}
-                subtitle={`${t('points.thankYou')}`} // {`+1,000 ${t('points.points')}`}
-                link="https://t.me/moon_wallet_xyz"
-                buttonText={t('points.join')}
-              /> */}
             </div>
           </div>
         }
