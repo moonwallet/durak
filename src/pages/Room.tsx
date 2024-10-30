@@ -404,7 +404,7 @@ export const Room = () => {
       {isLeaveModalOpen &&
         <Modal>
           <div className="mx-auto mb-[50px] max-w-[280px] text-[16px] leading-[18px] font-medium text-text/60">
-            <div>{t('gameWillBeLost')}</div>
+            <div>{status === 2 ? t('gameWillBeLost') : t('gameWillBeLost_')}</div>
             <div>{t('areYouSure')}</div>
           </div>
           <div className="flex flex-col gap-4">
@@ -422,7 +422,7 @@ export const Room = () => {
                 setRoomId(null)
                 navigate('/')
               }}>
-              {t('leaveAndLose')}
+              {status === 2 ? t('leaveAndLose') : t('leave')}
             </Button>
           </div>
         </Modal>
