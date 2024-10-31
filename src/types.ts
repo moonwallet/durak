@@ -95,4 +95,5 @@ export type TTask = {
   is_completed: boolean
   claimable: boolean
   is_partner?: boolean
+  image_url?: string
 }

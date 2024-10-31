@@ -3,15 +3,15 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { useCopy, useGetMe, useGetPoints, useOpenExternal, useShareLink, usePlatform, track, useGetTasks } from '../hooks'
-import { Page, Menu, Button, Quest } from '../kit'
+import { Page, Menu, Button, Task } from '../kit'
 
 import { ReactComponent as Point } from '../assets/point.svg'
 import { ReactComponent as Check } from '../assets/check.svg'
 import pointsLeft from '../assets/pointsLeft.png'
 import pointsRight from '../assets/pointsRight.png'
-import questDurak from '../assets/questDurak.png'
-import questMoon from '../assets/questMoon.png'
-import questSatoshi from '../assets/questSatoshi.png'
+import taskDurak from '../assets/taskDurak.png'
+import taskMoon from '../assets/taskMoon.png'
+import taskSatoshi from '../assets/taskSatoshi.png'
 
 export const Points = () => {
   const { t } = useTranslation()
@@ -115,10 +115,10 @@ export const Points = () => {
             <div className="mt-10 ml-[6px] text-[18px] leading-[22px] font-semibold">{t('points.durakQuests')}</div>
             <div className="mt-3 flex flex-col gap-3">
               {(tasks || []).filter(task => !task.is_partner).map(task => (
-                <Quest
+                <Task
                   key={`task-${task.id}`}
                   id={task.id}
-                  image={questDurak}
+                  image={taskDurak}
                   title={task.name}
                   subtitle={task.description}
                   buttonText={(task.id === 1 && isCopied) ? t('copied') : task.cta}
@@ -146,10 +146,14 @@ export const Points = () => {
             <div className="mt-10 ml-[6px] text-[18px] leading-[22px] font-semibold">{t('points.partnerQuests')}</div>
             <div className="mt-3 flex flex-col gap-3">
               {(tasks || []).filter(task => task.is_partner).map(task => (
-                <Quest
+                <Task
                   key={`task-${task.id}`}
                   id={task.id}
-                  image={task.name.toLowerCase().includes('satoshi') ? questSatoshi : questMoon}
+                  image={
+                    task.name.toLowerCase().includes(' satoshi') ? taskSatoshi :
+                    task.name.toLowerCase().includes(' moon') ? taskMoon :
+                    task.image_url
+                  }
                   title={task.name}
                   subtitle={task.description}
                   buttonText={task.cta}

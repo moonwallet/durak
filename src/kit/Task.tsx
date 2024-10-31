@@ -3,11 +3,11 @@ import { useState, ReactElement } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { useOpenExternal, usePostTask, track } from '../hooks'
-import { Button } from '../kit'
+import { Button } from '.'
 
 import { ReactComponent as Check } from '../assets/check.svg'
 
-export const Quest = ({ className, id, image, title, subtitle, buttonText, link, claimable, isSuccess, bottom, onClick, afterClaim } : {
+export const Task = ({ className, id, image, title, subtitle, buttonText, link, claimable, isSuccess, bottom, onClick, afterClaim } : {
   className?: string
   id: number
   image?: string
