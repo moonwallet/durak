@@ -157,7 +157,126 @@ export const Room = () => {
   }, [status])
 
   return (
-    <Page>
+    <Page bottom={
+      <div className="relative h-[154px]">
+        {(status === 2) &&
+          <div className="absolute bottom-[45px] w-full h-[162px]">
+            <div className="flex items-center justify-center h-full max-w-[100%] mx-auto px-[60px]">
+              {myCards.map((card, i, arr) => (
+                <div className="relative w-[40px] h-full">
+                  <div className="absolute top-0 left-[50%] -translate-x-[50%]">
+                    <div
+                      style={{
+                        transform: rotateCard({ i, n: arr.length }),
+                      }}
+                    >
+                      <Card
+                        key={`my-card-${card}`}
+                        className="h-[162px] w-[116px] hover:-translate-y-5 active:-translate-y-5"
+                        card={card}
+                        onClick={onCardClick}
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        }
+        <div className="absolute h-[90px] bottom-0 left-0 w-full flex items-center justify-between p-5 bg-[#292834] rounded-t-[24px]">
+          {!status && !opponent &&
+            <Button
+              theme="big"
+              onClick={share}
+              disabled={isCopied}
+            >
+              {isCopied ? t('copied') : t('shareRoomLink') }
+            </Button>
+          }
+          {!status && !!opponent && !!me &&
+            <>
+              {!me.ready ? (
+                <Button
+                  theme="big"
+                  onClick={ready}
+                >
+                  {t('ready')}
+                </Button>
+              ) : (
+                <Button
+                  theme="big"
+                  onClick={ready}
+                  disabled
+                >
+                  {t('waiting')}
+                </Button>
+              )}
+            </>
+          }
+
+          {isBatAvailable &&
+            <Button
+              theme="big"
+              onClick={() => { action('bat') }}
+            >
+              {t('bat')}
+            </Button>
+          }
+
+          {isTakeAvailable &&
+            <Button
+              theme="big"
+              onClick={() => { action('take') }}
+            >
+              {t('take')}
+            </Button>
+          }
+
+          {isPassAvailable &&
+            <Button
+              theme="big"
+              onClick={() => { action('pass') }}
+            >
+              {t('pass')}
+            </Button>
+          }
+
+          {status === 100 && !!opponent && !!me &&
+            <>
+              {!me.ready ? (
+                <Button
+                  theme="big"
+                  onClick={ready}
+                >
+                  {/*(result === 'win' || result === 'draw') ? t('startNew') : t('ready')*/ t('ready')}
+                </Button>
+              ) : (
+                <Button
+                  theme="big"
+                  onClick={ready}
+                  disabled
+                >
+                  {t('waiting')}
+                </Button>
+              )}
+            </>
+          }
+
+          <div className="absolute bottom-5 right-0 w-[120px] h-[120px]">
+            <img src={chair} className="absolute bottom-2 w-[120px] h-[120px]" />
+            <div className="absolute right-5 bottom-0 max-w-[110px] truncate text-text text-[14px] text-right">
+              <Username player={me} />
+            </div>
+            <Ava className="absolute top-[0%] left-[50%] -translate-x-[50%] scale-[85%]" status={myStatus} />
+            {false &&
+              <Tip className="absolute -top-[35%] left-[50%] -translate-x-[50%] scale-75">
+                {t('take')}
+              </Tip>
+            }
+          </div>
+        </div>
+      </div>
+    }>
       <BackButton onClick={() => { setIsLeaveModalOpen(true) }} />
       <div className="Top z-0 mt-1 flex flex-col items-center justify-center h-[158px]">
         <div className="z-[1] relative w-[200px] h-[90px] shadow-[0px_0px_30px_30px_#11101D]">
@@ -284,122 +403,8 @@ export const Room = () => {
           </div>
         }
       </div>
-      <div className="Bottom relative h-[210px]">
-        {(status === 2) &&
-          <div className="flex items-center justify-center h-[162px] max-w-[100%] mx-auto px-[60px]">
-            {myCards.map((card, i, arr) => (
-              <div className="relative w-[40px] h-full">
-                <div className="absolute top-0 left-[50%] -translate-x-[50%]">
-                  <div
-                    style={{
-                      transform: rotateCard({ i, n: arr.length }),
-                    }}
-                  >
-                    <Card
-                      key={`my-card-${card}`}
-                      className="h-[162px] w-[116px] hover:-translate-y-5 active:-translate-y-5"
-                      card={card}
-                      onClick={onCardClick}
-                    />
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        }
-        <div className="absolute h-[90px] bottom-0 left-0 w-full flex items-center justify-between p-5 bg-[#292834] rounded-t-[24px]">
-          {!status && !opponent &&
-            <Button
-              theme="big"
-              onClick={share}
-              disabled={isCopied}
-            >
-              {isCopied ? t('copied') : t('shareRoomLink') }
-            </Button>
-          }
-          {!status && !!opponent && !!me &&
-            <>
-              {!me.ready ? (
-                <Button
-                  theme="big"
-                  onClick={ready}
-                >
-                  {t('ready')}
-                </Button>
-              ) : (
-                <Button
-                  theme="big"
-                  onClick={ready}
-                  disabled
-                >
-                  {t('waiting')}
-                </Button>
-              )}
-            </>
-          }
 
-          {isBatAvailable &&
-            <Button
-              theme="big"
-              onClick={() => { action('bat') }}
-            >
-              {t('bat')}
-            </Button>
-          }
-
-          {isTakeAvailable &&
-            <Button
-              theme="big"
-              onClick={() => { action('take') }}
-            >
-              {t('take')}
-            </Button>
-          }
-
-          {isPassAvailable &&
-            <Button
-              theme="big"
-              onClick={() => { action('pass') }}
-            >
-              {t('pass')}
-            </Button>
-          }
-
-          {status === 100 && !!opponent && !!me &&
-            <>
-              {!me.ready ? (
-                <Button
-                  theme="big"
-                  onClick={ready}
-                >
-                  {/*(result === 'win' || result === 'draw') ? t('startNew') : t('ready')*/ t('ready')}
-                </Button>
-              ) : (
-                <Button
-                  theme="big"
-                  onClick={ready}
-                  disabled
-                >
-                  {t('waiting')}
-                </Button>
-              )}
-            </>
-          }
-
-          <div className="absolute bottom-5 right-0 w-[120px] h-[120px]">
-            <img src={chair} className="absolute bottom-2 w-[120px] h-[120px]" />
-            <div className="absolute right-5 bottom-0 max-w-[110px] truncate text-text text-[14px] text-right">
-              <Username player={me} />
-            </div>
-            <Ava className="absolute top-[0%] left-[50%] -translate-x-[50%] scale-[85%]" status={myStatus} />
-            {false &&
-              <Tip className="absolute -top-[35%] left-[50%] -translate-x-[50%] scale-75">
-                {t('take')}
-              </Tip>
-            }
-          </div>
-        </div>
-      </div>
+      <div className="Bottom" />
 
       {isLeaveModalOpen &&
         <Modal>
