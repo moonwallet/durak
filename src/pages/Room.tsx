@@ -267,7 +267,11 @@ export const Room = () => {
             <div className="absolute right-5 bottom-0 max-w-[110px] truncate text-text text-[14px] text-right">
               <Username player={me} />
             </div>
-            <Ava className="absolute top-[0%] left-[50%] -translate-x-[50%] scale-[85%]" status={myStatus} />
+            <Ava
+              className="!absolute top-[0%] left-[50%] -translate-x-[50%] scale-[85%]"
+              username={me?.username || null}
+              status={myStatus}
+            />
             {false &&
               <Tip className="absolute -top-[35%] left-[50%] -translate-x-[50%] scale-75">
                 {t('take')}
@@ -289,7 +293,11 @@ export const Room = () => {
               <div className="absolute top-[85%] left-[50%] -translate-x-[50%] w-full text-[14px] leading-[14px]">
                 <Username player={opponent} />
               </div>
-              <Ava className="absolute -top-[10%] left-[50%] -translate-x-[50%] scale-75" status={opponentStatus} />
+              <Ava
+                className="!absolute -top-[10%] left-[50%] -translate-x-[50%] scale-75"
+                username={opponent.username}
+                status={opponentStatus}
+              />
               {false &&
                 <Tip isReverse className="absolute top-[55%] left-[50%] -translate-x-[50%] scale-75">
                   {t('take')}
