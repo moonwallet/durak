@@ -73,7 +73,7 @@ export const Play = () => {
           onClick={createRoom}
           isBusy={isBusy}
         >
-          {t('createRoom')}
+          {t('startGame')}
         </Button>
       </div>
 
