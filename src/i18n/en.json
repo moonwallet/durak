@@ -75,5 +75,7 @@
     "howToEarn2": "Invite more friends. For every invite you get {{invitePoints}} points.",
     "tasks": "Tasks",
     "info": "Info"
-  }
+  },
+
+  "playDurakWithMe": "Play Durak with me! Winner gets {{winPoints}} points 🎁"
 }

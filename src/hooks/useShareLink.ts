@@ -1,4 +1,6 @@
-import { useGetMe } from '../hooks'
+import { useTranslation } from 'react-i18next'
+
+import { useGetMe, useGetPoints } from '../hooks'
 import { TShareLinkData } from '../types'
 
 const botUrl = import.meta.env.VITE_BOT_URL
@@ -11,6 +13,9 @@ export const useShareLink = ({ roomId }: {
   roomId?: string
 }) => {
   const { data: me } = useGetMe()
+  const { t } = useTranslation()
+
+  const { points } = useGetPoints()
 
   const data: TShareLinkData = {
     room_id: roomId,
@@ -23,7 +28,7 @@ export const useShareLink = ({ roomId }: {
     .split('/').join('_')
 
   const shareUrl = `${botUrl}/app?startapp=${encodedData}`
-  const shareLink = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}`
+  const shareLink = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(t('playDurakWithMe', { winPoints: points.win }))}`
 
   return { shareUrl, shareLink }
 }
