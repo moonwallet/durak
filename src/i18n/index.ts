@@ -11,8 +11,8 @@ const langs: TLanguageCode[] = ['en', 'ru']
 
 i18next.use(initReactI18next).init({
   // if you're using a language detector, do not define the lng option
-  // lng: window.Telegram?.WebApp.initDataUnsafe.user?.language_code === 'ru' ? 'ru' : 'en',
-  lng: langs[0],
+  lng: window.Telegram?.WebApp.initDataUnsafe.user?.language_code === 'ru' ? 'ru' : 'en',
+  // lng: langs[0],
   fallbackLng: langs,
   supportedLngs: langs,
   debug: false,
