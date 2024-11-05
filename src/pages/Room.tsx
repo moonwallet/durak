@@ -156,6 +156,12 @@ export const Room = () => {
     }
   }, [status])
 
+  useEffect(() => {
+    if (playersKeys.length >= 2) {
+      track('Two players joined')
+    }
+  }, [playersKeys.length])
+
   return (
     <Page bottom={
       <div className="relative h-[154px]">

@@ -25,6 +25,7 @@ type TEvent =
   'Session start' |
   'Room created' |
   'Share room pressed' |
+  'Two players joined' |
   'Game started' |
   'Game finished' |
   'Points viewed' |
