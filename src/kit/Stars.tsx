@@ -17,15 +17,17 @@ export const Stars = ({ className } : {
   }
 
   return (
-    <div className={cx('Stars', className)}>
+    <div className={cx('Stars flex items-center justify-around', className)}>
       {ratings.map(rating => (
         <Button
-          className="px-5 w-[26px] h-[26px]"
+          key={`star-${rating}`}
+          wrapperClassName='w-[36px] h-[26px]'
+          className="px-[5px]"
           onClick={() => { rate(rating) }}
         >
           <Star className={cx(
-            'w-[26px] h-[26px]',
-            rated <= rating ? 'text-main' : 'text-[#2C2946]',
+            'w-[26px] h-[26px] transition-all',
+            rated >= rating ? 'text-main' : 'text-[#2C2946]',
           )} />
         </Button>
       ))}

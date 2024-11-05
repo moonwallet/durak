@@ -10,7 +10,7 @@ import win from '../assets/win.png'
 import lose from '../assets/lose.png'
 
 import { useApiWs, useShareLink, useStore, useAuth, useCopy, useOpenExternal, useGetMe, useGetPoints, usePlatform, track } from '../hooks'
-import { Page, Button, Card, Ava, Tip, Username, Modal } from '../kit'
+import { Page, Button, Card, Ava, Tip, Username, Modal, Stars } from '../kit'
 import { TAction, TAvaStatus, TCard, TPlayer, TResult, TUserId } from '../types'
 
 
@@ -254,7 +254,7 @@ export const Room = () => {
                   theme="big"
                   onClick={ready}
                 >
-                  {/*(result === 'win' || result === 'draw') ? t('startNew') : t('ready')*/ t('ready')}
+                  {t('playAgain')}
                 </Button>
               ) : (
                 <Button
@@ -389,30 +389,27 @@ export const Room = () => {
         {(status === 100) &&
           <div className="flex flex-col items-center">
             {(result === 'win' || result === 'draw') &&
-              <img src={win} className="-mb-[40px] w-[148px] h-[163px]" />
+              <img src={win} className="w-[148px] h-[163px]" />
             }
             {result === 'lose' &&
-              <img src={lose} className="-mb-[70px] w-[188px] h-[188px]" />
+              <img src={lose} className="w-[186px] h-[112px]" />
             }
-            {rewardPoints &&
-              <div className="p-[10px] text-[36px] leading-[36px] font-semibold" style={{ textShadow: '-2px -2px #454456, -2px 2px #454456, 2px 2px #454456, 2px -2px #454456' }}>
-                +{rewardPoints} {t('points_')}
-              </div>
-            }
-            <div className="min-h-[22px]">
-              {invitePoints &&
-                <span className="text-main text-[18px] leading-[21px] font-semibold">+{invitePoints} {t('pointsForInviting')}</span>
-              }
-            </div>
-            <div className="mt-10 text-[48px] leading-[48px] font-extrabold">
+            <div className="text-[48px] leading-[48px] font-extrabold">
               {result === 'win' && <div className="text-main">{t('win')}</div>}
               {result === 'draw' && <div className="text-[#EBECEA]">{t('draw')}</div>}
               {result === 'lose' && <div className="text-[#DF0000]">{t('lose')}</div>}
             </div>
-            <div className="mt-[9px] text-[16px] leading-[18px] text-text/60">
-              {!!opponent && (result === 'win' || result === 'draw') && <span>{t('tapReadyToPlayAgain')}</span>}
-              {!!opponent && result === 'lose' && <span>{t('tapReadyForRevanche')}</span>}
-              {!opponent && <span>{t('opponentLeft')}</span>}
+            {!!rewardPoints &&
+              <div className="p-[10px] text-[36px] leading-[36px] font-semibold" style={{ textShadow: '-2px -2px #454456, -2px 2px #454456, 2px 2px #454456, 2px -2px #454456' }}>
+                +{rewardPoints} {t('points_')}
+              </div>
+            }
+            {!!invitePoints &&
+              <div className="text-main text-[18px] leading-[21px] font-semibold">+{invitePoints} {t('pointsForInviting')}</div>
+            }
+            <div className="mt-6 flex flex-col gap-[10px] p-[10px]">
+              <Stars />
+              <div className="text-[16px] leading-[18px] text-text/60 font-medium">{t('reviewGameplay')}</div>
             </div>
           </div>
         }
