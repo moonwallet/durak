@@ -1,6 +1,7 @@
 import cx from 'classnames'
 import { useState } from 'react'
 
+import { track } from '../hooks'
 import { Button } from '../kit'
 import { ReactComponent as Star } from '../assets/star.svg'
 
@@ -14,6 +15,9 @@ export const Stars = ({ className } : {
 
   const rate = (rating: TRating) =>  {
     setRated(rating)
+    track('Rated', {
+      rating,
+    })
   }
 
   return (

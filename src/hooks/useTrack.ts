@@ -12,11 +12,11 @@ if (AMPLITUDE_KEY) {
   console.error('⚠️ NO AMPLITUDE_KEY')
 }
 
-export const track: (_: TEvent) => void = (event: TEvent) => {
+export const track: (event: TEvent, props?: object) => void = (event, props = undefined) => {
   if (AMPLITUDE_KEY) {
-    amplitude.track(event)
+    amplitude.track(event, props)
   } else {
-    console.info('[NO-track]', event)
+    console.info('[NO-track]', event, props)
   }
 }
 
@@ -28,6 +28,7 @@ type TEvent =
   'Two players joined' |
   'Game started' |
   'Game finished' |
+  'Rated' |
   'Points viewed' |
   'Points info viewed' |
   'Points invite pressed' |
