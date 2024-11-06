@@ -10,7 +10,10 @@ export default {
         bg: '#11101D',
         text: '#FFFFFF',
         main: '#94EC24',
-      }
+      },
+      screens: {
+        'hoverable': {'raw': '(hover: hover)'},
+      },
     },
   },
   plugins: [],

@@ -178,7 +178,7 @@ export const Room = () => {
                     >
                       <Card
                         key={`my-card-${card}`}
-                        className="h-[162px] w-[116px] hover:-translate-y-5 active:-translate-y-5"
+                        className="h-[162px] w-[116px] hoverable:hover:-translate-y-5 active:-translate-y-5"
                         card={card}
                         onClick={onCardClick}
                       />
