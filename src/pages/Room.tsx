@@ -8,6 +8,7 @@ import chair from '../assets/chair.png'
 import game from '../assets/game.png'
 import win from '../assets/win.png'
 import lose from '../assets/lose.png'
+import tg from '../assets/tg.png'
 
 import { useApiWs, useShareLink, useStore, useAuth, useCopy, useOpenExternal, useGetMe, useGetPoints, usePlatform, track } from '../hooks'
 import { Page, Button, Card, Ava, Tip, Username, Modal, Stars } from '../kit'
@@ -352,15 +353,26 @@ export const Room = () => {
       <div className="Center flex items-center justify-center">
         {!status && !opponent &&
           <div className="px-4">
-            <div className="-mb-[50px]">
+            <div className="-mt-[30px] -mb-[50px]">
               <img src={game} className="mx-auto w-[294px] h-[232px]" />
             </div>
-            <div className="px-8 text-[24px] leading-[29px] font-bold">
-              {t('sendRoomLink')}
+            <div className="max-w-[470px] mx-auto text-[24px] leading-[29px] font-bold">
+              <span>{t('sendRoomLink')}</span>
+              &nbsp;
+              <Button
+                wrapperClassName="inline-block"
+                onClick={() => { openExternal('https://t.me/durakton_chat') }}
+              >
+                <span className="text-nowrap">
+                  <img src={tg} className="w-[28px] h-[28px] inline-block" />&nbsp;<span className="underline text-main">{t('ourChat')}</span>
+                </span>
+              </Button>
+              &nbsp;
+              <span>{t('toStart')}</span>
             </div>
             <div className="mt-2 text-text/60 text-[16px] leading-[18px] font-medium">
-              <div>{t('forEveryFren')} <span className="text-main">{points.invite} $DRK {t('points_')}</span></div>
-              <div>{t('forEveryWin')} <span className="text-main">{points.win} $DRK {t('points_')}</span></div>
+              <div className="text-main">{points.invite} {t('points_')} {t('forEveryFren')}</div>
+              <div className="text-main">{points.win} {t('points_')} {t('forEveryWin')}</div>
               <div></div>
             </div>
           </div>
