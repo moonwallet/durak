@@ -361,7 +361,7 @@ export const Room = () => {
               &nbsp;
               <Button
                 wrapperClassName="inline-block"
-                onClick={() => { openExternal('https://t.me/durakton_chat') }}
+                onClick={() => { openExternal('https://t.me/durakton_chat/4') }}
               >
                 <span className="text-nowrap">
                   <img src={tg} className="w-[28px] h-[28px] inline-block" />&nbsp;<span className="underline text-main">{t('ourChat')}</span>
