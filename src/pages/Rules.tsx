@@ -3,11 +3,11 @@ import { useTranslation } from 'react-i18next'
 import { Page, Menu, Button } from '../kit'
 
 import watch from '../assets/watch.png'
-import { useOpenExternal } from '../hooks'
+import { useOpenLink } from '../hooks'
 
 export const Rules = () => {
   const { t } = useTranslation()
-  const { openExternal } = useOpenExternal()
+  const { openLink } = useOpenLink()
 
   return (
     <Page bottom={<Menu />}>
@@ -21,7 +21,7 @@ export const Rules = () => {
         <Button
           theme="big"
           wrapperClassName='mt-10'
-          onClick={() => { openExternal('https://youtu.be/3JagmUmUJOc') }}
+          onClick={() => { openLink('https://youtu.be/3JagmUmUJOc') }}
         >
           {t('watchVideo')}
         </Button>

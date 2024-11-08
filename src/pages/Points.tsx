@@ -2,7 +2,7 @@ import cx from 'classnames'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { useCopy, useGetMe, useGetPoints, useOpenExternal, useShareLink, usePlatform, track, useGetTasks } from '../hooks'
+import { useCopy, useGetMe, useGetPoints, useOpenLink, useShareLink, usePlatform, track, useGetTasks } from '../hooks'
 import { Page, Menu, Button, Task } from '../kit'
 
 import { ReactComponent as Point } from '../assets/point.svg'
@@ -26,14 +26,14 @@ export const Points = () => {
   const [tab, setTab] = useState<1|2>(1)
 
   const { shareUrl, shareLink } = useShareLink({})
-  const { openExternal } = useOpenExternal()
+  const { openLink } = useOpenLink()
   const { copy, isCopied } = useCopy()
   const { isTg } = usePlatform()
 
   const share = () => {
     console.log(shareUrl)
     try {
-      openExternal(shareLink)
+      openLink(shareLink)
       if (!isTg) {
         copy(shareUrl)
       }

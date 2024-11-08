@@ -3,11 +3,11 @@ import { useTranslation } from 'react-i18next'
 import { Page, Menu, Button } from '../kit'
 
 import find from '../assets/find.png'
-import { useOpenExternal } from '../hooks'
+import { useOpenLink } from '../hooks'
 
 export const Find = () => {
   const { t } = useTranslation()
-  const { openExternal } = useOpenExternal()
+  const { openLink } = useOpenLink()
 
   return (
     <Page bottom={<Menu />}>
@@ -21,7 +21,7 @@ export const Find = () => {
         <Button
           theme="big"
           wrapperClassName='mt-10'
-          onClick={() => { openExternal('https://t.me/durakton_chat') }}
+          onClick={() => { openLink('https://t.me/durakton_chat') }}
         >
           {t('joinGroup')}
         </Button>

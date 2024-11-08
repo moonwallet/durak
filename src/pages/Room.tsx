@@ -10,7 +10,7 @@ import win from '../assets/win.png'
 import lose from '../assets/lose.png'
 import tg from '../assets/tg.png'
 
-import { useApiWs, useShareLink, useStore, useAuth, useCopy, useOpenExternal, useGetMe, useGetPoints, usePlatform, track } from '../hooks'
+import { useApiWs, useShareLink, useStore, useAuth, useCopy, useOpenLink, useGetMe, useGetPoints, usePlatform, track } from '../hooks'
 import { Page, Button, Card, Ava, Tip, Username, Modal, Stars } from '../kit'
 import { TAction, TAvaStatus, TCard, TPlayer, TResult, TUserId } from '../types'
 
@@ -72,7 +72,7 @@ export const Room = () => {
   const invitePoints: number | undefined = !!myIdString && state?.game?.rewards?.[myIdString] && state.game.rewards[myIdString].invite_points || undefined
 
   const { shareUrl, shareLink } = useShareLink({ roomId })
-  const { openExternal } = useOpenExternal()
+  const { openLink } = useOpenLink()
   const { copy, isCopied } = useCopy()
   const { isTg } = usePlatform()
 
@@ -80,7 +80,7 @@ export const Room = () => {
     console.log(shareUrl)
     console.log('roomId', roomId)
     try {
-      openExternal(shareLink)
+      openLink(shareLink)
       if (!isTg) {
         copy(shareUrl)
       }
@@ -361,7 +361,7 @@ export const Room = () => {
               &nbsp;
               <Button
                 wrapperClassName="inline-block"
-                onClick={() => { openExternal('https://t.me/durakton_chat/4') }}
+                onClick={() => { openLink('https://t.me/durakton_chat/4') }}
               >
                 <span className="text-nowrap">
                   <img src={tg} className="w-[28px] h-[28px] inline-block" />&nbsp;<span className="underline text-main">{t('ourChat')}</span>

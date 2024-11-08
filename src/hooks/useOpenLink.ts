@@ -2,11 +2,11 @@ import { useWebApp } from '@vkruglikov/react-telegram-web-app'
 
 import { usePlatform } from '../hooks'
 
-export const useOpenExternal = () => {
+export const useOpenLink = () => {
   const WebApp = useWebApp()
   const { isTg } = usePlatform()
 
-  const openExternal = (url: string) => {
+  const openLink = (url: string) => {
     if (isTg) {
       if (url.startsWith('https://t.me')) {
         WebApp.openTelegramLink(url)
@@ -17,5 +17,5 @@ export const useOpenExternal = () => {
       window.open(url, '_blank')?.focus()
     }
   }
-  return { openExternal }
+  return { openLink }
 }

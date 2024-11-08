@@ -2,7 +2,7 @@ import cx from 'classnames'
 import { useState, ReactElement } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { useOpenExternal, usePostTask, track } from '../hooks'
+import { useOpenLink, usePostTask, track } from '../hooks'
 import { Button } from '.'
 
 import { ReactComponent as Check } from '../assets/check.svg'
@@ -22,7 +22,7 @@ export const Task = ({ className, id, image, title, subtitle, buttonText, link, 
   afterClaim?: () => void
 }) => {
   const { t } = useTranslation()
-  const { openExternal } = useOpenExternal()
+  const { openLink } = useOpenLink()
 
   const [isDone, setIsDone] = useState(false)
 
@@ -65,7 +65,7 @@ export const Task = ({ className, id, image, title, subtitle, buttonText, link, 
               onClick={
                 onClick ? onClick :
                 link ? () => {
-                  openExternal(link)
+                  openLink(link)
                   if (claimable) {
                     setIsDone(true)
                   }
