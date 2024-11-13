@@ -18,7 +18,7 @@ export const Points = () => {
   const { data: me, refetch: refetchMe } = useGetMe()
 
   const textGradient = {
-    background: 'linear-gradient(91.1deg, #FFFFFF 0.94%, #999999 117.2%)',
+    background: 'linear-gradient(91.1deg, #FFFFFF 0.95%, #999999 117.2%)',
     backgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
   }
